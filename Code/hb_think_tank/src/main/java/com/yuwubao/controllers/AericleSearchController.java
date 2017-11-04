@@ -137,7 +137,8 @@ public class AericleSearchController {
             boolean acknowledged = createIndexResponse.isAcknowledged();
             result.successResponse(Const.SUCCESS, acknowledged, "创建成功");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn("创建失败", e);
+            result.failedApiResponse(Const.FAILED, "创建失败");
         }
         return result;
     }
@@ -177,7 +178,8 @@ public class AericleSearchController {
             this.client.admin().indices().putMapping(mappingRequest).actionGet();
             result.successResponse(Const.SUCCESS, true, "创建mapping成功");
         } catch (Exception e) {
-            logger.warn("创建mapping异常", e);
+            logger.warn("创建失败", e);
+            result.failedApiResponse(Const.FAILED, "创建失败");
         }
         return result;
     }
@@ -199,7 +201,8 @@ public class AericleSearchController {
             boolean acknowledged = deleteIndexResponse.isAcknowledged();// true表示成功
             result.successResponse(Const.SUCCESS, acknowledged, "删除索引成功");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn("删除索引异常", e);
+            result.failedApiResponse(Const.FAILED, "删除索引异常");
         }
         return result;
     }
