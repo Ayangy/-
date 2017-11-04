@@ -47,7 +47,10 @@ public class AericleSearchController {
     private ArticleService articleService;
 
     /**
-     *  复合查询
+     *  站内搜索
+     * @param query 查询内容
+     * @param pageIndex  第几页
+     * @param pageSize  每页几条
      *
      */
     @GetMapping("/query/zk/article")
@@ -84,9 +87,6 @@ public class AericleSearchController {
                     .setExplain(true)
                     .setFrom(pageIndex)
                     .setSize(pageSize);
-
-
-            System.out.println("[ES查询请求参数]："+builder);
 
             SearchResponse response = builder.get();
 

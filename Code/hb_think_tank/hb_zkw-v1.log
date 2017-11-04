@@ -1324,3 +1324,4 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown co
 2017-11-04 16:28:12.167  INFO 24948 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
 2017-11-04 16:28:12.168  INFO 24948 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
 2017-11-04 16:28:12.216  INFO 24948 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 48 ms
+2017-11-04 16:39:37.292  INFO 24948 --- [http-nio-8080-exec-3] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1499934488,1500256931,1500516759] that contained an invalid cookie. That cookie will be ignored.Note: further occurrences of this error will be logged at DEBUG level.

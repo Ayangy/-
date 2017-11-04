@@ -36,15 +36,15 @@ public class ArticleController {
 
     /**
      * 查询文章
-     * @param index
-     * @param size
-     * @param field
-     * @param keyword
-     * @param beginTime
-     * @param endTime
-     * @param typeId
-     * @param organizationId
-     * @return
+     * @param index  第几页
+     * @param size  每页几条
+     * @param field  查询字段
+     * @param keyword  查询值
+     * @param beginTime  开始时间
+     * @param endTime  结束时间
+     * @param typeId  文章分类Id
+     * @param organizationId  机构Id
+     *
      */
     @GetMapping("/findAll")
     public RestApiResponse<Page<ArticleEntity>> findAll(@RequestParam(defaultValue = "1", required = false)int index,
@@ -57,7 +57,7 @@ public class ArticleController {
                                 @RequestParam(required = false, defaultValue = "0")int organizationId){
         RestApiResponse<Page<ArticleEntity>> result = new RestApiResponse<Page<ArticleEntity>>();
         try {
-            Map<String, String> map = new HashMap();
+            Map<String, String> map = new HashMap<String, String>();
             map.put("field", field);
             map.put("keyword", keyword);
             map.put("beginTime", beginTime);
@@ -99,7 +99,9 @@ public class ArticleController {
     }
 
     /**
-     * 删除文章
+     *  删除文章
+     * @param id 文章Id
+     *
      */
     @DeleteMapping("/delete")
     public RestApiResponse<ArticleEntity> delete(@RequestParam(required = true) int id) {
