@@ -42,7 +42,7 @@ spring:
 #    proxy-target-class: false
 logging:
   level: warn
-  file: zyt-v1.log
+  file: hb_zkw-v1.log
 security:
   basic:
     authorize-mode: none
