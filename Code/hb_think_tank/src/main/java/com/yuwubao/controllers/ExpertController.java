@@ -1,0 +1,126 @@
+package com.yuwubao.controllers;
+
+import com.yuwubao.entities.ExpertEntity;
+import com.yuwubao.services.ExpertService;
+import com.yuwubao.util.Const;
+import com.yuwubao.util.RestApiResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by yangyu on 2017/11/3.
+ */
+@RestController
+@RequestMapping("/expert")
+public class ExpertController {
+
+    private final static Logger logger = LoggerFactory.getLogger(ExpertController.class);
+
+    @Autowired
+    private ExpertService expertService;
+
+    /**
+     * 查询专家列表
+     * @param index 第几页
+     * @param size  每页几条
+     * @param field  查询字段
+     * @param keyword  查询值
+     * @return
+     */
+    @GetMapping("/findAll")
+    public RestApiResponse<Page<ExpertEntity>> findAll(@RequestParam(defaultValue = "1", required = false)int index,
+                                                       @RequestParam(defaultValue = "10", required = false)int size,
+                                                       @RequestParam(required = false, defaultValue = "")String field,
+                                                       @RequestParam(required = false, defaultValue = "")String keyword){
+        RestApiResponse<Page<ExpertEntity>> result = new RestApiResponse<Page<ExpertEntity>>();
+        try {
+            Map<String, String> map = new HashMap();
+            map.put("field", field);
+            map.put("keyword", keyword);
+            Pageable pageAble = new PageRequest(index - 1, size);
+            Page<ExpertEntity> list = expertService.findAll(map, pageAble);
+            if (list.getContent().size() == 0) {
+                result.failedApiResponse(Const.FAILED, "暂无数据");
+                return result;
+            }
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("查询专家列表异常", e);
+            result.failedApiResponse(Const.FAILED, "专家列表查询异常");
+        }
+        return result;
+    }
+
+    /**
+     * 新增专家
+     */
+    @PostMapping("/add")
+    public RestApiResponse<ExpertEntity> add(@RequestBody ExpertEntity expertEntity) {
+        RestApiResponse<ExpertEntity> result = new RestApiResponse<ExpertEntity>();
+        try {
+            ExpertEntity expert = expertService.add(expertEntity);
+            if (expert == null) {
+                result.failedApiResponse(Const.FAILED, "添加失败");
+                return result;
+            }
+            result.successResponse(Const.SUCCESS, expert, "添加成功");
+        } catch (Exception e) {
+            logger.warn("新增专家异常:", e);
+            result.failedApiResponse(Const.FAILED, "新增专家异常");
+        }
+        return result;
+    }
+
+    /**
+     * 删除专家
+     * @param id  专家Id
+     * @return
+     */
+    @DeleteMapping("/delete")
+    public RestApiResponse<ExpertEntity> delete(@RequestParam(required = true) int id) {
+        RestApiResponse<ExpertEntity> result = new RestApiResponse<ExpertEntity>();
+        try {
+            ExpertEntity expertEntity = expertService.delete(id);
+            if (expertEntity == null) {
+                result.failedApiResponse(Const.FAILED, "专家不存在，删除失败");
+                return result;
+            }
+            result.successResponse(Const.SUCCESS, expertEntity, "删除成功");
+        } catch (Exception e) {
+            logger.warn("删除专家异常:", e);
+            result.failedApiResponse(Const.FAILED, "删除专家异常");
+        }
+        return result;
+    }
+
+    /**
+     * 修改专家
+     */
+    @PutMapping("/update")
+    public RestApiResponse<ExpertEntity> update(@RequestBody ExpertEntity expertEntity) {
+        RestApiResponse<ExpertEntity> result = new RestApiResponse<ExpertEntity>();
+        try {
+            ExpertEntity entity = expertService.findOne(expertEntity.getId());
+            if (entity == null) {
+                result.failedApiResponse(Const.FAILED, "该专家不存在，修改失败");
+                return result;
+            }
+            ExpertEntity expert = expertService.update(expertEntity);
+            result.successResponse(Const.SUCCESS, expert, "修改成功");
+        } catch (Exception e) {
+            logger.warn("修改专家异常", e);
+            result.failedApiResponse(Const.FAILED, "修改专家异常");
+        }
+        return result;
+
+    }
+
+}

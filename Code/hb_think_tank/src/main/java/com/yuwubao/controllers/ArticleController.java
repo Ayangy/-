@@ -1,0 +1,136 @@
+package com.yuwubao.controllers;
+
+import com.yuwubao.entities.ArticleEntity;
+import com.yuwubao.services.ArticleService;
+import com.yuwubao.services.impl.ArticleSearchService;
+import com.yuwubao.util.Const;
+import com.yuwubao.util.RestApiResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by yangyu on 2017/10/20.
+ */
+@RestController
+@RequestMapping("/article")
+@Transactional
+public class ArticleController {
+
+    private final static Logger logger = LoggerFactory.getLogger(ArticleController.class);
+
+    @Autowired
+    private ArticleService articleService;
+
+    @Autowired
+    private ArticleSearchService articleSearchService;
+
+    /**
+     * 查询文章
+     * @param index
+     * @param size
+     * @param field
+     * @param keyword
+     * @param beginTime
+     * @param endTime
+     * @param typeId
+     * @param organizationId
+     * @return
+     */
+    @GetMapping("/findAll")
+    public RestApiResponse<Page<ArticleEntity>> findAll(@RequestParam(defaultValue = "1", required = false)int index,
+                                @RequestParam(defaultValue = "10", required = false)int size,
+                                @RequestParam(required = false, defaultValue = "")String field,
+                                @RequestParam(required = false, defaultValue = "")String keyword,
+                                @RequestParam(required = false, defaultValue = "")String beginTime,
+                                @RequestParam(required = false, defaultValue = "")String endTime,
+                                @RequestParam(required = false, defaultValue = "0")int typeId,
+                                @RequestParam(required = false, defaultValue = "0")int organizationId){
+        RestApiResponse<Page<ArticleEntity>> result = new RestApiResponse<Page<ArticleEntity>>();
+        try {
+            Map<String, String> map = new HashMap();
+            map.put("field", field);
+            map.put("keyword", keyword);
+            map.put("beginTime", beginTime);
+            map.put("endTime", endTime);
+            Pageable pageAble = new PageRequest(index - 1, size);
+            Page<ArticleEntity> list = articleService.findAll(map, pageAble, typeId, organizationId);
+            result.successResponse(Const.SUCCESS, list, "获取列表成功");
+        } catch (Exception e) {
+            logger.warn("article list find failed", e);
+
+        }
+        return result;
+    }
+
+    /**
+     * 新增文章
+     */
+    @PostMapping("/add")
+    public RestApiResponse<ArticleEntity> add(@RequestBody ArticleEntity articleEntity) {
+        RestApiResponse<ArticleEntity> result = new RestApiResponse<ArticleEntity>();
+        try {
+            articleEntity.setAddTime(new Date());
+            ArticleEntity article = articleService.add(articleEntity);
+            if (article == null) {
+                result.failedApiResponse(Const.FAILED, "添加失败");
+                return result;
+            }
+            articleSearchService.createDoc(articleEntity);
+            result.successResponse(Const.SUCCESS, article, "添加成功");
+        } catch (Exception e) {
+            logger.warn("", e);
+        }
+        return result;
+    }
+
+    /**
+     * 删除文章
+     */
+    @DeleteMapping("/delete")
+    public RestApiResponse<ArticleEntity> delete(@RequestParam(required = true) int id) {
+        RestApiResponse<ArticleEntity> result = new RestApiResponse<ArticleEntity>();
+        try {
+            ArticleEntity articleEntity = articleService.delete(id);
+            if (articleEntity == null) {
+                result.failedApiResponse(Const.FAILED, "删除失败,文章不存在");
+                return result;
+            }
+            articleSearchService.delete(String.valueOf(id));
+            result.successResponse(Const.SUCCESS, articleEntity, "删除成功");
+        } catch (Exception e) {
+            logger.warn("删除文章异常", e);
+        }
+        return result;
+    }
+
+    /**
+     * 修改文章
+     */
+    @PutMapping("/update")
+    public RestApiResponse<ArticleEntity> update(@RequestBody ArticleEntity articleEntity) {
+        RestApiResponse<ArticleEntity> result = new RestApiResponse<ArticleEntity>();
+        try {
+            ArticleEntity article = articleService.update(articleEntity);
+            if (article == null) {
+                result.failedApiResponse(Const.FAILED, "修改失败，文章不存在");
+                return result;
+            }
+            articleSearchService.update(String.valueOf(article.getId()),article);
+            result.successResponse(Const.SUCCESS, article, "修改成功");
+        } catch (Exception e) {
+            logger.warn("修改文章异常", e);
+        }
+        return result;
+
+    }
+}
