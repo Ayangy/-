@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,32 +36,30 @@ public class ArticleSortController {
      * @param size
      * @param field
      * @param keyword
-     * @param beginTime
-     * @param endTime
      * @return
      */
     @GetMapping("/findAll")
-    public ModelAndView findAll(@RequestParam(defaultValue = "1", required = false)int index,
+    public RestApiResponse<Page<ArticleSortEntity>> findAll(@RequestParam(defaultValue = "1", required = false)int index,
                                 @RequestParam(defaultValue = "10", required = false)int size,
                                 @RequestParam(required = false, defaultValue = "")String field,
-                                @RequestParam(required = false, defaultValue = "")String keyword,
-                                @RequestParam(required = false, defaultValue = "")String beginTime,
-                                @RequestParam(required = false, defaultValue = "")String endTime){
-        ModelAndView modelAndView = new ModelAndView("login");
+                                @RequestParam(required = false, defaultValue = "")String keyword){
+        RestApiResponse<Page<ArticleSortEntity>> result = new RestApiResponse<Page<ArticleSortEntity>>();
         try {
             Map<String, String> map = new HashMap();
             map.put("field", field);
             map.put("keyword", keyword);
-            map.put("beginTime", beginTime);
-            map.put("endTime", endTime);
             Pageable pageAble = new PageRequest(index - 1, size);
             Page<ArticleSortEntity> list = articleSortService.findAll(map, pageAble);
-            modelAndView.addObject("list", list);
+            if (list.getContent().size() == 0) {
+                result.failedApiResponse(Const.SUCCESS, "暂无数据");
+                return result;
+            }
+            result.successResponse(Const.SUCCESS, list, "获取文章列表成功");
         } catch (Exception e) {
-            logger.warn("article list find failed", e);
-
+            logger.warn("文章分类条件查询异常：", e);
+            result.failedApiResponse(Const.FAILED, "文章分类条件查询异常");
         }
-        return modelAndView;
+        return result;
     }
 
     /**
@@ -79,7 +76,8 @@ public class ArticleSortController {
             }
             result.successResponse(Const.SUCCESS, articleSort, "添加成功");
         } catch (Exception e) {
-            logger.warn("", e);
+            logger.warn("新增文章分类异常", e);
+            result.failedApiResponse(Const.FAILED, "新增文章分类异常");
         }
         return result;
     }
@@ -99,6 +97,7 @@ public class ArticleSortController {
             result.successResponse(Const.SUCCESS, articleSort, "删除成功");
         } catch (Exception e) {
             logger.warn("删除文章分类异常", e);
+            result.failedApiResponse(Const.FAILED, "删除文章分类异常");
         }
         return result;
     }
@@ -118,6 +117,7 @@ public class ArticleSortController {
             result.successResponse(Const.SUCCESS, articleSort, "修改成功");
         } catch (Exception e) {
             logger.warn("修改文章分类异常", e);
+            result.failedApiResponse(Const.FAILED, "修改文章分类异常");
         }
         return result;
 
@@ -132,13 +132,14 @@ public class ArticleSortController {
         try {
             List<ArticleSortEntity> list = articleSortService.getAll();
             if (list.size() == 0) {
-                result.failedApiResponse(Const.FAILED, "无文章分类列表");
+                result.failedApiResponse(Const.FAILED, "暂无数据");
                 return result;
             }
             result.failedApiResponse(Const.SUCCESS, "列表获取成功");
             result.setResult(list);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn("获取列表异常", e);
+            result.failedApiResponse(Const.FAILED, "获取列表异常");
         }
         return result;
     }

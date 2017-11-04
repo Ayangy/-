@@ -17,6 +17,11 @@ public class ExpertEntity {
     private int id;
 
     /**
+     * 专家照片
+     */
+    private String img;
+
+    /**
      * 专家姓名
      */
     private String name;
@@ -92,6 +97,14 @@ public class ExpertEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getName() {

@@ -51,9 +51,10 @@ public class AericleSearchController {
      *
      */
     @GetMapping("/query/zk/article")
-    public List<ArticleEntity> query(@RequestParam(defaultValue = "", required = false) String query,
+    public RestApiResponse<List<ArticleEntity>> query(@RequestParam(defaultValue = "", required = false) String query,
                                      @RequestParam(defaultValue = "0", required = false) int pageIndex,
                                      @RequestParam(defaultValue = "10", required = false) int pageSize){
+        RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
         List<ArticleEntity> list = new  ArrayList<ArticleEntity>();
         try {
             if (StringUtils.isEmpty(query)) {
@@ -63,7 +64,8 @@ public class AericleSearchController {
                     ArticleEntity articleEntity = mapper.map(map, ArticleEntity.class);
                     list.add(articleEntity);
                 }
-                return list;
+                result.successResponse(Const.SUCCESS, list, "获取列表成功");
+                return result;
             }
             // 构建布尔查询
             QueryStringQueryBuilder queryBuilder = new QueryStringQueryBuilder(query);
@@ -114,11 +116,13 @@ public class AericleSearchController {
                 articleEntity.setId(Integer.parseInt(hit.getId()));
                 list.add(articleEntity);
             }
+            result.successResponse(Const.SUCCESS, list, "获取列表成功");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn("站内搜索异常", e);
+            result.failedApiResponse(Const.FAILED, "站内搜索异常");
         }
 
-        return list;
+        return result;
     }
 
     /**

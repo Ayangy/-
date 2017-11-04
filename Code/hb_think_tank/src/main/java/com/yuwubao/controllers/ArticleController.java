@@ -64,10 +64,14 @@ public class ArticleController {
             map.put("endTime", endTime);
             Pageable pageAble = new PageRequest(index - 1, size);
             Page<ArticleEntity> list = articleService.findAll(map, pageAble, typeId, organizationId);
+            if (list.getContent().size() == 0) {
+                result.failedApiResponse(Const.SUCCESS, "暂无数据");
+                return result;
+            }
             result.successResponse(Const.SUCCESS, list, "获取列表成功");
         } catch (Exception e) {
-            logger.warn("article list find failed", e);
-
+            logger.warn("文章列表查询异常", e);
+            result.failedApiResponse(Const.FAILED, "文章列表查询异常");
         }
         return result;
     }
@@ -88,7 +92,8 @@ public class ArticleController {
             articleSearchService.createDoc(articleEntity);
             result.successResponse(Const.SUCCESS, article, "添加成功");
         } catch (Exception e) {
-            logger.warn("", e);
+            logger.warn("新增文章异常", e);
+            result.failedApiResponse(Const.FAILED, "新增文章异常");
         }
         return result;
     }
@@ -109,6 +114,7 @@ public class ArticleController {
             result.successResponse(Const.SUCCESS, articleEntity, "删除成功");
         } catch (Exception e) {
             logger.warn("删除文章异常", e);
+            result.failedApiResponse(Const.FAILED, "删除文章异常");
         }
         return result;
     }
@@ -129,6 +135,7 @@ public class ArticleController {
             result.successResponse(Const.SUCCESS, article, "修改成功");
         } catch (Exception e) {
             logger.warn("修改文章异常", e);
+            result.failedApiResponse(Const.FAILED, "修改文章异常");
         }
         return result;
 

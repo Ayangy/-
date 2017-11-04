@@ -2,22 +2,21 @@ package com.yuwubao.controllers;
 
 import com.yuwubao.entities.UserEntity;
 import com.yuwubao.services.UserService;
+import com.yuwubao.util.Const;
+import com.yuwubao.util.RestApiResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by yangyu on 2017/10/19.
  */
-@Controller
+@RestController
 @Transactional
 public class LoginController {
 
@@ -29,37 +28,39 @@ public class LoginController {
     /**
      * 登陆页
      */
-    @RequestMapping("/sys/toLogin")
+    /*@RequestMapping("/sys/toLogin")
     public String index() {
         return "login";
-    }
+    }*/
 
     /**
      * 后台用户登陆
      */
-    @RequestMapping(value = "/login")
-    public String sysLogin(HttpServletRequest request, HttpServletResponse response, Model model) {
+    @PostMapping("/login")
+    public RestApiResponse<UserEntity> sysLogin(@RequestBody UserEntity user) {
+        RestApiResponse<UserEntity> result = new RestApiResponse<UserEntity>();
         try {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
+            String username = user.getUsername();
+            String password = user.getPassword();
             if (!StringUtils.isNotBlank(username)) {
-                model.addAttribute("msg", "账号不能为空");
-                return "login";
+                result.failedApiResponse(Const.FAILED, "账号不能为空");
+                return result;
             }
             if (!StringUtils.isNotBlank(password)) {
-                model.addAttribute("msg", "密码不能为空");
-                return "login";
+                result.failedApiResponse(Const.FAILED, "密码不能为空");
+                return result;
             }
             UserEntity userEntity = userService.findByUsernameAndPassword(username, password);
             if (userEntity == null) {
-                model.addAttribute("msg", "账号或密码错误");
-                return "login";
+                result.failedApiResponse(Const.FAILED, "账号或密码错误");
+                return result;
             }
-            model.addAttribute("user", userEntity);
+            result.successResponse(Const.SUCCESS, userEntity, "登陆成功");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn("登陆异常:", e);
+            result.failedApiResponse(Const.FAILED, "登陆异常");
         }
-        return "redirect:/index";
+        return result;
     }
 
 }
