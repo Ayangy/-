@@ -53,7 +53,7 @@ public class UserController {
                                                     @RequestParam(required = false, defaultValue = "")String endTime){
         RestApiResponse<Page<UserEntity>> result = new RestApiResponse<Page<UserEntity>>();
         try {
-            Map<String, String> map = new HashMap();
+            Map<String, String> map = new HashMap<String, String>();
             map.put("field", field);
             map.put("keyword", keyword);
             map.put("beginTime", beginTime);
@@ -79,6 +79,11 @@ public class UserController {
     public RestApiResponse<UserEntity> add(@RequestBody UserEntity userEntity) {
         RestApiResponse<UserEntity> result = new RestApiResponse<UserEntity>();
         try {
+            UserEntity entity = userService.findByUsername(userEntity.getUsername());
+            if (entity != null) {
+                result.failedApiResponse(Const.FAILED, "用户名已存在");
+                return result;
+            }
             userEntity.setCreateTime(new Date());
             UserEntity user = userService.add(userEntity);
             if (user == null) {
@@ -125,6 +130,11 @@ public class UserController {
             UserEntity entity = userService.findById(userEntity.getId());
             if (entity == null) {
                 result.failedApiResponse(Const.FAILED, "修改失败，用户不存在");
+                return result;
+            }
+            UserEntity u = userService.findByUsername(userEntity.getUsername());
+            if (u != null) {
+                result.failedApiResponse(Const.FAILED, "修改失败，用户名已存在");
                 return result;
             }
             UserEntity user = userService.update(userEntity);

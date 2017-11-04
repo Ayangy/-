@@ -21,4 +21,6 @@ public interface UserService {
     UserEntity findById(int userId);
 
     UserEntity findByUsernameAndPassword(String username, String password);
+
+    UserEntity findByUsername(String username);
 }
