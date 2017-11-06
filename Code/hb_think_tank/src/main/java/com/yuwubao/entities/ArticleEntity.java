@@ -51,7 +51,7 @@ public class ArticleEntity implements Serializable {
     /**
      * 文章类型Id
      */
-    private int textTypeId;
+    private int articleType;
 
     /**
      * 机构ID
@@ -119,12 +119,12 @@ public class ArticleEntity implements Serializable {
         this.imgState = imgState;
     }
 
-    public int getTextTypeId() {
-        return textTypeId;
+    public int getArticleType() {
+        return articleType;
     }
 
-    public void setTextTypeId(int textTypeId) {
-        this.textTypeId = textTypeId;
+    public void setArticleType(int articleType) {
+        this.articleType = articleType;
     }
 
     public int getOrganizationId() {

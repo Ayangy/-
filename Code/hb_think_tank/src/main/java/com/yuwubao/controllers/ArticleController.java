@@ -42,7 +42,7 @@ public class ArticleController {
      * @param keyword  查询值
      * @param beginTime  开始时间
      * @param endTime  结束时间
-     * @param typeId  文章分类Id
+     * @param articleType  文章分类Id
      * @param organizationId  机构Id
      *
      */
@@ -53,7 +53,7 @@ public class ArticleController {
                                 @RequestParam(required = false, defaultValue = "")String keyword,
                                 @RequestParam(required = false, defaultValue = "")String beginTime,
                                 @RequestParam(required = false, defaultValue = "")String endTime,
-                                @RequestParam(required = false, defaultValue = "0")int typeId,
+                                @RequestParam(required = false, defaultValue = "0")int articleType,
                                 @RequestParam(required = false, defaultValue = "0")int organizationId){
         RestApiResponse<Page<ArticleEntity>> result = new RestApiResponse<Page<ArticleEntity>>();
         try {
@@ -63,7 +63,7 @@ public class ArticleController {
             map.put("beginTime", beginTime);
             map.put("endTime", endTime);
             Pageable pageAble = new PageRequest(index - 1, size);
-            Page<ArticleEntity> list = articleService.findAll(map, pageAble, typeId, organizationId);
+            Page<ArticleEntity> list = articleService.findAll(map, pageAble, articleType, organizationId);
             if (list.getContent().size() == 0) {
                 result.failedApiResponse(Const.SUCCESS, "暂无数据");
                 return result;

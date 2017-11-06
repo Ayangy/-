@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
@@ -25,6 +28,9 @@ public class VideoServiceImpl implements VideoService {
 
     @Autowired
     private VideoRepository videoRepository;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public Page<VideoEntity> findAll(Map<String, String> map, Pageable pageAble) {
@@ -92,5 +98,12 @@ public class VideoServiceImpl implements VideoService {
         ModelMapper mapper = new ModelMapper();
         VideoEntity entity = mapper.map(videoEntity, VideoEntity.class);
         return  videoRepository.save(entity);
+    }
+
+    @Override
+    public VideoEntity getNewsVideo(){
+        String sql = "select * from video_news order by createTime desc limit 0, 1";
+        RowMapper<VideoEntity> rowMapper = new BeanPropertyRowMapper<>(VideoEntity.class);
+        return jdbcTemplate.queryForObject(sql, rowMapper);
     }
 }

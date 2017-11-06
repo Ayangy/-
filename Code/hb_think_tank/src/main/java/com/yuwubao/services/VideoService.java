@@ -19,4 +19,6 @@ public interface VideoService {
     VideoEntity findOne(int id);
 
     VideoEntity update(VideoEntity videoEntity);
+
+    VideoEntity getNewsVideo();
 }

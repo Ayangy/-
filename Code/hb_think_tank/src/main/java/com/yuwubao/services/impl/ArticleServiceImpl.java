@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,7 +35,7 @@ public class ArticleServiceImpl implements ArticleService {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public Page<ArticleEntity> findAll(Map<String, String> map, Pageable pageAble, int typeId, int organizationId) {
+    public Page<ArticleEntity> findAll(Map<String, String> map, Pageable pageAble, int articleType, int organizationId) {
         String field = map.get("field");
         String keyword = map.get("keyword");
         String start = map.get("beginTime");
@@ -67,9 +69,9 @@ public class ArticleServiceImpl implements ArticleService {
                         e.printStackTrace();
                     }
                 }
-                if (typeId != 0) {
-                    Path<Integer> type = root.get("textTypeId");
-                    predict.getExpressions().add(criteriaBuilder.equal(type, typeId));
+                if (articleType != 0) {
+                    Path<Integer> type = root.get("articleType");
+                    predict.getExpressions().add(criteriaBuilder.equal(type, articleType));
                 }
                 if (organizationId != 0) {
                     Path<Integer> oId = root.get("organizationId");
@@ -114,6 +116,14 @@ public class ArticleServiceImpl implements ArticleService {
         String sql = "SELECT * FROM article limit " + pageIndex + ","+ pageSize ;
         List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql);
         return maps;
+    }
+
+    @Override
+    public List<ArticleEntity> getHomeArticle(int articleType, int index, int size) {
+        String sql = "select * from article WHERE articleType = ? order by addTime desc limit ?, ?";
+        RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, articleType, index, size);
+        return list;
     }
 
 }

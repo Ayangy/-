@@ -23,9 +23,9 @@ public class ArticleSortEntity {
     private String name;
 
     /**
-     * 父ID
+     * 分类码
      */
-    private int parentId;
+    private int type;
 
     public int getId() {
         return id;
@@ -43,11 +43,11 @@ public class ArticleSortEntity {
         this.name = name;
     }
 
-    public int getParentId() {
-        return parentId;
+    public int getType() {
+        return type;
     }
 
-    public void setParentId(int parentId) {
-        this.parentId = parentId;
+    public void setType(int type) {
+        this.type = type;
     }
 }
