@@ -145,4 +145,44 @@ public class OrganizationController {
         }
         return result;
     }
+
+    /**
+     * 通过首字母查询
+     * @param type  机构类型
+     * @param letter  查询字母
+     * @return
+     */
+    @GetMapping("/findByLetter")
+    public RestApiResponse<List<OrganizationEntity>> findByLetter(@RequestParam(defaultValue = "0", required = false) int type,
+                                                                  @RequestParam String letter) {
+        RestApiResponse<List<OrganizationEntity>> result = new RestApiResponse<List<OrganizationEntity>>();
+        try {
+            List<OrganizationEntity> list = organizationService.finByLetter(type, letter);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("通过字母查询异常", e);
+            result.failedApiResponse(Const.FAILED, "通过字母查询异常");
+        }
+        return result;
+    }
+
+    /**
+     * 通过机构名查询
+     * @param query 机构名
+     * @param type  机构类型
+     * @return
+     */
+    @GetMapping("/findByName")
+    public RestApiResponse<List<OrganizationEntity>> findByName(@RequestParam String query,
+                                                                @RequestParam(defaultValue = "0", required = false) int type) {
+        RestApiResponse<List<OrganizationEntity>> result = new RestApiResponse<List<OrganizationEntity>>();
+        try {
+            List<OrganizationEntity> list= organizationService.finByNameAndType(query, type);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("机构名模糊查询异常", e);
+            result.failedApiResponse(Const.FAILED, "机构名模糊查询异常");
+        }
+        return result;
+    }
 }

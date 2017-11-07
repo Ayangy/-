@@ -23,4 +23,8 @@ public interface OrganizationService {
     List<OrganizationEntity> getAll();
 
     OrganizationEntity findOne(int id);
+
+    List<OrganizationEntity> finByLetter(int type, String letter);
+
+    List<OrganizationEntity> finByNameAndType(String query, int type) throws Exception;
 }

@@ -126,4 +126,10 @@ public class ArticleServiceImpl implements ArticleService {
         return list;
     }
 
+    @Override
+    public ArticleEntity findById(int id) {
+        return articleRepository.findOne(id);
+
+    }
+
 }

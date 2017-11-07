@@ -4,6 +4,7 @@ import com.yuwubao.entities.VideoEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,5 +21,5 @@ public interface VideoService {
 
     VideoEntity update(VideoEntity videoEntity);
 
-    VideoEntity getNewsVideo();
+    List<VideoEntity> getNewsVideo(int index, int size);
 }

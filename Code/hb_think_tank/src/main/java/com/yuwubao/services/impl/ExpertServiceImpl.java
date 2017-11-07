@@ -9,10 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,6 +27,9 @@ public class ExpertServiceImpl implements ExpertService {
 
     @Autowired
     private ExpertRepository expertRepository;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public Page<ExpertEntity> findAll(Map<String, String> map, Pageable pageAble) {
@@ -70,5 +77,24 @@ public class ExpertServiceImpl implements ExpertService {
         ModelMapper mapper = new ModelMapper();
         ExpertEntity entity = mapper.map(expertEntity, ExpertEntity.class);
         return expertRepository.save(entity);
+    }
+
+    @Override
+    public ExpertEntity findById(int id) {
+        return expertRepository.findOne(id);
+    }
+
+    @Override
+    public List<ExpertEntity> getAll() {
+        List<ExpertEntity> list = expertRepository.findAll();
+        return list;
+    }
+
+    @Override
+    public List<ExpertEntity> findExpertByLetter(String letter) {
+        String sql = "select * from zk_expert where get_first_pinyin_char(name) = ?";
+        RowMapper<ExpertEntity> rowMapper = new BeanPropertyRowMapper<>(ExpertEntity.class);
+        List<ExpertEntity> list = jdbcTemplate.query(sql, rowMapper, letter);
+        return list;
     }
 }

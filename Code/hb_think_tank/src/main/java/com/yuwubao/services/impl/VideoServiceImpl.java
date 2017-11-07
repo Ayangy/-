@@ -18,6 +18,7 @@ import javax.persistence.criteria.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -101,9 +102,10 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public VideoEntity getNewsVideo(){
-        String sql = "select * from video_news order by createTime desc limit 0, 1";
+    public List<VideoEntity> getNewsVideo(int index, int size){
+        String sql = "select * from video_news order by createTime desc limit ?, ?";
         RowMapper<VideoEntity> rowMapper = new BeanPropertyRowMapper<>(VideoEntity.class);
-        return jdbcTemplate.queryForObject(sql, rowMapper);
+        List<VideoEntity> list = jdbcTemplate.query(sql, rowMapper, index, size);
+        return list;
     }
 }

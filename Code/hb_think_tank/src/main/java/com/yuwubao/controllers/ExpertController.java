@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -121,6 +122,24 @@ public class ExpertController {
         }
         return result;
 
+    }
+
+    /**
+     * 拼音首字母查询专家
+     * @param letter 字母
+     * @return
+     */
+    @GetMapping("/findExpertByLetter")
+    public RestApiResponse<List<ExpertEntity>> findExpertByLetter(@RequestParam String letter) {
+        RestApiResponse<List<ExpertEntity>> result = new RestApiResponse<List<ExpertEntity>>();
+        try {
+            List<ExpertEntity> list = expertService.findExpertByLetter(letter);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("通过字母查询专家异常", e);
+            result.failedApiResponse(Const.FAILED, "通过首字母查询专家异常");
+        }
+        return result;
     }
 
 }

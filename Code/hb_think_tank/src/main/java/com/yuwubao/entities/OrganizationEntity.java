@@ -41,7 +41,10 @@ public class OrganizationEntity {
      */
     private String institutionSetting;
 
-
+    /**
+     *  机构分类
+     */
+    private int type;
 
     public int getId() {
         return id;
@@ -89,5 +92,13 @@ public class OrganizationEntity {
 
     public void setInstitutionSetting(String institutionSetting) {
         this.institutionSetting = institutionSetting;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

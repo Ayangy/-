@@ -142,4 +142,21 @@ public class ArticleController {
         return result;
 
     }
+
+    @GetMapping("/getOne")
+    public RestApiResponse<ArticleEntity> getOne(@RequestParam int id) {
+        RestApiResponse<ArticleEntity> result = new RestApiResponse<ArticleEntity>();
+        try {
+            ArticleEntity entity = articleService.findById(id);
+            if (entity == null) {
+                result.failedApiResponse(Const.FAILED, "文章不存在");
+                return result;
+            }
+            result.successResponse(Const.SUCCESS, entity);
+        } catch (Exception e) {
+            logger.warn("获取文章异常", e);
+            result.failedApiResponse(Const.FAILED, "获取文章异常");
+        }
+        return result;
+    }
 }

@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
@@ -23,6 +26,9 @@ public class OrganizationServiceImpl implements OrganizationService{
 
     @Autowired
     private OrganizationRepository organizationRepository;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public Page<OrganizationEntity> findAll(Map<String, String> map, Pageable pageAble) {
@@ -83,5 +89,24 @@ public class OrganizationServiceImpl implements OrganizationService{
     @Override
     public OrganizationEntity findOne(int id) {
         return organizationRepository.findOne(id);
+    }
+
+    @Override
+    public List<OrganizationEntity> finByLetter(int type, String letter) {
+        String sql = "select * from organization where get_first_pinyin_char(name) = ? AND type = ?";
+        RowMapper<OrganizationEntity> rowMapper = new BeanPropertyRowMapper<>(OrganizationEntity.class);
+        List<OrganizationEntity> list = jdbcTemplate.query(sql, rowMapper, letter, type);
+        return list;
+    }
+
+    @Override
+    public List<OrganizationEntity> finByNameAndType(String query, int type){
+        String sql = "SELECT * FROM organization where type=? ";
+        if (StringUtils.isNotBlank(query)) {
+            sql = sql + "and `name` LIKE  '%" + query + "%'";
+        }
+        RowMapper<OrganizationEntity> rowMapper = new BeanPropertyRowMapper<>(OrganizationEntity.class);
+        List<OrganizationEntity> list = jdbcTemplate.query(sql, rowMapper, type);
+        return list;
     }
 }
