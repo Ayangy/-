@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -126,6 +127,29 @@ public class VideoController {
             result.failedApiResponse(Const.FAILED, "修改视频资讯异常");
         }
         return result;
+    }
 
+    /**
+     * 获取视频新闻
+     * @param index  第几页
+     * @param size 每页几条
+     * @return
+     */
+    @GetMapping("/findVideoNews")
+    public RestApiResponse<List<VideoEntity>> getVideoNews(@RequestParam(defaultValue = "0", required = false) int index,
+                                                           @RequestParam(defaultValue = "1", required = false) int size) {
+        RestApiResponse<List<VideoEntity>> result = new RestApiResponse<List<VideoEntity>>();
+        try {
+            List<VideoEntity> list = videoService.getNewsVideo(index, size);
+            if (list.size() == 0) {
+                result.failedApiResponse(Const.FAILED, "暂无数据");
+                return result;
+            }
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("视频新闻获取异常", e);
+            result.failedApiResponse(Const.FAILED, "视频新闻获取异常");
+        }
+        return result;
     }
 }

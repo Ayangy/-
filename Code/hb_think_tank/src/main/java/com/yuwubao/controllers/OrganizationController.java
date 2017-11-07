@@ -185,4 +185,26 @@ public class OrganizationController {
         }
         return result;
     }
+
+    /**
+     * 获取机构简介
+     * @param id  机构Id
+     * @return
+     */
+    @GetMapping("/getOrganization")
+    public RestApiResponse<OrganizationEntity> getOrganizationEntity(@RequestParam int id) {
+        RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
+        try {
+            OrganizationEntity entity = organizationService.findOne(id);
+            if (entity == null) {
+                result.failedApiResponse(Const.FAILED, "当前机构不存在");
+                return result;
+            }
+            result.successResponse(Const.SUCCESS, entity);
+        } catch (Exception e) {
+            logger.warn("获取机构简介异常：", e);
+            result.failedApiResponse(Const.FAILED, "获取机构简介异常");
+        }
+        return result;
+    }
 }

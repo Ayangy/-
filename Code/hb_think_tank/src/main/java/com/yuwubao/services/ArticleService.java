@@ -24,4 +24,6 @@ public interface ArticleService {
     List<ArticleEntity> getHomeArticle(int articleType, int index, int size);
 
     ArticleEntity findById(int id);
+
+    List<ArticleEntity> findByArticleSort(int type, int parentType);
 }
