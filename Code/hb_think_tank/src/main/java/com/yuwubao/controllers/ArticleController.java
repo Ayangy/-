@@ -25,6 +25,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/article")
 @Transactional
+@CrossOrigin
 public class ArticleController {
 
     private final static Logger logger = LoggerFactory.getLogger(ArticleController.class);

@@ -23,6 +23,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("organization")
 @Transactional
+@CrossOrigin
 public class OrganizationController {
 
     private final static Logger logger = LoggerFactory.getLogger(OrganizationController.class);

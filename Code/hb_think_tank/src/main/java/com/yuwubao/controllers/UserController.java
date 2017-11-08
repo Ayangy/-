@@ -25,6 +25,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/sys/user")
 @Transactional
+@CrossOrigin
 public class UserController {
 
     private final static Logger logger = LoggerFactory.getLogger(UserController.class);

@@ -21,6 +21,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/videoNews")
+@CrossOrigin
 public class VideoController {
 
     private final static Logger logger = LoggerFactory.getLogger(VideoController.class);

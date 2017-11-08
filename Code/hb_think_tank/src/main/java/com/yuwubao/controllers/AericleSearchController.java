@@ -36,6 +36,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping
+@CrossOrigin
 public class AericleSearchController {
 
     private final static Logger logger = LoggerFactory.getLogger(AericleSearchController.class);

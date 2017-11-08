@@ -23,6 +23,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/articleSort")
 @Transactional
+@CrossOrigin
 public class ArticleSortController {
 
     private final static Logger logger = LoggerFactory.getLogger(ArticleSortController.class);

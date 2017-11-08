@@ -23,6 +23,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/sys/role")
 @Transactional
+@CrossOrigin
 public class RoleController {
 
     private final static Logger logger = LoggerFactory.getLogger(RoleController.class);

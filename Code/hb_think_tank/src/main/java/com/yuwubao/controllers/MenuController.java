@@ -21,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/sys/menu")
 @Transactional
+@CrossOrigin
 public class MenuController {
 
     private final static Logger logger = LoggerFactory.getLogger(MenuController.class);

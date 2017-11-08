@@ -21,6 +21,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/expert")
+@CrossOrigin
 public class ExpertController {
 
     private final static Logger logger = LoggerFactory.getLogger(ExpertController.class);
