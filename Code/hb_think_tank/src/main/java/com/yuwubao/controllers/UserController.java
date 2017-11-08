@@ -36,7 +36,7 @@ public class UserController {
     private UserRoleService userRoleService;
 
     /**
-     * 查询用户
+     * 分页查询用户
      * @param index 第几页
      * @param size  每页几条
      * @param field  查询字段

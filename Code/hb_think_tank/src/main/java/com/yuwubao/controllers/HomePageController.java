@@ -26,7 +26,7 @@ public class HomePageController {
     private ArticleService articleService;
 
     /**
-     * 获取文章
+     * 获取最新的文章
      * @param articleType  文章类型
      * @param index  第几页
      * @param size  每页几条
