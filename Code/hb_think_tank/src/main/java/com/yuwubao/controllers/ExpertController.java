@@ -49,10 +49,6 @@ public class ExpertController {
             map.put("keyword", keyword);
             Pageable pageAble = new PageRequest(index - 1, size);
             Page<ExpertEntity> list = expertService.findAll(map, pageAble);
-            if (list.getContent().size() == 0) {
-                result.failedApiResponse(Const.FAILED, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("查询专家列表异常", e);
@@ -173,10 +169,6 @@ public class ExpertController {
         RestApiResponse<List<ExpertEntity>> result = new RestApiResponse<List<ExpertEntity>>();
         try {
             List<ExpertEntity> list = expertService.getAll();
-            if (list.size() == 0) {
-                result.failedApiResponse(Const.FAILED, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("获取所有智库专家异常", e);

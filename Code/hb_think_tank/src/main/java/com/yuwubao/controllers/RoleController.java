@@ -57,10 +57,6 @@ public class RoleController {
             map.put("endTime", endTime);
             Pageable pageAble = new PageRequest(index - 1, size);
             Page<RoleEntity> list = roleService.findAll(map, pageAble);
-            if (list.getContent().size() == 0) {
-                result.failedApiResponse(Const.SUCCESS, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list, "查询角色成功");
         } catch (Exception e) {
             logger.warn("角色列表查询异常", e);
@@ -141,10 +137,6 @@ public class RoleController {
         RestApiResponse<List<RoleEntity>> result = new RestApiResponse<List<RoleEntity>>();
         try {
             List<RoleEntity> list = roleService.getAll();
-            if (list.size() == 0) {
-                result.failedApiResponse(Const.SUCCESS, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list, "获取角色列表成功");
         } catch (Exception e) {
             logger.warn("获取角色列表异常：", e);

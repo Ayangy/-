@@ -66,10 +66,6 @@ public class ArticleController {
             map.put("endTime", endTime);
             Pageable pageAble = new PageRequest(index - 1, size);
             Page<ArticleEntity> list = articleService.findAll(map, pageAble, articleType, organizationId);
-            if (list.getContent().size() == 0) {
-                result.failedApiResponse(Const.SUCCESS, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list, "获取列表成功");
         } catch (Exception e) {
             logger.warn("文章列表查询异常", e);
@@ -155,10 +151,6 @@ public class ArticleController {
         RestApiResponse<ArticleEntity> result = new RestApiResponse<ArticleEntity>();
         try {
             ArticleEntity articleEntity = articleService.findById(id);
-            if (articleEntity == null) {
-                result.failedApiResponse(Const.FAILED, "文章不存在");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, articleEntity);
         } catch (Exception e) {
             logger.warn("文章获取异常", e);
@@ -176,10 +168,6 @@ public class ArticleController {
         RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
         try {
             List<ArticleEntity> list = articleService.findByArticleSort(type, parentType);
-            if (list.size() == 0) {
-                result.failedApiResponse(Const.FAILED, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("文章分类查询异常", e);
@@ -187,4 +175,6 @@ public class ArticleController {
         }
         return result;
     }
+
+
 }

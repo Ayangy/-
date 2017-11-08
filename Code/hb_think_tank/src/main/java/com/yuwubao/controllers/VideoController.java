@@ -55,10 +55,6 @@ public class VideoController {
             map.put("endTime", endTime);
             Pageable pageAble = new PageRequest(index - 1, size);
             Page<VideoEntity> list = videoService.findAll(map, pageAble);
-            if (list.getContent().size() == 0) {
-                result.failedApiResponse(Const.FAILED, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("查询视频资讯列表异常", e);
@@ -142,10 +138,6 @@ public class VideoController {
         RestApiResponse<List<VideoEntity>> result = new RestApiResponse<List<VideoEntity>>();
         try {
             List<VideoEntity> list = videoService.getNewsVideo(index, size);
-            if (list.size() == 0) {
-                result.failedApiResponse(Const.FAILED, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("视频新闻获取异常", e);

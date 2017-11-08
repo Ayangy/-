@@ -51,10 +51,6 @@ public class ArticleSortController {
             map.put("keyword", keyword);
             Pageable pageAble = new PageRequest(index - 1, size);
             Page<ArticleSortEntity> list = articleSortService.findAll(map, pageAble);
-            if (list.getContent().size() == 0) {
-                result.failedApiResponse(Const.SUCCESS, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list, "获取文章列表成功");
         } catch (Exception e) {
             logger.warn("文章分类条件查询异常：", e);
@@ -132,10 +128,6 @@ public class ArticleSortController {
         RestApiResponse<List<ArticleSortEntity>> result = new RestApiResponse<List<ArticleSortEntity>>();
         try {
             List<ArticleSortEntity> list = articleSortService.getAll();
-            if (list.size() == 0) {
-                result.failedApiResponse(Const.FAILED, "暂无数据");
-                return result;
-            }
             result.failedApiResponse(Const.SUCCESS, "列表获取成功");
             result.setResult(list);
         } catch (Exception e) {

@@ -39,10 +39,6 @@ public class HomePageController {
         RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
         try {
             List<ArticleEntity> list = articleService.getHomeArticle(articleType, index, size);
-            if (list.size() == 0) {
-                result.failedApiResponse(Const.FAILED, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("首页文章显示异常", e);

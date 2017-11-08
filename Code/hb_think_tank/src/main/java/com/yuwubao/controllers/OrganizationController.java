@@ -51,10 +51,6 @@ public class OrganizationController {
             map.put("keyword", keyword);
             Pageable pageAble = new PageRequest(index - 1, size);
             Page<OrganizationEntity> list = organizationService.findAll(map, pageAble);
-            if (list.getContent().size() == 0) {
-                result.failedApiResponse(Const.SUCCESS, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list, "机构列表查询成功");
         } catch (Exception e) {
             logger.warn("机构列表查询异常", e);

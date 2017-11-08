@@ -61,10 +61,6 @@ public class UserController {
             map.put("endTime", endTime);
             Pageable pageAble = new PageRequest(index - 1, size);
             Page<UserEntity> list = userService.findAll(map, pageAble);
-            if (list.getContent().size() == 0) {
-                result.failedApiResponse(Const.FAILED, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("查询用户列表异常", e);

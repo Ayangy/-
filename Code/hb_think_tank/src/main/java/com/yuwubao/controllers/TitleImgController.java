@@ -50,10 +50,6 @@ public class TitleImgController {
             map.put("endTime", endTime);
             Pageable pageAble = new PageRequest(index - 1, size);
             Page<TitleImgEntity> list = titleImgService.findAll(map, pageAble, state);
-            if (list.getContent().size() == 0) {
-                result.failedApiResponse(Const.FAILED, "暂无数据");
-                return result;
-            }
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("查询展示图片列表异常", e);

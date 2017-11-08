@@ -28,14 +28,6 @@ public class LoginController {
     private UserService userService;
 
     /**
-     * 登陆页
-     */
-    /*@RequestMapping("/sys/toLogin")
-    public String index() {
-        return "login";
-    }*/
-
-    /**
      * 后台用户登陆
      */
     @PostMapping("/login")
@@ -64,5 +56,6 @@ public class LoginController {
         }
         return result;
     }
+
 
 }
