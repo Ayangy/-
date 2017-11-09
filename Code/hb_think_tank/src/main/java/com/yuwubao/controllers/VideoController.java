@@ -126,23 +126,5 @@ public class VideoController {
         return result;
     }
 
-    /**
-     * 获取视频新闻
-     * @param index  第几页
-     * @param size 每页几条
-     * @return
-     */
-    @GetMapping("/findVideoNews")
-    public RestApiResponse<List<VideoEntity>> getVideoNews(@RequestParam(defaultValue = "0", required = false) int index,
-                                                           @RequestParam(defaultValue = "1", required = false) int size) {
-        RestApiResponse<List<VideoEntity>> result = new RestApiResponse<List<VideoEntity>>();
-        try {
-            List<VideoEntity> list = videoService.getNewsVideo(index, size);
-            result.successResponse(Const.SUCCESS, list);
-        } catch (Exception e) {
-            logger.warn("视频新闻获取异常", e);
-            result.failedApiResponse(Const.FAILED, "视频新闻获取异常");
-        }
-        return result;
-    }
+
 }

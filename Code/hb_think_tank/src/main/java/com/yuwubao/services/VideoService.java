@@ -21,5 +21,5 @@ public interface VideoService {
 
     VideoEntity update(VideoEntity videoEntity);
 
-    List<VideoEntity> getNewsVideo(int index, int size);
+    List<VideoEntity> getNewsVideo(int index, int size, int shield);
 }

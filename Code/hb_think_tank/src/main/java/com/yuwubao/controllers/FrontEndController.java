@@ -3,9 +3,11 @@ package com.yuwubao.controllers;
 import com.yuwubao.entities.ArticleEntity;
 import com.yuwubao.entities.ExpertEntity;
 import com.yuwubao.entities.OrganizationEntity;
+import com.yuwubao.entities.VideoEntity;
 import com.yuwubao.services.ArticleService;
 import com.yuwubao.services.ExpertService;
 import com.yuwubao.services.OrganizationService;
+import com.yuwubao.services.VideoService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
 import org.slf4j.Logger;
@@ -36,6 +38,9 @@ public class FrontEndController {
 
     @Autowired
     private OrganizationService organizationService;
+
+    @Autowired
+    private VideoService videoService;
 
     /**
      * 获取未屏蔽的最新文章
@@ -129,6 +134,26 @@ public class FrontEndController {
         } catch (Exception e) {
             logger.warn("获取所有智库专家异常", e);
             result.failedApiResponse(Const.FAILED, "获取所有智库专家异常");
+        }
+        return result;
+    }
+
+    /**
+     * 获取最新的未屏蔽视频新闻
+     * @param index  第几页
+     * @param size 每页几条
+     * @return
+     */
+    @GetMapping("/findVideoNews")
+    public RestApiResponse<List<VideoEntity>> getVideoNews(@RequestParam(defaultValue = "0", required = false) int index,
+                                                           @RequestParam(defaultValue = "1", required = false) int size) {
+        RestApiResponse<List<VideoEntity>> result = new RestApiResponse<List<VideoEntity>>();
+        try {
+            List<VideoEntity> list = videoService.getNewsVideo(index, size, shield);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("视频新闻获取异常", e);
+            result.failedApiResponse(Const.FAILED, "视频新闻获取异常");
         }
         return result;
     }

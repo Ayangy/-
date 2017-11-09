@@ -83,4 +83,12 @@ public class VideoEntity {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    public int getShield() {
+        return shield;
+    }
+
+    public void setShield(int shield) {
+        this.shield = shield;
+    }
 }

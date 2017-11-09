@@ -102,10 +102,10 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public List<VideoEntity> getNewsVideo(int index, int size){
-        String sql = "select * from video_news order by createTime desc limit ?, ?";
+    public List<VideoEntity> getNewsVideo(int index, int size, int shield){
+        String sql = "select * from video_news WHERE shield = ? order by createTime desc limit ?, ?";
         RowMapper<VideoEntity> rowMapper = new BeanPropertyRowMapper<>(VideoEntity.class);
-        List<VideoEntity> list = jdbcTemplate.query(sql, rowMapper, index, size);
+        List<VideoEntity> list = jdbcTemplate.query(sql, rowMapper, shield, index, size);
         return list;
     }
 }
