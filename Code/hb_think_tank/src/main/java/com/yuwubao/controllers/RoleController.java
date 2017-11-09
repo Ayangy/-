@@ -37,24 +37,18 @@ public class RoleController {
      * @param size  每页几条
      * @param field  查询字段
      * @param keyword  查询值
-     * @param beginTime  开始时间
-     * @param endTime  结束时间
      * @return
      */
     @GetMapping("/findAll")
     public RestApiResponse<Page<RoleEntity>> findAll(@RequestParam(defaultValue = "1", required = false)int index,
                                                      @RequestParam(defaultValue = "10", required = false)int size,
                                                      @RequestParam(required = false, defaultValue = "")String field,
-                                                     @RequestParam(required = false, defaultValue = "")String keyword,
-                                                     @RequestParam(required = false, defaultValue = "")String beginTime,
-                                                     @RequestParam(required = false, defaultValue = "")String endTime){
+                                                     @RequestParam(required = false, defaultValue = "")String keyword){
         RestApiResponse<Page<RoleEntity>> result = new RestApiResponse<Page<RoleEntity>>();
         try {
             Map<String, String> map = new HashMap();
             map.put("field", field);
             map.put("keyword", keyword);
-            map.put("beginTime", beginTime);
-            map.put("endTime", endTime);
             Pageable pageAble = new PageRequest(index - 1, size);
             Page<RoleEntity> list = roleService.findAll(map, pageAble);
             result.successResponse(Const.SUCCESS, list, "查询角色成功");

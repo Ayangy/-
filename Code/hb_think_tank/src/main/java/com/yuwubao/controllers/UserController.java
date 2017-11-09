@@ -1,7 +1,9 @@
 package com.yuwubao.controllers;
 
+import com.yuwubao.entities.RoleEntity;
 import com.yuwubao.entities.UserEntity;
 import com.yuwubao.entities.UserRoleEntity;
+import com.yuwubao.services.RoleService;
 import com.yuwubao.services.UserRoleService;
 import com.yuwubao.services.UserService;
 import com.yuwubao.util.Const;
@@ -32,6 +34,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
+
     @Autowired
     private UserRoleService userRoleService;
 
@@ -157,6 +163,11 @@ public class UserController {
             UserEntity user = userService.findById(userId);
             if (user == null) {
                 result.failedApiResponse(Const.FAILED, "用户不存在，无法指定角色");
+                return result;
+            }
+            RoleEntity roleEntity = roleService.findOne(roleId);
+            if (roleEntity == null) {
+                result.failedApiResponse(Const.FAILED, "无此角色，请重新指定角色");
                 return result;
             }
             UserRoleEntity entity = userRoleService.findByUserId(userId);

@@ -79,4 +79,10 @@ public class ArticleSortServiceImpl implements ArticleSortService {
         List<ArticleSortEntity> list = articleSortRepository.findAll(spec);
         return list;
     }
+
+    @Override
+    public ArticleSortEntity findByType(int type) {
+        ArticleSortEntity entity = articleSortRepository.findByType(type);
+        return entity;
+    }
 }

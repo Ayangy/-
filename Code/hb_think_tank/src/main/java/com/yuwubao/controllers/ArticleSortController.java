@@ -66,6 +66,11 @@ public class ArticleSortController {
     public RestApiResponse<ArticleSortEntity> add(@RequestBody ArticleSortEntity articleSortEntity) {
         RestApiResponse<ArticleSortEntity> result = new RestApiResponse<ArticleSortEntity>();
         try {
+            ArticleSortEntity entity = articleSortService.findByType(articleSortEntity.getType());
+            if (entity != null) {
+                result.failedApiResponse(Const.FAILED, "类型编码已存在");
+                return result;
+            }
             ArticleSortEntity articleSort = articleSortService.add(articleSortEntity);
             if (articleSort == null) {
                 result.failedApiResponse(Const.FAILED, "添加失败");
@@ -106,6 +111,11 @@ public class ArticleSortController {
     public RestApiResponse<ArticleSortEntity> update(@RequestBody ArticleSortEntity articleSortEntity) {
         RestApiResponse<ArticleSortEntity> result = new RestApiResponse<ArticleSortEntity>();
         try {
+            ArticleSortEntity entity = articleSortService.findByType(articleSortEntity.getType());
+            if (entity != null) {
+                result.failedApiResponse(Const.FAILED, "分类编码已存在");
+                return result;
+            }
             ArticleSortEntity articleSort = articleSortService.update(articleSortEntity);
             if (articleSort == null) {
                 result.failedApiResponse(Const.FAILED, "修改失败，分类不存在");

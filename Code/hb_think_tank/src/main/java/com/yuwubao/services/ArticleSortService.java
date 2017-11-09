@@ -20,4 +20,6 @@ public interface ArticleSortService {
     ArticleSortEntity update(ArticleSortEntity articleSortEntity);
 
     List<ArticleSortEntity> getAll();
+
+    ArticleSortEntity findByType(int type);
 }
