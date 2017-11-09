@@ -87,7 +87,9 @@ public class ArticleController {
                 result.failedApiResponse(Const.FAILED, "添加失败");
                 return result;
             }
-            articleSearchService.createDoc(articleEntity);
+            if (article.getShield() == 0) {
+                articleSearchService.createDoc(articleEntity);
+            }
             result.successResponse(Const.SUCCESS, article, "添加成功");
         } catch (Exception e) {
             logger.warn("新增文章异常", e);
@@ -102,7 +104,7 @@ public class ArticleController {
      *
      */
     @DeleteMapping("/delete")
-    public RestApiResponse<ArticleEntity> delete(@RequestParam(required = true) int id) {
+    public RestApiResponse<ArticleEntity> delete(@RequestParam int id) {
         RestApiResponse<ArticleEntity> result = new RestApiResponse<ArticleEntity>();
         try {
             ArticleEntity articleEntity = articleService.delete(id);
@@ -131,7 +133,12 @@ public class ArticleController {
                 result.failedApiResponse(Const.FAILED, "修改失败，文章不存在");
                 return result;
             }
-            articleSearchService.update(String.valueOf(article.getId()),article);
+
+            if (article.getShield() == 0) {
+                articleSearchService.createDoc(article);
+            } else {
+                articleSearchService.delete(String.valueOf(article.getId()));
+            }
             result.successResponse(Const.SUCCESS, article, "修改成功");
         } catch (Exception e) {
             logger.warn("修改文章异常", e);

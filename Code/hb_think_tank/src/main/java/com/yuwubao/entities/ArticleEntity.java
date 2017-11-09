@@ -63,6 +63,11 @@ public class ArticleEntity implements Serializable {
      */
     private Date addTime;
 
+    /**
+     * 是否屏蔽0（不屏蔽），1（屏蔽）
+     */
+    private int shield;
+
     public int getId() {
         return id;
     }
@@ -141,5 +146,13 @@ public class ArticleEntity implements Serializable {
 
     public void setAddTime(Date addTime) {
         this.addTime = addTime;
+    }
+
+    public int getShield() {
+        return shield;
+    }
+
+    public void setShield(int shield) {
+        this.shield = shield;
     }
 }

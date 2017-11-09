@@ -26,4 +26,6 @@ public interface ExpertService {
     List<ExpertEntity> getAll();
 
     List<ExpertEntity> findExpertByLetter(String letter);
+
+    List<ExpertEntity> findByShield(int shield);
 }

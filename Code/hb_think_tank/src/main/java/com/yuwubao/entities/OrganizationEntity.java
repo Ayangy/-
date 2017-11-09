@@ -46,6 +46,11 @@ public class OrganizationEntity {
      */
     private int type;
 
+    /**
+     * 是否屏蔽0(不屏蔽),1(屏蔽)
+     */
+    private int shield;
+
     public int getId() {
         return id;
     }
@@ -100,5 +105,13 @@ public class OrganizationEntity {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getShield() {
+        return shield;
+    }
+
+    public void setShield(int shield) {
+        this.shield = shield;
     }
 }

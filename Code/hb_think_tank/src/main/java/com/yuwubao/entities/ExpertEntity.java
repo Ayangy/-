@@ -91,6 +91,11 @@ public class ExpertEntity {
      */
     private String contactWay;
 
+    /**
+     * 是否屏蔽0(不屏蔽),1(屏蔽)
+     */
+    private int shield;
+
     public int getId() {
         return id;
     }
@@ -217,5 +222,13 @@ public class ExpertEntity {
 
     public void setContactWay(String contactWay) {
         this.contactWay = contactWay;
+    }
+
+    public int getShield() {
+        return shield;
+    }
+
+    public void setShield(int shield) {
+        this.shield = shield;
     }
 }

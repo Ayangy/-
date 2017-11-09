@@ -39,6 +39,11 @@ public class VideoEntity {
      */
     private Date createTime;
 
+    /**
+     * 是否屏蔽0(未屏蔽), 1(屏蔽)
+     */
+    private int shield;
+
     public int getId() {
         return id;
     }

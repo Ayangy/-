@@ -97,4 +97,10 @@ public class ExpertServiceImpl implements ExpertService {
         List<ExpertEntity> list = jdbcTemplate.query(sql, rowMapper, letter);
         return list;
     }
+
+    @Override
+    public List<ExpertEntity> findByShield(int shield) {
+        List<ExpertEntity> list = expertRepository.findByShield(shield);
+        return list;
+    }
 }

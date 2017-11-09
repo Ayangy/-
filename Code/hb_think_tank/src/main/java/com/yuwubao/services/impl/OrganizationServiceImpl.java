@@ -92,21 +92,21 @@ public class OrganizationServiceImpl implements OrganizationService{
     }
 
     @Override
-    public List<OrganizationEntity> finByLetter(int type, String letter) {
-        String sql = "select * from organization where get_first_pinyin_char(name) = ? AND type = ?";
+    public List<OrganizationEntity> finByLetter(int type, String letter, int shield) {
+        String sql = "select * from organization where get_first_pinyin_char(name) = ? AND type = ? AND = ?";
         RowMapper<OrganizationEntity> rowMapper = new BeanPropertyRowMapper<>(OrganizationEntity.class);
-        List<OrganizationEntity> list = jdbcTemplate.query(sql, rowMapper, letter, type);
+        List<OrganizationEntity> list = jdbcTemplate.query(sql, rowMapper, letter, type, shield);
         return list;
     }
 
     @Override
-    public List<OrganizationEntity> finByNameAndType(String query, int type){
-        String sql = "SELECT * FROM organization where type=? ";
+    public List<OrganizationEntity> finByNameAndTypeAndShield(String query, int type, int shield){
+        String sql = "SELECT * FROM organization where type=? AND shield = ?";
         if (StringUtils.isNotBlank(query)) {
             sql = sql + "and `name` LIKE  '%" + query + "%'";
         }
         RowMapper<OrganizationEntity> rowMapper = new BeanPropertyRowMapper<>(OrganizationEntity.class);
-        List<OrganizationEntity> list = jdbcTemplate.query(sql, rowMapper, type);
+        List<OrganizationEntity> list = jdbcTemplate.query(sql, rowMapper, type, shield);
         return list;
     }
 }

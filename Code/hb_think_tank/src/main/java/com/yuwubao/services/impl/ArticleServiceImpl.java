@@ -119,10 +119,10 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleEntity> getHomeArticle(int articleType, int index, int size) {
-        String sql = "select * from article WHERE articleType = ? order by addTime desc limit ?, ?";
+    public List<ArticleEntity> getHomeArticle(int articleType, int shield, int index, int size) {
+        String sql = "select * from article WHERE articleType = ? AND shield = ? order by addTime desc limit ?, ?";
         RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
-        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, articleType, index, size);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, articleType, shield, index, size);
         return list;
     }
 
