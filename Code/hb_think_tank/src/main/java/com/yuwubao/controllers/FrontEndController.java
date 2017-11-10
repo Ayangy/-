@@ -159,7 +159,12 @@ public class FrontEndController {
     }
 
     /**
-     * 文章分类显示
+     * 分类查询未屏蔽文章
+     * @param type  文章类型
+     * @param parentType  父分类
+     * @param index  第几页
+     * @param size  每页几条
+     * @return
      */
     @GetMapping("/articleSort")
     public RestApiResponse<List<ArticleEntity>> articleSort(@RequestParam int type, @RequestParam int parentType,

@@ -28,6 +28,7 @@
 		<transport.version>5.4.1</transport.version>
 	</properties>
 	<dependencies>
+
 		<!--验证码 kaptcha-->
 		<dependency>
 			<groupId>com.github.penggle</groupId>

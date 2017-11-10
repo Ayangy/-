@@ -135,11 +135,14 @@ public class UserController {
                 result.failedApiResponse(Const.FAILED, "修改失败，用户不存在");
                 return result;
             }
-            UserEntity u = userService.findByUsername(userEntity.getUsername());
-            if (u != null) {
-                result.failedApiResponse(Const.FAILED, "修改失败，用户名已存在");
-                return result;
+            if (!entity.getUsername().equals(userEntity.getUsername())) {
+                UserEntity elseUser = userService.findByUsername(userEntity.getUsername());
+                if (elseUser != null) {
+                    result.failedApiResponse(Const.FAILED, "修改失败，用户名已存在");
+                    return result;
+                }
             }
+            userEntity.setCreateTime(entity.getCreateTime());
             UserEntity user = userService.update(userEntity);
             result.successResponse(Const.SUCCESS, user, "修改成功");
         } catch (Exception e) {
