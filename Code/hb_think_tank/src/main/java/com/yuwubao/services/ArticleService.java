@@ -25,5 +25,5 @@ public interface ArticleService {
 
     ArticleEntity findById(int id);
 
-    List<ArticleEntity> findByArticleSort(int type, int parentType);
+    List<ArticleEntity> findByArticleSortAndShield(int type, int parentType, int shield, int index, int size);
 }

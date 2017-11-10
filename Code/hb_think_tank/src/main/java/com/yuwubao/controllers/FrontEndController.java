@@ -157,5 +157,23 @@ public class FrontEndController {
         }
         return result;
     }
+
+    /**
+     * 文章分类显示
+     */
+    @GetMapping("/articleSort")
+    public RestApiResponse<List<ArticleEntity>> articleSort(@RequestParam int type, @RequestParam int parentType,
+                                                            @RequestParam(defaultValue = "0", required = false) int index,
+                                                            @RequestParam(defaultValue = "10", required = false) int size) {
+        RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
+        try {
+            List<ArticleEntity> list = articleService.findByArticleSortAndShield(type, parentType,shield, index, size);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("文章分类查询异常", e);
+            result.failedApiResponse(Const.FAILED, "文章分类查询异常");
+        }
+        return result;
+    }
 }
 

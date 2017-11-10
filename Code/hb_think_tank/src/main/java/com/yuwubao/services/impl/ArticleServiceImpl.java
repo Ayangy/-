@@ -133,18 +133,19 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleEntity> findByArticleSort(int type, int parentType) {
+    public List<ArticleEntity> findByArticleSortAndShield(int type, int parentType, int shield, int index, int size) {
         String sql = "SELECT a.id," +
                 "a.title," +
-                " a.createdDate from article a , article_sort s where a.articleType = s.type";
+                " a.createdDate from article a , article_sort s where a.articleType = s.type AND a.shield = ?";
         if (type != 0) {
             sql += " AND s.type = " + type;
         }
         if (parentType != 0) {
             sql += " AND s.parentType = " + parentType;
         }
+        sql += " order by a.createdDate desc LIMIT ?, ?";
         RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
-        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, shield, index, size);
         return list;
     }
 

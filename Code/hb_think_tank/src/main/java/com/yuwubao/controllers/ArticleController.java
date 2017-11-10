@@ -166,22 +166,7 @@ public class ArticleController {
         return result;
     }
 
-    /**
-     * 文章分类显示
-     */
-    @GetMapping("/articleSort")
-    public RestApiResponse<List<ArticleEntity>> articleSort(@RequestParam int type,
-                                                            @RequestParam int parentType) {
-        RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
-        try {
-            List<ArticleEntity> list = articleService.findByArticleSort(type, parentType);
-            result.successResponse(Const.SUCCESS, list);
-        } catch (Exception e) {
-            logger.warn("文章分类查询异常", e);
-            result.failedApiResponse(Const.FAILED, "文章分类查询异常");
-        }
-        return result;
-    }
+
 
 
 }
