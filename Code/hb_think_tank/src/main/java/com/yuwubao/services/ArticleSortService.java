@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by yangyu on 2017/10/24.
  */
 public interface ArticleSortService {
-    Page<ArticleSortEntity> findAll(Map<String, String> map, Pageable pageAble);
+    Page<ArticleSortEntity> findAll(Map<String, String> map, Pageable pageAble, int parentId);
 
     ArticleSortEntity add(ArticleSortEntity articleSortEntity);
 
@@ -21,5 +21,5 @@ public interface ArticleSortService {
 
     List<ArticleSortEntity> getAll();
 
-    ArticleSortEntity findByType(int type);
+    List<ArticleSortEntity> getArticleSort(int parentId);
 }

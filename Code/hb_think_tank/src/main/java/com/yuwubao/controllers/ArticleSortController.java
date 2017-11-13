@@ -43,14 +43,15 @@ public class ArticleSortController {
     public RestApiResponse<Page<ArticleSortEntity>> findAll(@RequestParam(defaultValue = "1", required = false)int index,
                                 @RequestParam(defaultValue = "10", required = false)int size,
                                 @RequestParam(required = false, defaultValue = "")String field,
-                                @RequestParam(required = false, defaultValue = "")String keyword){
+                                @RequestParam(required = false, defaultValue = "")String keyword,
+                                @RequestParam(required = false, defaultValue = "0") int parentId){
         RestApiResponse<Page<ArticleSortEntity>> result = new RestApiResponse<Page<ArticleSortEntity>>();
         try {
             Map<String, String> map = new HashMap();
             map.put("field", field);
             map.put("keyword", keyword);
             Pageable pageAble = new PageRequest(index - 1, size);
-            Page<ArticleSortEntity> list = articleSortService.findAll(map, pageAble);
+            Page<ArticleSortEntity> list = articleSortService.findAll(map, pageAble, parentId);
             result.successResponse(Const.SUCCESS, list, "获取文章列表成功");
         } catch (Exception e) {
             logger.warn("文章分类条件查询异常：", e);
@@ -66,11 +67,6 @@ public class ArticleSortController {
     public RestApiResponse<ArticleSortEntity> add(@RequestBody ArticleSortEntity articleSortEntity) {
         RestApiResponse<ArticleSortEntity> result = new RestApiResponse<ArticleSortEntity>();
         try {
-            ArticleSortEntity entity = articleSortService.findByType(articleSortEntity.getType());
-            if (entity != null) {
-                result.failedApiResponse(Const.FAILED, "类型编码已存在");
-                return result;
-            }
             ArticleSortEntity articleSort = articleSortService.add(articleSortEntity);
             if (articleSort == null) {
                 result.failedApiResponse(Const.FAILED, "添加失败");
@@ -88,9 +84,14 @@ public class ArticleSortController {
      * 删除文章分类
      */
     @DeleteMapping("/delete")
-    public RestApiResponse<ArticleSortEntity> delete(@RequestParam(required = true) int id) {
+    public RestApiResponse<ArticleSortEntity> delete(@RequestParam int id) {
         RestApiResponse<ArticleSortEntity> result = new RestApiResponse<ArticleSortEntity>();
         try {
+            List<ArticleSortEntity> sort = articleSortService.getArticleSort(id);
+            if (sort.size() > 0) {
+                result.failedApiResponse(Const.FAILED, "此分类下还有子级分类，请先删除子级类型");
+                return result;
+            }
             ArticleSortEntity articleSort = articleSortService.delete(id);
             if (articleSort == null) {
                 result.failedApiResponse(Const.FAILED, "删除失败,分类不存在");
@@ -111,11 +112,6 @@ public class ArticleSortController {
     public RestApiResponse<ArticleSortEntity> update(@RequestBody ArticleSortEntity articleSortEntity) {
         RestApiResponse<ArticleSortEntity> result = new RestApiResponse<ArticleSortEntity>();
         try {
-            ArticleSortEntity entity = articleSortService.findByType(articleSortEntity.getType());
-            if (entity != null) {
-                result.failedApiResponse(Const.FAILED, "分类编码已存在");
-                return result;
-            }
             ArticleSortEntity articleSort = articleSortService.update(articleSortEntity);
             if (articleSort == null) {
                 result.failedApiResponse(Const.FAILED, "修改失败，分类不存在");
@@ -143,6 +139,22 @@ public class ArticleSortController {
         } catch (Exception e) {
             logger.warn("获取列表异常", e);
             result.failedApiResponse(Const.FAILED, "获取列表异常");
+        }
+        return result;
+    }
+
+    /**
+     * 获取子级分类
+     */
+    @GetMapping("getArticleSort")
+    public RestApiResponse<List<ArticleSortEntity>> getSonSort(@RequestParam(required = false, defaultValue = "0") int parentId) {
+        RestApiResponse<List<ArticleSortEntity>> result = new RestApiResponse<List<ArticleSortEntity>>();
+        try {
+            List<ArticleSortEntity> list = articleSortService.getArticleSort(parentId);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("获取子级文章分类列表异常", e);
+            result.failedApiResponse(Const.FAILED, "获取子级文章分类列表异常");
         }
         return result;
     }

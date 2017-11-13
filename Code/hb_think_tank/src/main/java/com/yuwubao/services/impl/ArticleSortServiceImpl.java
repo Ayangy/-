@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
@@ -24,8 +27,11 @@ public class ArticleSortServiceImpl implements ArticleSortService {
     @Autowired
     private ArticleSortRepository articleSortRepository;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @Override
-    public Page<ArticleSortEntity> findAll(Map<String, String> map, Pageable pageAble) {
+    public Page<ArticleSortEntity> findAll(Map<String, String> map, Pageable pageAble, int parentId) {
         String field = map.get("field");
         String keyword = map.get("keyword");
         Specification<ArticleSortEntity> spec = new Specification<ArticleSortEntity>() {
@@ -38,6 +44,8 @@ public class ArticleSortServiceImpl implements ArticleSortService {
                         predict.getExpressions().add(criteriaBuilder.like(exp1, "%" + keyword + "%"));
                     }
                 }
+                Path<Integer> path = root.get("parentId");
+                predict.getExpressions().add(criteriaBuilder.equal(path, String.valueOf(parentId)));
                 return predict;
             }
         };
@@ -81,8 +89,10 @@ public class ArticleSortServiceImpl implements ArticleSortService {
     }
 
     @Override
-    public ArticleSortEntity findByType(int type) {
-        ArticleSortEntity entity = articleSortRepository.findByType(type);
-        return entity;
+    public List<ArticleSortEntity> getArticleSort(int parentId) {
+        String sql = "SELECT * from article_sort where parentId = ?";
+        RowMapper<ArticleSortEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleSortEntity.class);
+        List<ArticleSortEntity> list = jdbcTemplate.query(sql, rowMapper, parentId);
+        return list;
     }
 }

@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * Created by yangyu on 2017/10/24.
  */
 public interface ArticleSortRepository extends JpaRepository<ArticleSortEntity, Integer>, JpaSpecificationExecutor<ArticleSortEntity> {
-    ArticleSortEntity findByType(int type);
 }

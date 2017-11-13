@@ -1,7 +1,6 @@
 package com.yuwubao.services.impl;
 
 import com.yuwubao.entities.ArticleEntity;
-import com.yuwubao.services.ArticleService;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
@@ -25,9 +24,6 @@ public class ArticleSearchService {
 
     @Autowired
     private TransportClient client;
-
-    @Autowired
-    private ArticleService articleService;
 
     /**
      * 创建一个文档

@@ -136,7 +136,7 @@ public class ArticleServiceImpl implements ArticleService {
     public List<ArticleEntity> findByArticleSortAndShield(int type, int parentType, int shield, int index, int size) {
         String sql = "SELECT a.id," +
                 "a.title," +
-                " a.createdDate from article a , article_sort s where a.articleType = s.type AND a.shield = ?";
+                " a.createdDate from article a , article_sort s where a.articleType = s.id AND a.shield = ?";
         if (type != 0) {
             sql += " AND s.type = " + type;
         }

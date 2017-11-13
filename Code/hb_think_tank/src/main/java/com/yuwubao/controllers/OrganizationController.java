@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by yangyu on 2017/10/23.
  */
 @RestController
-@RequestMapping("organization")
+@RequestMapping("/organization")
 @Transactional
 @CrossOrigin
 public class OrganizationController {
