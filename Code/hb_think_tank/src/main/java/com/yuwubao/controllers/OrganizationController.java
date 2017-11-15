@@ -89,6 +89,7 @@ public class OrganizationController {
         RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
         try {
             OrganizationEntity organizationEntity = organizationService.delete(id);
+
             if (organizationEntity == null) {
                 result.failedApiResponse(Const.FAILED, "该机构不存在，删除失败");
                 return result;
