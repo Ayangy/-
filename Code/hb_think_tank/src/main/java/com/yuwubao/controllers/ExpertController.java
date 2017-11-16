@@ -1,7 +1,9 @@
 package com.yuwubao.controllers;
 
 import com.yuwubao.entities.ExpertEntity;
+import com.yuwubao.entities.OrganizationEntity;
 import com.yuwubao.services.ExpertService;
+import com.yuwubao.services.OrganizationService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
 import org.slf4j.Logger;
@@ -28,6 +30,9 @@ public class ExpertController {
 
     @Autowired
     private ExpertService expertService;
+
+    @Autowired
+    private OrganizationService organizationService;
 
 
     /**
@@ -65,6 +70,11 @@ public class ExpertController {
     public RestApiResponse<ExpertEntity> add(@RequestBody ExpertEntity expertEntity) {
         RestApiResponse<ExpertEntity> result = new RestApiResponse<ExpertEntity>();
         try {
+            OrganizationEntity organizationEntity = organizationService.findOne(expertEntity.getOrganizationId());
+            if (organizationEntity == null) {
+                result.failedApiResponse(Const.FAILED, "指定的机构不存在");
+                return result;
+            }
             ExpertEntity expert = expertService.add(expertEntity);
             if (expert == null) {
                 result.failedApiResponse(Const.FAILED, "添加失败");
@@ -107,6 +117,11 @@ public class ExpertController {
     public RestApiResponse<ExpertEntity> update(@RequestBody ExpertEntity expertEntity) {
         RestApiResponse<ExpertEntity> result = new RestApiResponse<ExpertEntity>();
         try {
+            OrganizationEntity organizationEntity = organizationService.findOne(expertEntity.getOrganizationId());
+            if (organizationEntity == null) {
+                result.failedApiResponse(Const.FAILED, "指定的机构不存在");
+                return result;
+            }
             ExpertEntity entity = expertService.findOne(expertEntity.getId());
             if (entity == null) {
                 result.failedApiResponse(Const.FAILED, "该专家不存在，修改失败");

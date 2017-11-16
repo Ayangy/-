@@ -44,6 +44,11 @@ public class VideoEntity {
      */
     private int shield;
 
+    /**
+     * 智库机构Id
+     */
+    private int organizationId;
+
     public int getId() {
         return id;
     }
@@ -90,5 +95,13 @@ public class VideoEntity {
 
     public void setShield(int shield) {
         this.shield = shield;
+    }
+
+    public int getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(int organizationId) {
+        this.organizationId = organizationId;
     }
 }

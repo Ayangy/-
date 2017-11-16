@@ -1,6 +1,8 @@
 package com.yuwubao.controllers;
 
+import com.yuwubao.entities.OrganizationEntity;
 import com.yuwubao.entities.VideoEntity;
+import com.yuwubao.services.OrganizationService;
 import com.yuwubao.services.VideoService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
@@ -13,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +29,9 @@ public class VideoController {
 
     @Autowired
     private VideoService videoService;
+
+    @Autowired
+    private OrganizationService organizationService;
 
     /**
      * 查询视频资讯
@@ -70,6 +74,11 @@ public class VideoController {
     public RestApiResponse<VideoEntity> add(@RequestBody VideoEntity videoEntity) {
         RestApiResponse<VideoEntity> result = new RestApiResponse<VideoEntity>();
         try {
+            OrganizationEntity organizationEntity = organizationService.findOne(videoEntity.getOrganizationId());
+            if (organizationEntity != null) {
+                result.failedApiResponse(Const.FAILED, "指定的机构不存在");
+                return result;
+            }
             VideoEntity video = videoService.add(videoEntity);
             if (video == null) {
                 result.failedApiResponse(Const.FAILED, "添加失败");
@@ -112,6 +121,11 @@ public class VideoController {
     public RestApiResponse<VideoEntity> update(@RequestBody VideoEntity videoEntity) {
         RestApiResponse<VideoEntity> result = new RestApiResponse<VideoEntity>();
         try {
+            OrganizationEntity organizationEntity = organizationService.findOne(videoEntity.getOrganizationId());
+            if (organizationEntity != null) {
+                result.failedApiResponse(Const.FAILED, "指定的机构不存在");
+                return result;
+            }
             VideoEntity entity = videoService.findOne(videoEntity.getId());
             if (entity == null) {
                 result.failedApiResponse(Const.FAILED, "该视频资讯不存在，修改失败");

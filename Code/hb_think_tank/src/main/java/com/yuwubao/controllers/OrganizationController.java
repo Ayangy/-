@@ -1,6 +1,8 @@
 package com.yuwubao.controllers;
 
+import com.yuwubao.entities.ArticleEntity;
 import com.yuwubao.entities.OrganizationEntity;
+import com.yuwubao.services.ArticleService;
 import com.yuwubao.services.OrganizationService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
@@ -30,6 +32,9 @@ public class OrganizationController {
 
     @Autowired
     private OrganizationService organizationService;
+
+    @Autowired
+    private ArticleService articleService;
 
     /**
      * 查询机构列表
@@ -88,6 +93,11 @@ public class OrganizationController {
     public RestApiResponse<OrganizationEntity> delete(@RequestParam(required = true) int id) {
         RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
         try {
+            List<ArticleEntity> articleList = articleService.findByOrganizationId(id);
+            if (articleList.size() > 0) {
+                result.failedApiResponse(Const.FAILED, "当前机构下还有数据，删除失败");
+                return result;
+            }
             OrganizationEntity organizationEntity = organizationService.delete(id);
 
             if (organizationEntity == null) {

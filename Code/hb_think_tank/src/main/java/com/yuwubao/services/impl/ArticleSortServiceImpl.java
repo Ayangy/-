@@ -95,4 +95,10 @@ public class ArticleSortServiceImpl implements ArticleSortService {
         List<ArticleSortEntity> list = jdbcTemplate.query(sql, rowMapper, parentId);
         return list;
     }
+
+    @Override
+    public ArticleSortEntity findById(int id) {
+        ArticleSortEntity entity = articleSortRepository.findOne(id);
+        return entity;
+    }
 }

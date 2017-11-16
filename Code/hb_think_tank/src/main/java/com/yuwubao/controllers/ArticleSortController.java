@@ -67,6 +67,14 @@ public class ArticleSortController {
     public RestApiResponse<ArticleSortEntity> add(@RequestBody ArticleSortEntity articleSortEntity) {
         RestApiResponse<ArticleSortEntity> result = new RestApiResponse<ArticleSortEntity>();
         try {
+            int parentId = articleSortEntity.getParentId();
+            if (parentId != 0) {
+                ArticleSortEntity sortEntity = articleSortService.findById(parentId);
+                if (sortEntity == null) {
+                    result.failedApiResponse(Const.FAILED, "指定的父级类型不存在");
+                    return result;
+                }
+            }
             ArticleSortEntity articleSort = articleSortService.add(articleSortEntity);
             if (articleSort == null) {
                 result.failedApiResponse(Const.FAILED, "添加失败");

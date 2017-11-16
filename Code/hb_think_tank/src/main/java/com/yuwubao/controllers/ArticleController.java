@@ -1,7 +1,11 @@
 package com.yuwubao.controllers;
 
 import com.yuwubao.entities.ArticleEntity;
+import com.yuwubao.entities.ArticleSortEntity;
+import com.yuwubao.entities.OrganizationEntity;
 import com.yuwubao.services.ArticleService;
+import com.yuwubao.services.ArticleSortService;
+import com.yuwubao.services.OrganizationService;
 import com.yuwubao.services.impl.ArticleSearchService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
@@ -34,6 +38,12 @@ public class ArticleController {
 
     @Autowired
     private ArticleSearchService articleSearchService;
+
+    @Autowired
+    private OrganizationService organizationService;
+
+    @Autowired
+    private ArticleSortService articleSortService;
 
     /**
      * 查询文章
@@ -80,6 +90,16 @@ public class ArticleController {
     public RestApiResponse<ArticleEntity> add(@RequestBody ArticleEntity articleEntity) {
         RestApiResponse<ArticleEntity> result = new RestApiResponse<ArticleEntity>();
         try {
+            OrganizationEntity organizationEntity = organizationService.findOne(articleEntity.getOrganizationId());
+            if (organizationEntity == null) {
+                result.failedApiResponse(Const.FAILED, "指定的机构不存在");
+                return result;
+            }
+            ArticleSortEntity articleSortEntity = articleSortService.findById(articleEntity.getArticleType());
+            if (articleSortEntity == null) {
+                result.failedApiResponse(Const.FAILED, "文章类型不存在，请重新指定");
+                return result;
+            }
             articleEntity.setAddTime(new Date());
             ArticleEntity article = articleService.add(articleEntity);
             if (article == null) {
@@ -127,6 +147,16 @@ public class ArticleController {
     public RestApiResponse<ArticleEntity> update(@RequestBody ArticleEntity articleEntity) {
         RestApiResponse<ArticleEntity> result = new RestApiResponse<ArticleEntity>();
         try {
+            OrganizationEntity organizationEntity = organizationService.findOne(articleEntity.getOrganizationId());
+            if (organizationEntity == null) {
+                result.failedApiResponse(Const.FAILED, "指定的机构不存在");
+                return result;
+            }
+            ArticleSortEntity articleSortEntity = articleSortService.findById(articleEntity.getArticleType());
+            if (articleSortEntity == null) {
+                result.failedApiResponse(Const.FAILED, "文章类型不存在，请重新指定");
+                return result;
+            }
             ArticleEntity article = articleService.update(articleEntity);
             if (article == null) {
                 result.failedApiResponse(Const.FAILED, "修改失败，文章不存在");
