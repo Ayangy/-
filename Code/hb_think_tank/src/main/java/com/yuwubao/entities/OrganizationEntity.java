@@ -42,7 +42,7 @@ public class OrganizationEntity {
     private String institutionSetting;
 
     /**
-     *  机构分类
+     *  机构分类0(智库机构)，1(智库联盟)
      */
     private int type;
 

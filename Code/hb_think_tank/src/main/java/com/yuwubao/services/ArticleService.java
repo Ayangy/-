@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by yangyu on 2017/10/20.
  */
 public interface ArticleService {
-    Page<ArticleEntity> findAll(Map<String, String> map, Pageable pageAble, int articleType, int organizationId);
+    Page<ArticleEntity> findAll(Map<String, String> map, Pageable pageAble, int textTypeId, int organizationId);
 
     ArticleEntity add(ArticleEntity articleEntity);
 

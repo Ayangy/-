@@ -53,7 +53,7 @@ public class ArticleController {
      * @param keyword  查询值
      * @param beginTime  开始时间
      * @param endTime  结束时间
-     * @param articleType  文章分类Id
+     * @param textTypeId  文章分类Id
      * @param organizationId  机构Id
      *
      */
@@ -64,7 +64,7 @@ public class ArticleController {
                                 @RequestParam(required = false, defaultValue = "")String keyword,
                                 @RequestParam(required = false, defaultValue = "")String beginTime,
                                 @RequestParam(required = false, defaultValue = "")String endTime,
-                                @RequestParam(required = false, defaultValue = "0")int articleType,
+                                @RequestParam(required = false, defaultValue = "0")int textTypeId,
                                 @RequestParam(required = false, defaultValue = "0")int organizationId){
         RestApiResponse<Page<ArticleEntity>> result = new RestApiResponse<Page<ArticleEntity>>();
         try {
@@ -74,7 +74,7 @@ public class ArticleController {
             map.put("beginTime", beginTime);
             map.put("endTime", endTime);
             Pageable pageAble = new PageRequest(index - 1, size);
-            Page<ArticleEntity> list = articleService.findAll(map, pageAble, articleType, organizationId);
+            Page<ArticleEntity> list = articleService.findAll(map, pageAble, textTypeId, organizationId);
             result.successResponse(Const.SUCCESS, list, "获取列表成功");
         } catch (Exception e) {
             logger.warn("文章列表查询异常", e);
@@ -200,8 +200,5 @@ public class ArticleController {
         }
         return result;
     }
-
-
-
 
 }
