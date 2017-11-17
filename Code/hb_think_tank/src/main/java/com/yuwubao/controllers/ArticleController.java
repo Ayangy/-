@@ -95,7 +95,7 @@ public class ArticleController {
                 result.failedApiResponse(Const.FAILED, "指定的机构不存在");
                 return result;
             }
-            ArticleSortEntity articleSortEntity = articleSortService.findById(articleEntity.getArticleType());
+            ArticleSortEntity articleSortEntity = articleSortService.findById(articleEntity.getTextTypeId());
             if (articleSortEntity == null) {
                 result.failedApiResponse(Const.FAILED, "文章类型不存在，请重新指定");
                 return result;
@@ -147,15 +147,21 @@ public class ArticleController {
     public RestApiResponse<ArticleEntity> update(@RequestBody ArticleEntity articleEntity) {
         RestApiResponse<ArticleEntity> result = new RestApiResponse<ArticleEntity>();
         try {
-            OrganizationEntity organizationEntity = organizationService.findOne(articleEntity.getOrganizationId());
-            if (organizationEntity == null) {
-                result.failedApiResponse(Const.FAILED, "指定的机构不存在");
-                return result;
+            ArticleEntity oldEntity = articleService.findById(articleEntity.getId());
+            articleEntity.setAddTime(oldEntity.getAddTime());
+            if (oldEntity.getOrganizationId() != articleEntity.getOrganizationId()) {
+                OrganizationEntity organizationEntity = organizationService.findOne(articleEntity.getOrganizationId());
+                if (organizationEntity == null) {
+                    result.failedApiResponse(Const.FAILED, "指定的机构不存在");
+                    return result;
+                }
             }
-            ArticleSortEntity articleSortEntity = articleSortService.findById(articleEntity.getArticleType());
-            if (articleSortEntity == null) {
-                result.failedApiResponse(Const.FAILED, "文章类型不存在，请重新指定");
-                return result;
+            if (oldEntity.getTextTypeId() != articleEntity.getTextTypeId()) {
+                ArticleSortEntity articleSortEntity = articleSortService.findById(articleEntity.getTextTypeId());
+                if (articleSortEntity == null) {
+                    result.failedApiResponse(Const.FAILED, "文章类型不存在，请重新指定");
+                    return result;
+                }
             }
             ArticleEntity article = articleService.update(articleEntity);
             if (article == null) {

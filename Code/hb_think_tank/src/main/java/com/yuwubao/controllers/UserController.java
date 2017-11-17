@@ -82,6 +82,11 @@ public class UserController {
     public RestApiResponse<UserEntity> add(@RequestBody UserEntity userEntity) {
         RestApiResponse<UserEntity> result = new RestApiResponse<UserEntity>();
         try {
+            RoleEntity roleEntity = roleService.findOne(userEntity.getRoleId());
+            if (roleEntity == null) {
+                result.failedApiResponse(Const.FAILED, "指定的权限不存在");
+                return result;
+            }
             UserEntity entity = userService.findByUsername(userEntity.getUsername());
             if (entity != null) {
                 result.failedApiResponse(Const.FAILED, "用户名已存在");

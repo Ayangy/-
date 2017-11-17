@@ -21,11 +21,11 @@ public interface ArticleService {
 
     List<Map<String, Object>> getAll(int pageIndex,int pageSize);
 
-    List<ArticleEntity> getHomeArticle(int articleType, int shield, int index, int size);
+    List<ArticleEntity> getHomeArticle(int textTypeId, int shield, int index, int size);
 
     ArticleEntity findById(int id);
 
-    List<ArticleEntity> findByArticleSortAndShield(int type, int parentType, int shield, int index, int size);
+    List<ArticleEntity> findByArticleSortAndShield(int textTypeId, int parentId, int shield, int index, int size);
 
     List<ArticleEntity> findByOrganizationId(int id);
 }

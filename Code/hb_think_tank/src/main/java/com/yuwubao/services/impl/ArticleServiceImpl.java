@@ -35,7 +35,7 @@ public class ArticleServiceImpl implements ArticleService {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public Page<ArticleEntity> findAll(Map<String, String> map, Pageable pageAble, int articleType, int organizationId) {
+    public Page<ArticleEntity> findAll(Map<String, String> map, Pageable pageAble, int textTypeId, int organizationId) {
         String field = map.get("field");
         String keyword = map.get("keyword");
         String start = map.get("beginTime");
@@ -69,9 +69,9 @@ public class ArticleServiceImpl implements ArticleService {
                         e.printStackTrace();
                     }
                 }
-                if (articleType != 0) {
-                    Path<Integer> type = root.get("articleType");
-                    predict.getExpressions().add(criteriaBuilder.equal(type, articleType));
+                if (textTypeId != 0) {
+                    Path<Integer> type = root.get("textTypeId");
+                    predict.getExpressions().add(criteriaBuilder.equal(type, textTypeId));
                 }
                 if (organizationId != 0) {
                     Path<Integer> oId = root.get("organizationId");
@@ -133,15 +133,15 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleEntity> findByArticleSortAndShield(int type, int parentType, int shield, int index, int size) {
+    public List<ArticleEntity> findByArticleSortAndShield(int textTypeId, int parentId, int shield, int index, int size) {
         String sql = "SELECT a.id," +
                 "a.title," +
-                " a.createdDate from article a , article_sort s where a.articleType = s.id AND a.shield = ?";
-        if (type != 0) {
-            sql += " AND s.type = " + type;
+                " a.createdDate from article a , article_sort s where a.textTypeId = s.id AND a.shield = ?";
+        if (textTypeId != 0) {
+            sql += " AND a.textTypeId = " + textTypeId;
         }
-        if (parentType != 0) {
-            sql += " AND s.parentType = " + parentType;
+        if (parentId != 0) {
+            sql += " AND s.parentId = " + parentId;
         }
         sql += " order by a.createdDate desc LIMIT ?, ?";
         RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);

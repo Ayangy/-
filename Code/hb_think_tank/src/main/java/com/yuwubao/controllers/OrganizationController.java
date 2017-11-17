@@ -3,6 +3,7 @@ package com.yuwubao.controllers;
 import com.yuwubao.entities.ArticleEntity;
 import com.yuwubao.entities.OrganizationEntity;
 import com.yuwubao.services.ArticleService;
+import com.yuwubao.services.ExpertService;
 import com.yuwubao.services.OrganizationService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
@@ -35,6 +36,9 @@ public class OrganizationController {
 
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private ExpertService expertService;
 
     /**
      * 查询机构列表
@@ -71,6 +75,7 @@ public class OrganizationController {
     public RestApiResponse<OrganizationEntity> add(@RequestBody OrganizationEntity organizationEntity) {
         RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
         try {
+            expertService.findOne(organizationEntity.getExpert());
             OrganizationEntity organization = organizationService.add(organizationEntity);
             if (organization == null) {
                 result.failedApiResponse(Const.FAILED, "添加机构失败");

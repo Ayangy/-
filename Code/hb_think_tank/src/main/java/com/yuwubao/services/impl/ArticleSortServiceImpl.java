@@ -101,4 +101,12 @@ public class ArticleSortServiceImpl implements ArticleSortService {
         ArticleSortEntity entity = articleSortRepository.findOne(id);
         return entity;
     }
+
+    @Override
+    public List<ArticleSortEntity> getJuniorAll() {
+        String sql = "SELECT * from article_sort where parentId > 0";
+        RowMapper<ArticleSortEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleSortEntity.class);
+        List<ArticleSortEntity> list = jdbcTemplate.query(sql, rowMapper);
+        return list;
+    }
 }

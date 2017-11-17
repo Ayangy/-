@@ -44,18 +44,18 @@ public class FrontEndController {
 
     /**
      * 获取未屏蔽的最新文章
-     * @param articleType  文章类型
+     * @param textTypeId  文章类型
      * @param index  第几页
      * @param size  每页几条
      * @return
      */
     @GetMapping("/article")
-    public RestApiResponse<List<ArticleEntity>> getHomeArticle(@RequestParam int articleType,
+    public RestApiResponse<List<ArticleEntity>> getHomeArticle(@RequestParam int textTypeId,
                                                                @RequestParam(defaultValue = "0", required = false) int index,
                                                                @RequestParam(defaultValue = "6", required = false) int size) {
         RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
         try {
-            List<ArticleEntity> list = articleService.getHomeArticle(articleType, shield, index, size);
+            List<ArticleEntity> list = articleService.getHomeArticle(textTypeId, shield, index, size);
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("首页文章显示异常", e);
@@ -160,19 +160,19 @@ public class FrontEndController {
 
     /**
      * 分类查询未屏蔽文章
-     * @param type  文章类型
-     * @param parentType  父分类
+     * @param textTypeId  文章类型
+     * @param parentId  父分类
      * @param index  第几页
      * @param size  每页几条
      * @return
      */
     @GetMapping("/articleSort")
-    public RestApiResponse<List<ArticleEntity>> articleSort(@RequestParam int type, @RequestParam int parentType,
+    public RestApiResponse<List<ArticleEntity>> articleSort(@RequestParam int textTypeId, @RequestParam int parentId,
                                                             @RequestParam(defaultValue = "0", required = false) int index,
                                                             @RequestParam(defaultValue = "10", required = false) int size) {
         RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
         try {
-            List<ArticleEntity> list = articleService.findByArticleSortAndShield(type, parentType,shield, index, size);
+            List<ArticleEntity> list = articleService.findByArticleSortAndShield(textTypeId, parentId,shield, index, size);
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("文章分类查询异常", e);

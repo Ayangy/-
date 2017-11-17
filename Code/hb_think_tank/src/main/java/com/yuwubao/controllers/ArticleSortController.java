@@ -152,7 +152,7 @@ public class ArticleSortController {
     }
 
     /**
-     * 获取子级分类
+     * 获取当前子级分类
      */
     @GetMapping("getArticleSort")
     public RestApiResponse<List<ArticleSortEntity>> getSonSort(@RequestParam(required = false, defaultValue = "0") int parentId) {
@@ -163,6 +163,22 @@ public class ArticleSortController {
         } catch (Exception e) {
             logger.warn("获取子级文章分类列表异常", e);
             result.failedApiResponse(Const.FAILED, "获取子级文章分类列表异常");
+        }
+        return result;
+    }
+
+    /**
+     * 获取所有的二级文章分类
+     */
+    @GetMapping("/getJuniorAll")
+    public RestApiResponse<List<ArticleSortEntity>> getJuniorAll(){
+        RestApiResponse<List<ArticleSortEntity>> result = new RestApiResponse<List<ArticleSortEntity>>();
+        try {
+            List<ArticleSortEntity> list = articleSortService.getJuniorAll();
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("获取文章二级分类异常");
+            result.failedApiResponse(Const.FAILED, "获取文章二级分类异常");
         }
         return result;
     }
