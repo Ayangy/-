@@ -34,6 +34,8 @@ public class ExpertController {
     @Autowired
     private OrganizationService organizationService;
 
+    @Autowired
+    private FileUploadController fileUploadController;
 
     /**
      * 查询专家列表
@@ -103,6 +105,7 @@ public class ExpertController {
                 return result;
             }
             result.successResponse(Const.SUCCESS, expertEntity, "删除成功");
+            fileUploadController.deleteFile(expertEntity.getImg());
         } catch (Exception e) {
             logger.warn("删除专家异常:", e);
             result.failedApiResponse(Const.FAILED, "删除专家异常");
@@ -127,6 +130,7 @@ public class ExpertController {
                 result.failedApiResponse(Const.FAILED, "该专家不存在，修改失败");
                 return result;
             }
+            fileUploadController.deleteFile(entity.getImg());
             ExpertEntity expert = expertService.update(expertEntity);
             result.successResponse(Const.SUCCESS, expert, "修改成功");
         } catch (Exception e) {

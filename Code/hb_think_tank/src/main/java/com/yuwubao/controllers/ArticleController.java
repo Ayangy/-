@@ -45,6 +45,9 @@ public class ArticleController {
     @Autowired
     private ArticleSortService articleSortService;
 
+    @Autowired
+    private FileUploadController fileUploadController;
+
     /**
      * 查询文章
      * @param index  第几页
@@ -132,6 +135,7 @@ public class ArticleController {
                 return result;
             }
             articleSearchService.delete(String.valueOf(id));
+            fileUploadController.deleteFile(articleEntity.getImgUrl());
             result.successResponse(Const.SUCCESS, articleEntity, "删除成功");
         } catch (Exception e) {
             logger.warn("删除文章异常", e);
@@ -149,6 +153,9 @@ public class ArticleController {
         try {
             ArticleEntity oldEntity = articleService.findById(articleEntity.getId());
             articleEntity.setAddTime(oldEntity.getAddTime());
+            if (articleEntity.getImgUrl() != oldEntity.getImgUrl()) {
+                fileUploadController.deleteFile(oldEntity.getImgUrl());
+            }
             if (oldEntity.getOrganizationId() != articleEntity.getOrganizationId()) {
                 OrganizationEntity organizationEntity = organizationService.findOne(articleEntity.getOrganizationId());
                 if (organizationEntity == null) {
@@ -156,6 +163,7 @@ public class ArticleController {
                     return result;
                 }
             }
+
             if (oldEntity.getTextTypeId() != articleEntity.getTextTypeId()) {
                 ArticleSortEntity articleSortEntity = articleSortService.findById(articleEntity.getTextTypeId());
                 if (articleSortEntity == null) {
