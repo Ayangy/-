@@ -8,6 +8,7 @@ import com.yuwubao.services.UserRoleService;
 import com.yuwubao.services.UserService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +88,14 @@ public class UserController {
                 result.failedApiResponse(Const.FAILED, "指定的权限不存在");
                 return result;
             }
+            if (!StringUtils.isNotBlank(userEntity.getUsername())) {
+                result.failedApiResponse(Const.FAILED, "未设置用户名");
+                return result;
+            }
+            if (!StringUtils.isNotBlank(userEntity.getPassword())) {
+                result.failedApiResponse(Const.FAILED, "未设置密码");
+                return result;
+            }
             UserEntity entity = userService.findByUsername(userEntity.getUsername());
             if (entity != null) {
                 result.failedApiResponse(Const.FAILED, "用户名已存在");
@@ -135,6 +144,14 @@ public class UserController {
     public RestApiResponse<UserEntity> update(@RequestBody UserEntity userEntity) {
         RestApiResponse<UserEntity> result = new RestApiResponse<UserEntity>();
         try {
+            if (!StringUtils.isNotBlank(userEntity.getUsername())) {
+                result.failedApiResponse(Const.FAILED, "未设置用户名");
+                return result;
+            }
+            if (!StringUtils.isNotBlank(userEntity.getPassword())) {
+                result.failedApiResponse(Const.FAILED, "未设置密码");
+                return result;
+            }
             UserEntity entity = userService.findById(userEntity.getId());
             if (entity == null) {
                 result.failedApiResponse(Const.FAILED, "修改失败，用户不存在");

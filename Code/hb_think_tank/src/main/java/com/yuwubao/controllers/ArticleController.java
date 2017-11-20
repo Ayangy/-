@@ -101,13 +101,13 @@ public class ArticleController {
                 return result;
             }
             articleEntity.setAddTime(new Date());
+            if (articleEntity.getShield() == 0) {
+                articleSearchService.createDoc(articleEntity);
+            }
             ArticleEntity article = articleService.add(articleEntity);
             if (article == null) {
                 result.failedApiResponse(Const.FAILED, "添加失败");
                 return result;
-            }
-            if (article.getShield() == 0) {
-                articleSearchService.createDoc(articleEntity);
             }
             result.successResponse(Const.SUCCESS, article, "添加成功");
         } catch (Exception e) {

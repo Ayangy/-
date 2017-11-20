@@ -4,6 +4,7 @@ import com.yuwubao.entities.RoleEntity;
 import com.yuwubao.services.RoleService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,10 @@ public class RoleController {
     public RestApiResponse<RoleEntity> add(@RequestBody RoleEntity roleEntity) {
         RestApiResponse<RoleEntity> result = new RestApiResponse<RoleEntity>();
         try {
+            if (!StringUtils.isNotBlank(roleEntity.getName())) {
+                result.failedApiResponse(Const.FAILED, "未设置角色名");
+                return result;
+            }
             RoleEntity role = roleService.add(roleEntity);
             if (role == null) {
                 result.failedApiResponse(Const.FAILED, "添加角色失败");
@@ -108,6 +113,10 @@ public class RoleController {
     public RestApiResponse<RoleEntity> update(@RequestBody RoleEntity roleEntity) {
         RestApiResponse<RoleEntity> result = new RestApiResponse<RoleEntity>();
         try {
+            if (!StringUtils.isNotBlank(roleEntity.getName())) {
+                result.failedApiResponse(Const.FAILED, "未设置角色名");
+                return result;
+            }
             RoleEntity entity = roleService.findOne(roleEntity.getId());
             if (entity == null) {
                 result.failedApiResponse(Const.FAILED, "修改失败，角色不存在");
