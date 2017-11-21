@@ -155,4 +155,60 @@ public class ArticleServiceImpl implements ArticleService {
         return list;
     }
 
+    @Override
+    public List<ArticleEntity> findByCriteria(Map<String, String> map, int textTypeId, int parentId, int timeHorizon, int sort, int index, int size) {
+        String field = map.get("field");
+        String keyword = map.get("keyword");
+        String sql = "SELECT * from article a, article_sort s WHERE a.textTypeId = s.id  AND a.shield = 0";
+        if (textTypeId != 0) {
+            sql += " AND a.textTypeId = " + textTypeId;
+        }
+        if (parentId != 0) {
+            sql += " AND s.parentId = " + parentId;
+        }
+        switch (timeHorizon) {
+            case 1:
+                sql += " AND a.addTime > DATE_SUB(now(),INTERVAL 3 DAY)";
+                break;
+            case 2:
+                sql += " AND a.addTime>DATE_SUB(CURDATE(), INTERVAL 1 WEEK)";
+                break;
+            case 3:
+                sql += " AND a.addTime>DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
+                break;
+            case 4:
+                sql += " AND a.addTime>DATE_SUB(CURDATE(), INTERVAL 6 MONTH)";
+                break;
+            case 5:
+                sql += " AND a.addTime>DATE_SUB(CURDATE(), INTERVAL 12 MONTH)";
+                break;
+        }
+        if (StringUtils.isNotBlank(field)) {
+            if (field.equals("content")) {
+                if (StringUtils.isNotBlank(keyword)) {
+                    sql += " AND a.content LIKE '%" + keyword + "%'";
+                }
+            }
+            if (field.equals("title")) {
+                if (StringUtils.isNotBlank(keyword)) {
+                    sql += " AND a.title LIKE '%" + keyword + "%'";
+                }
+            }
+            if (!field.equals("content") && !field.equals("title")) {
+                if (StringUtils.isNotBlank(keyword)) {
+                    sql += " AND a.content NOT LIKE '%" + keyword + "%'";
+                }
+            }
+        }
+        if (sort == 0) {
+            sql += " ORDER BY a.addTime DESC";
+        } else {
+            sql += " ORDER BY a.addTime";
+        }
+        sql += " limit ?, ?";
+        RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, index, size);
+        return list;
+    }
+
 }

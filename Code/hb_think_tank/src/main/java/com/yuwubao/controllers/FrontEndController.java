@@ -15,7 +15,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 前端首页数据
@@ -177,6 +179,32 @@ public class FrontEndController {
         } catch (Exception e) {
             logger.warn("文章分类查询异常", e);
             result.failedApiResponse(Const.FAILED, "文章分类查询异常");
+        }
+        return result;
+    }
+
+    /**
+     * 智库成果多条件查询
+     */
+    @GetMapping("/findResultByCriteria")
+    public RestApiResponse<List<ArticleEntity>> findResultByCriteria(@RequestParam(defaultValue = "0", required = false)int index,
+                                                          @RequestParam(defaultValue = "10", required = false)int size,
+                                                          @RequestParam(required = false, defaultValue = "")String field,
+                                                          @RequestParam(required = false, defaultValue = "")String keyword,
+                                                          @RequestParam(required = false, defaultValue = "0")int textTypeId,
+                                                          @RequestParam(required = false, defaultValue = "0")int parentId,
+                                                          @RequestParam(required = false, defaultValue = "0")int timeHorizon,
+                                                          @RequestParam(required = false, defaultValue = "0")int sort) {
+        RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
+        try {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("field", field);
+            map.put("keyword", keyword);
+            List<ArticleEntity> list = articleService.findByCriteria(map, textTypeId, parentId, timeHorizon, sort, index, size);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("查询智库成果失败", e);
+            result.failedApiResponse(Const.FAILED, "查询智库成果失败");
         }
         return result;
     }

@@ -1,5 +1,6 @@
 package com.yuwubao.util;
 
+import java.io.*;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
@@ -65,5 +66,59 @@ public class ThinkTankUtil {
             }
         }
         return slashMatcher.start();
+    }
+
+    /**
+     * 数据库备份
+     * @param path
+     * @throws IOException
+     */
+    public static void backup(String path, String backupDateConfig) throws IOException {
+        Runtime runtime = Runtime.getRuntime();
+
+        Process process = runtime.exec(backupDateConfig);
+        InputStream inputStream = process.getInputStream();//得到输入流，写成.sql文件
+        InputStreamReader reader = new InputStreamReader(inputStream);
+        BufferedReader br = new BufferedReader(reader);
+        String s = null;
+        StringBuffer sb = new StringBuffer();
+        while((s = br.readLine()) != null){
+            sb.append(s+"\r\n");
+        }
+        s = sb.toString();
+        //System.out.println(s);
+        File file = new File(path);
+        file.getParentFile().mkdirs();
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        fileOutputStream.write(s.getBytes());
+        fileOutputStream.close();
+        br.close();
+        reader.close();
+        inputStream.close();
+    }
+
+    /**
+     * 数据库还原
+     * @param path
+     * @throws IOException
+     */
+    public static void recover(String path, String recoverDateConfig) throws IOException{
+        Runtime runtime = Runtime.getRuntime();
+        Process process = runtime.exec(recoverDateConfig);
+        OutputStream outputStream = process.getOutputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
+        String str = null;
+        StringBuffer sb = new StringBuffer();
+        while((str = br.readLine()) != null){
+            sb.append(str+"\r\n");
+        }
+        str = sb.toString();
+        //System.out.println(str);
+        OutputStreamWriter writer = new OutputStreamWriter(outputStream,"utf-8");
+        writer.write(str);
+        writer.flush();
+        outputStream.close();
+        br.close();
+        writer.close();
     }
 }
