@@ -67,6 +67,11 @@ public class RoleController {
     public RestApiResponse<RoleEntity> add(@RequestBody RoleEntity roleEntity) {
         RestApiResponse<RoleEntity> result = new RestApiResponse<RoleEntity>();
         try {
+            RoleEntity entity = roleService.findByName(roleEntity.getName());
+            if (entity != null) {
+                result.failedApiResponse(Const.FAILED, "角色名已存在");
+                return result;
+            }
             if (!StringUtils.isNotBlank(roleEntity.getName())) {
                 result.failedApiResponse(Const.FAILED, "未设置角色名");
                 return result;
@@ -117,8 +122,15 @@ public class RoleController {
                 result.failedApiResponse(Const.FAILED, "未设置角色名");
                 return result;
             }
-            RoleEntity entity = roleService.findOne(roleEntity.getId());
-            if (entity == null) {
+            RoleEntity oldEntity = roleService.findOne(roleEntity.getId());
+            if (!roleEntity.getName().equals(oldEntity.getName())) {
+                RoleEntity entity = roleService.findByName(roleEntity.getName());
+                if (entity != null) {
+                    result.failedApiResponse(Const.FAILED, "角色名已存在");
+                    return result;
+                }
+            }
+            if (oldEntity == null) {
                 result.failedApiResponse(Const.FAILED, "修改失败，角色不存在");
                 return result;
             }

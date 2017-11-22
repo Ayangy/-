@@ -109,4 +109,10 @@ public class OrganizationServiceImpl implements OrganizationService{
         List<OrganizationEntity> list = jdbcTemplate.query(sql, rowMapper, type, shield);
         return list;
     }
+
+    @Override
+    public OrganizationEntity findByName(String name) {
+        OrganizationEntity entity = organizationRepository.findByName(name);
+        return entity;
+    }
 }

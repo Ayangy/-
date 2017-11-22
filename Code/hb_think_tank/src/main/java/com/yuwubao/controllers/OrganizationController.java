@@ -75,6 +75,11 @@ public class OrganizationController {
     public RestApiResponse<OrganizationEntity> add(@RequestBody OrganizationEntity organizationEntity) {
         RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
         try {
+            OrganizationEntity entity = organizationService.findByName(organizationEntity.getName());
+            if (entity != null) {
+                result.failedApiResponse(Const.FAILED, "机构已存在");
+                return result;
+            }
             expertService.findOne(organizationEntity.getExpert());
             OrganizationEntity organization = organizationService.add(organizationEntity);
             if (organization == null) {
@@ -125,6 +130,13 @@ public class OrganizationController {
         RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
         try {
             OrganizationEntity organization = organizationService.findOne(organizationEntity.getId());
+            if (!organization.getName().equals(organizationEntity.getName())) {
+                OrganizationEntity entity = organizationService.findByName(organizationEntity.getName());
+                if (entity != null) {
+                    result.failedApiResponse(Const.FAILED, "机构已存在");
+                    return result;
+                }
+            }
             if (organization == null) {
                 result.failedApiResponse(Const.FAILED, "修改失败，机构不存在");
                 return result;

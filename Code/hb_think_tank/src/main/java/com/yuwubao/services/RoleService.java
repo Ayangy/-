@@ -22,4 +22,6 @@ public interface RoleService {
     List<RoleEntity> getAll();
 
     RoleEntity findOne(int id);
+
+    RoleEntity findByName(String name);
 }

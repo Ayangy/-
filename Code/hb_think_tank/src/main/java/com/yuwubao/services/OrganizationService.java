@@ -27,4 +27,6 @@ public interface OrganizationService {
     List<OrganizationEntity> finByLetter(int type, String letter, int shield);
 
     List<OrganizationEntity> finByNameAndTypeAndShield(String query, int type, int shield);
+
+    OrganizationEntity findByName(String name);
 }
