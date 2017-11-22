@@ -211,4 +211,28 @@ public class ArticleServiceImpl implements ArticleService {
         return list;
     }
 
+    @Override
+    public List<ArticleEntity> getKind(int textTypeId, int index, int size) {
+        String sql = "SELECT * FROM article WHERE textTypeId = ? AND shield = 0 LIMIT ?,?;";
+        RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, textTypeId, index, size);
+        return list;
+    }
+
+    @Override
+    public List<ArticleEntity> getRecommendArticle(int recommend, int index, int size) {
+        String sql = "SELECT * from article WHERE recommend = ? AND shield = 0 LIMIT ?,?;";
+        RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, recommend, index, size);
+        return list;
+    }
+
+    @Override
+    public List<ArticleEntity> getNewestArticle(int index, int size) {
+        String sql = "SELECT * from article WHERE shield = 0 ORDER BY addTime DESC LIMIT ?,?;";
+        RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, index, size);
+        return list;
+    }
+
 }

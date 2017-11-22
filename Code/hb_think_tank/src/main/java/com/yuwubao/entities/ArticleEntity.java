@@ -68,6 +68,11 @@ public class ArticleEntity implements Serializable {
      */
     private int shield;
 
+    /**
+     * 是否推荐 0(否)， 0(是)
+     */
+    private int recommend;
+
     public int getId() {
         return id;
     }
@@ -154,5 +159,13 @@ public class ArticleEntity implements Serializable {
 
     public void setShield(int shield) {
         this.shield = shield;
+    }
+
+    public int getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(int recommend) {
+        this.recommend = recommend;
     }
 }
