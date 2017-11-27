@@ -1,20 +1,16 @@
 package com.yuwubao.controllers;
 
-import com.yuwubao.entities.ArticleEntity;
-import com.yuwubao.entities.ExpertEntity;
-import com.yuwubao.entities.OrganizationEntity;
-import com.yuwubao.entities.VideoEntity;
-import com.yuwubao.services.ArticleService;
-import com.yuwubao.services.ExpertService;
-import com.yuwubao.services.OrganizationService;
-import com.yuwubao.services.VideoService;
+import com.yuwubao.entities.*;
+import com.yuwubao.services.*;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +39,12 @@ public class FrontEndController {
 
     @Autowired
     private VideoService videoService;
+
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 获取未屏蔽的最新文章
@@ -272,6 +274,42 @@ public class FrontEndController {
         } catch (Exception e) {
             logger.warn("获取最新文章异常", e);
             result.failedApiResponse(Const.FAILED, "获取最新文章异常");
+        }
+        return result;
+    }
+
+    /**
+     * 注册用户
+     */
+    @PostMapping("/registeredUser")
+    public RestApiResponse<UserEntity> registeredUser(@RequestBody UserEntity userEntity,
+                                           @RequestParam(required = false, defaultValue = "1")int type) {
+        RestApiResponse<UserEntity> result = new RestApiResponse<UserEntity>();
+        try {
+            if (!StringUtils.isNotBlank(userEntity.getUsername())) {
+                result.failedApiResponse(Const.FAILED, "未设置用户名");
+                return result;
+            }
+            if (!StringUtils.isNotBlank(userEntity.getPassword())) {
+                result.failedApiResponse(Const.FAILED, "未设置密码");
+                return result;
+            }
+            UserEntity entity = userService.findByUsernameAndType(userEntity.getUsername(), type);
+            if (entity != null) {
+                result.failedApiResponse(Const.FAILED, "用户名已存在");
+                return result;
+            }
+            userEntity.setCreateTime(new Date());
+            userEntity.setType(type);
+            UserEntity user = userService.add(userEntity);
+            if (user == null) {
+                result.failedApiResponse(Const.FAILED, "添加失败");
+                return result;
+            }
+            result.successResponse(Const.SUCCESS, user, "注册成功");
+        } catch (Exception e) {
+            logger.warn("注册用户异常:", e);
+            result.failedApiResponse(Const.FAILED, "注册用户异常");
         }
         return result;
     }
