@@ -9,10 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by yangyu on 2017/10/19.
@@ -31,7 +28,8 @@ public class LoginController {
      * 后台用户登陆
      */
     @PostMapping("/login")
-    public RestApiResponse<UserEntity> sysLogin(@RequestBody UserEntity user) {
+    public RestApiResponse<UserEntity> sysLogin(@RequestBody UserEntity user,
+                                                @RequestParam(required = false, defaultValue = "0")int type) {
         RestApiResponse<UserEntity> result = new RestApiResponse<UserEntity>();
         try {
             String username = user.getUsername();
@@ -44,7 +42,7 @@ public class LoginController {
                 result.failedApiResponse(Const.FAILED, "密码不能为空");
                 return result;
             }
-            UserEntity userEntity = userService.findByUsernameAndPassword(username, password);
+            UserEntity userEntity = userService.findByUsernameAndPassword(username, password, type);
             if (userEntity == null) {
                 result.failedApiResponse(Const.FAILED, "账号或密码错误");
                 return result;

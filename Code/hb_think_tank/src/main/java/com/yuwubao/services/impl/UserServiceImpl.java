@@ -73,8 +73,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserEntity findByUsernameAndPassword(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username, password);
+    public UserEntity findByUsernameAndPassword(String username, String password, int type) {
+        return userRepository.findByUsernameAndPasswordAndType(username, password, type);
     }
 
     @Override

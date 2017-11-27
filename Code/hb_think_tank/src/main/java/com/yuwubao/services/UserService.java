@@ -20,7 +20,7 @@ public interface UserService {
 
     UserEntity findById(int userId);
 
-    UserEntity findByUsernameAndPassword(String username, String password);
+    UserEntity findByUsernameAndPassword(String username, String password, int type);
 
     UserEntity findByUsername(String username);
 }

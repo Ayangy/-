@@ -80,7 +80,8 @@ public class UserController {
      * 新增用户
      */
     @PostMapping("/add")
-    public RestApiResponse<UserEntity> add(@RequestBody UserEntity userEntity) {
+    public RestApiResponse<UserEntity> add(@RequestBody UserEntity userEntity,
+                                           @RequestParam(required = false, defaultValue = "0")int type) {
         RestApiResponse<UserEntity> result = new RestApiResponse<UserEntity>();
         try {
             RoleEntity roleEntity = roleService.findOne(userEntity.getRoleId());
@@ -102,6 +103,7 @@ public class UserController {
                 return result;
             }
             userEntity.setCreateTime(new Date());
+            userEntity.setType(type);
             UserEntity user = userService.add(userEntity);
             if (user == null) {
                 result.failedApiResponse(Const.FAILED, "添加失败");

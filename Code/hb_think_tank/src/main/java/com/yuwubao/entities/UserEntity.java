@@ -38,6 +38,11 @@ public class UserEntity {
      */
     private Date createTime;
 
+    /**
+     * 用户类型0(后台用户),1(前端用户)
+     */
+    private int type;
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -78,4 +83,11 @@ public class UserEntity {
         this.roleId = roleId;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 }
