@@ -92,7 +92,7 @@ public class ExpertServiceImpl implements ExpertService {
 
     @Override
     public List<ExpertEntity> findExpertByLetter(String letter) {
-        String sql = "select * from zk_expert where get_first_pinyin_char(name) = ?";
+        String sql = "select * from zk_expert where shield=0 AND get_first_pinyin_char(name) = ?";
         RowMapper<ExpertEntity> rowMapper = new BeanPropertyRowMapper<>(ExpertEntity.class);
         List<ExpertEntity> list = jdbcTemplate.query(sql, rowMapper, letter);
         return list;

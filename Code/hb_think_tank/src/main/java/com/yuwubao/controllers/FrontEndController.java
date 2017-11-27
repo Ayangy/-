@@ -74,11 +74,23 @@ public class FrontEndController {
      * @return
      */
     @GetMapping("/findExpertByLetter")
-    public RestApiResponse<List<ExpertEntity>> findExpertByLetter(@RequestParam String letter) {
-        RestApiResponse<List<ExpertEntity>> result = new RestApiResponse<List<ExpertEntity>>();
+    public RestApiResponse<Map<String, List<ExpertEntity>>> findExpertByLetter(@RequestParam(defaultValue = "", required = false) String letter) {
+        RestApiResponse<Map<String, List<ExpertEntity>>> result = new RestApiResponse<Map<String, List<ExpertEntity>>>();
+        Map<String, List<ExpertEntity>> map = new HashMap<String, List<ExpertEntity>>();
         try {
-            List<ExpertEntity> list = expertService.findExpertByLetter(letter);
-            result.successResponse(Const.SUCCESS, list);
+            if (!StringUtils.isNotBlank(letter)) {
+                String alphabet;
+                for (char i = 'A' ; i<= 'Z'; i++ ){
+                    alphabet = String.valueOf(i);
+                    List<ExpertEntity> entityList = expertService.findExpertByLetter(alphabet);
+                    map.put(alphabet,entityList);
+                }
+                result.successResponse(Const.SUCCESS, map);
+                return result;
+            }
+            List<ExpertEntity> entities = expertService.findExpertByLetter(letter);
+            map.put(letter, entities);
+            result.successResponse(Const.SUCCESS, map);
         } catch (Exception e) {
             logger.warn("通过字母查询专家异常", e);
             result.failedApiResponse(Const.FAILED, "通过首字母查询专家异常");

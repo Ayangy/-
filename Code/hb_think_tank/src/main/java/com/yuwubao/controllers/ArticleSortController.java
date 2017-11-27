@@ -152,9 +152,9 @@ public class ArticleSortController {
     }
 
     /**
-     * 获取当前子级分类
+     * 获取当前分类的子级类型
      */
-    @GetMapping("getArticleSort")
+    @GetMapping("getArticleSonSort")
     public RestApiResponse<List<ArticleSortEntity>> getSonSort(@RequestParam(required = false, defaultValue = "0") int parentId) {
         RestApiResponse<List<ArticleSortEntity>> result = new RestApiResponse<List<ArticleSortEntity>>();
         try {

@@ -92,6 +92,11 @@ public class ExpertEntity {
     private String contactWay;
 
     /**
+     * 0(国内专家),1(国外专家)
+     */
+    private int type;
+
+    /**
      * 是否屏蔽0(不屏蔽),1(屏蔽)
      */
     private int shield;
@@ -222,6 +227,14 @@ public class ExpertEntity {
 
     public void setContactWay(String contactWay) {
         this.contactWay = contactWay;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getShield() {
