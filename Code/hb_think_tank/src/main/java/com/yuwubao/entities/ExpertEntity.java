@@ -37,6 +37,11 @@ public class ExpertEntity {
     private int organizationId;
 
     /**
+     * 机构名
+     */
+    private String organizationName;
+
+    /**
      *  个人简历
      */
     private String resume;
@@ -139,6 +144,14 @@ public class ExpertEntity {
 
     public void setOrganizationId(int organizationId) {
         this.organizationId = organizationId;
+    }
+
+    public String getOrganizationName() {
+        return organizationName;
+    }
+
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 
     public String getResume() {

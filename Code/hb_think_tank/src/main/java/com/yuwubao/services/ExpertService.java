@@ -30,4 +30,6 @@ public interface ExpertService {
     List<ExpertEntity> findByShield(int shield);
 
     List<ExpertEntity> queryAnExpert(int id);
+
+    List<ExpertEntity> findExpertByCondition(Map<String, String> map);
 }

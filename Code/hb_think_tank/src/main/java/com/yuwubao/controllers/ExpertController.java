@@ -77,6 +77,7 @@ public class ExpertController {
                 result.failedApiResponse(Const.FAILED, "指定的机构不存在");
                 return result;
             }
+            expertEntity.setOrganizationName(organizationEntity.getName());
             ExpertEntity expert = expertService.add(expertEntity);
             if (expert == null) {
                 result.failedApiResponse(Const.FAILED, "添加失败");
@@ -129,6 +130,9 @@ public class ExpertController {
             if (entity == null) {
                 result.failedApiResponse(Const.FAILED, "该专家不存在，修改失败");
                 return result;
+            }
+            if (!organizationEntity.getName().equals(entity.getOrganizationName())) {
+                expertEntity.setOrganizationName(organizationEntity.getName());
             }
             fileUploadController.deleteFile(entity.getImg());
             ExpertEntity expert = expertService.update(expertEntity);

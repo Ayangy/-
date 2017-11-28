@@ -4,16 +4,14 @@ import com.yuwubao.entities.*;
 import com.yuwubao.services.*;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
+import com.yuwubao.util.ThinkTankUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 前端首页数据
@@ -117,6 +115,48 @@ public class FrontEndController {
         } catch (Exception e) {
             logger.warn("查询专家异常", e);
             result.failedApiResponse(Const.FAILED, "查询专家异常");
+        }
+        return result;
+    }
+
+    /**
+     * 条件查询专家
+     * @param field  查询字段
+     * @param keyword  查询值
+     * @return
+     */
+    @GetMapping("/findExpertByCondition")
+    public RestApiResponse<Map<String, List<ExpertEntity>>> findExpertByCondition(@RequestParam(required = false, defaultValue = "")String field,
+                                                       @RequestParam(required = false, defaultValue = "")String keyword){
+        RestApiResponse<Map<String, List<ExpertEntity>>> result = new RestApiResponse<Map<String, List<ExpertEntity>>>();
+        Map<String, List<ExpertEntity>> findResult = new HashMap<String, List<ExpertEntity>>();
+        try {
+            Map<String, String> map = new HashMap();
+            map.put("field", field);
+            map.put("keyword", keyword);
+            List<ExpertEntity> list = expertService.findExpertByCondition(map);
+            List<String> letter = new ArrayList<String>();
+            for (ExpertEntity entity : list) {
+                String substring = entity.getName().substring(0, 1);
+                String pyIndexStr = ThinkTankUtil.getPYIndexStr(substring, true);
+                letter.add(pyIndexStr);
+            }
+
+            for (String s : letter) {
+                List<ExpertEntity> entities = new ArrayList<ExpertEntity>();
+                for (ExpertEntity expertEntity: list) {
+                    String substring = expertEntity.getName().substring(0, 1);
+                    String pyIndexStr = ThinkTankUtil.getPYIndexStr(substring, true);
+                    if (s.equals(pyIndexStr)) {
+                        entities.add(expertEntity);
+                    }
+                }
+                findResult.put(s, entities);
+            }
+            result.successResponse(Const.SUCCESS, findResult);
+        } catch (Exception e) {
+            logger.warn("查询专家列表异常", e);
+            result.failedApiResponse(Const.FAILED, "专家列表查询异常");
         }
         return result;
     }
