@@ -25,7 +25,9 @@ public interface ExpertService {
 
     List<ExpertEntity> getAll();
 
-    List<ExpertEntity> findExpertByLetter(String letter);
+    List<ExpertEntity> findExpertByLetter(String letter, int type);
 
     List<ExpertEntity> findByShield(int shield);
+
+    List<ExpertEntity> queryAnExpert(int id);
 }

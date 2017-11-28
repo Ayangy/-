@@ -92,10 +92,10 @@ public class OrganizationServiceImpl implements OrganizationService{
     }
 
     @Override
-    public List<OrganizationEntity> finByLetter(int type, String letter, int shield) {
-        String sql = "select * from organization where get_first_pinyin_char(name) = ? AND type = ? AND shield = ?";
+    public List<OrganizationEntity> finByLetter(String letter, int type) {
+        String sql = "select * from organization where get_first_pinyin_char(name) = ? AND type = ? AND shield = 0";
         RowMapper<OrganizationEntity> rowMapper = new BeanPropertyRowMapper<>(OrganizationEntity.class);
-        List<OrganizationEntity> list = jdbcTemplate.query(sql, rowMapper, letter, type, shield);
+        List<OrganizationEntity> list = jdbcTemplate.query(sql, rowMapper, letter, type);
         return list;
     }
 

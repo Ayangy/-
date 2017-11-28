@@ -138,10 +138,10 @@ public class ArticleServiceImpl implements ArticleService {
                 "a.title," +
                 " a.createdDate from article a , article_sort s where a.textTypeId = s.id AND a.shield = ?";
         if (textTypeId != 0) {
-            sql += " AND a.textTypeId = " + textTypeId;
+            sql += " AND a.textTypeId = " + String.valueOf(textTypeId);
         }
         if (parentId != 0) {
-            sql += " AND s.parentId = " + parentId;
+            sql += " AND s.parentId = " + String.valueOf(parentId);
         }
         sql += " order by a.createdDate desc LIMIT ?, ?";
         RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);

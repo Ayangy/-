@@ -74,7 +74,8 @@ public class FrontEndController {
      * @return
      */
     @GetMapping("/findExpertByLetter")
-    public RestApiResponse<Map<String, List<ExpertEntity>>> findExpertByLetter(@RequestParam(defaultValue = "", required = false) String letter) {
+    public RestApiResponse<Map<String, List<ExpertEntity>>> findExpertByLetter(@RequestParam(defaultValue = "", required = false) String letter,
+                                                                               @RequestParam(defaultValue = "0", required = false) int type) {
         RestApiResponse<Map<String, List<ExpertEntity>>> result = new RestApiResponse<Map<String, List<ExpertEntity>>>();
         Map<String, List<ExpertEntity>> map = new HashMap<String, List<ExpertEntity>>();
         try {
@@ -82,18 +83,40 @@ public class FrontEndController {
                 String alphabet;
                 for (char i = 'A' ; i<= 'Z'; i++ ){
                     alphabet = String.valueOf(i);
-                    List<ExpertEntity> entityList = expertService.findExpertByLetter(alphabet);
+                    List<ExpertEntity> entityList = expertService.findExpertByLetter(alphabet, type);
                     map.put(alphabet,entityList);
                 }
                 result.successResponse(Const.SUCCESS, map);
                 return result;
             }
-            List<ExpertEntity> entities = expertService.findExpertByLetter(letter);
+            List<ExpertEntity> entities = expertService.findExpertByLetter(letter, type);
             map.put(letter, entities);
             result.successResponse(Const.SUCCESS, map);
         } catch (Exception e) {
             logger.warn("通过字母查询专家异常", e);
             result.failedApiResponse(Const.FAILED, "通过首字母查询专家异常");
+        }
+        return result;
+    }
+
+    /**
+     * 查询专家详情
+     * @param id  专家id
+     * @return
+     */
+    @GetMapping("/queryAnExpert")
+    public RestApiResponse<List<ExpertEntity>> queryAnExpert(@RequestParam int id){
+        RestApiResponse<List<ExpertEntity>> result = new RestApiResponse<List<ExpertEntity>>();
+        try {
+            List<ExpertEntity> entity = expertService.queryAnExpert(id);
+            if (entity.size() == 0) {
+                result.failedApiResponse(Const.FAILED, "专家不存在");
+                return result;
+            }
+            result.successResponse(Const.SUCCESS, entity);
+        } catch (Exception e) {
+            logger.warn("查询专家异常", e);
+            result.failedApiResponse(Const.FAILED, "查询专家异常");
         }
         return result;
     }
@@ -105,12 +128,24 @@ public class FrontEndController {
      * @return
      */
     @GetMapping("/findOrganizationByLetter")
-    public RestApiResponse<List<OrganizationEntity>> findByLetter(@RequestParam(defaultValue = "0", required = false) int type,
-                                                                  @RequestParam String letter) {
-        RestApiResponse<List<OrganizationEntity>> result = new RestApiResponse<List<OrganizationEntity>>();
+    public RestApiResponse<Map<String, List<OrganizationEntity>>> findByLetter(@RequestParam(defaultValue = "0", required = false) int type,
+                                                                  @RequestParam(defaultValue = "", required = false) String letter) {
+        RestApiResponse<Map<String, List<OrganizationEntity>>> result = new RestApiResponse<Map<String, List<OrganizationEntity>>>();
+        Map<String, List<OrganizationEntity>> map = new HashMap<String, List<OrganizationEntity>>();
         try {
-            List<OrganizationEntity> list = organizationService.finByLetter(type, letter, shield);
-            result.successResponse(Const.SUCCESS, list);
+            if (!StringUtils.isNotBlank(letter)) {
+                String alphabet;
+                for (char i = 'A' ; i<= 'Z'; i++ ){
+                    alphabet = String.valueOf(i);
+                    List<OrganizationEntity> list = organizationService.finByLetter(alphabet, type);
+                    map.put(alphabet,list);
+                }
+                result.successResponse(Const.SUCCESS, map);
+                return result;
+            }
+            List<OrganizationEntity> entities = organizationService.finByLetter(letter, type);
+            map.put(letter, entities);
+            result.successResponse(Const.SUCCESS, map);
         } catch (Exception e) {
             logger.warn("通过字母查询异常", e);
             result.failedApiResponse(Const.FAILED, "通过字母查询异常");
