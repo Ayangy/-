@@ -115,4 +115,28 @@ public class OrganizationServiceImpl implements OrganizationService{
         OrganizationEntity entity = organizationRepository.findByName(name);
         return entity;
     }
+
+    @Override
+    public List<OrganizationEntity> findByCondition(Map<String, String> map, int type) {
+        String field = map.get("field");
+        String keyword = map.get("keyword");
+        Specification<OrganizationEntity> spec = new Specification<OrganizationEntity>() {
+            @Override
+            public Predicate toPredicate(Root<OrganizationEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder){
+                Predicate predict = criteriaBuilder.conjunction();
+                if (StringUtils.isNotBlank(field)) {
+                    Path<String> exp1 = root.get(field);
+                    if (StringUtils.isNotBlank(keyword)) {
+                        predict.getExpressions().add(criteriaBuilder.like(exp1, "%" + keyword + "%"));
+                    }
+                }
+                Path<Integer> path = root.get("type");
+                predict.getExpressions().add(criteriaBuilder.equal(path, String.valueOf(type)));
+                Path<Integer> path1 = root.get("shield");
+                predict.getExpressions().add(criteriaBuilder.equal(path1, String.valueOf(0)));
+                return predict;
+            }
+        };
+        return organizationRepository.findAll(spec);
+    }
 }

@@ -129,7 +129,7 @@ public class FrontEndController {
     public RestApiResponse<Map<String, List<ExpertEntity>>> findExpertByCondition(@RequestParam(required = false, defaultValue = "")String field,
                                                        @RequestParam(required = false, defaultValue = "")String keyword){
         RestApiResponse<Map<String, List<ExpertEntity>>> result = new RestApiResponse<Map<String, List<ExpertEntity>>>();
-        Map<String, List<ExpertEntity>> findResult = new HashMap<String, List<ExpertEntity>>();
+        Map<String, List<ExpertEntity>> endResult = new HashMap<String, List<ExpertEntity>>();
         try {
             Map<String, String> map = new HashMap();
             map.put("field", field);
@@ -151,9 +151,9 @@ public class FrontEndController {
                         entities.add(expertEntity);
                     }
                 }
-                findResult.put(s, entities);
+                endResult.put(s, entities);
             }
-            result.successResponse(Const.SUCCESS, findResult);
+            result.successResponse(Const.SUCCESS, endResult);
         } catch (Exception e) {
             logger.warn("查询专家列表异常", e);
             result.failedApiResponse(Const.FAILED, "专家列表查询异常");
@@ -195,17 +195,41 @@ public class FrontEndController {
 
     /**
      * 模糊查询未屏蔽机构名
-     * @param query 机构名
-     * @param type  机构类型
+     * @param field 查询字段
+     * @param keyword  查询值
+     * @param type  机构类型0(智库机构)，1(智库联盟)
      * @return
      */
     @GetMapping("/findOrganizationByName")
-    public RestApiResponse<List<OrganizationEntity>> findByName(@RequestParam String query,
+    public RestApiResponse<Map<String, List<OrganizationEntity>>> findByName(@RequestParam(required = false, defaultValue = "")String field,
+                                                                @RequestParam(required = false, defaultValue = "")String keyword,
                                                                 @RequestParam(defaultValue = "0", required = false) int type) {
-        RestApiResponse<List<OrganizationEntity>> result = new RestApiResponse<List<OrganizationEntity>>();
+        RestApiResponse<Map<String, List<OrganizationEntity>>> result = new RestApiResponse<Map<String, List<OrganizationEntity>>>();
+        Map<String, List<OrganizationEntity>> endResult = new HashMap<String, List<OrganizationEntity>>();
         try {
-            List<OrganizationEntity> list= organizationService.finByNameAndTypeAndShield(query, type, shield);
-            result.successResponse(Const.SUCCESS, list);
+            Map<String, String> map = new HashMap();
+            map.put("field", field);
+            map.put("keyword", keyword);
+            List<OrganizationEntity> list = organizationService.findByCondition(map, type);
+            List<String> letter = new ArrayList<String>();
+            for (OrganizationEntity entity : list) {
+                String substring = entity.getName().substring(0, 1);
+                String pyIndexStr = ThinkTankUtil.getPYIndexStr(substring, true);
+                letter.add(pyIndexStr);
+            }
+
+            for (String s : letter) {
+                List<OrganizationEntity> entities = new ArrayList<OrganizationEntity>();
+                for (OrganizationEntity organizationEntity: list) {
+                    String substring = organizationEntity.getName().substring(0, 1);
+                    String pyIndexStr = ThinkTankUtil.getPYIndexStr(substring, true);
+                    if (s.equals(pyIndexStr)) {
+                        entities.add(organizationEntity);
+                    }
+                }
+                endResult.put(s, entities);
+            }
+            result.successResponse(Const.SUCCESS, endResult);
         } catch (Exception e) {
             logger.warn("机构名模糊查询异常", e);
             result.failedApiResponse(Const.FAILED, "机构名模糊查询异常");
