@@ -127,14 +127,15 @@ public class FrontEndController {
      */
     @GetMapping("/findExpertByCondition")
     public RestApiResponse<Map<String, List<ExpertEntity>>> findExpertByCondition(@RequestParam(required = false, defaultValue = "")String field,
-                                                       @RequestParam(required = false, defaultValue = "")String keyword){
+                                                                                  @RequestParam(required = false, defaultValue = "")String keyword,
+                                                                                  @RequestParam(required = false, defaultValue = "0")int countryType){
         RestApiResponse<Map<String, List<ExpertEntity>>> result = new RestApiResponse<Map<String, List<ExpertEntity>>>();
         Map<String, List<ExpertEntity>> endResult = new HashMap<String, List<ExpertEntity>>();
         try {
             Map<String, String> map = new HashMap();
             map.put("field", field);
             map.put("keyword", keyword);
-            List<ExpertEntity> list = expertService.findExpertByCondition(map);
+            List<ExpertEntity> list = expertService.findExpertByCondition(map, countryType);
             List<String> letter = new ArrayList<String>();
             for (ExpertEntity entity : list) {
                 String substring = entity.getName().substring(0, 1);
@@ -238,6 +239,63 @@ public class FrontEndController {
     }
 
     /**
+     * 获取机构介绍
+     * @param id
+     * @return
+     */
+    @GetMapping("/organizationDetails")
+    public RestApiResponse<OrganizationEntity> findOrganizationByid(@RequestParam int id) {
+        RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
+        try {
+            OrganizationEntity organizationEntity = organizationService.findOne(id);
+            result.successResponse(Const.SUCCESS, organizationEntity);
+        } catch (Exception e) {
+            logger.warn("查询机构异常", e);
+            result.failedApiResponse(Const.FAILED, "查询机构异常");
+        }
+        return result;
+    }
+
+    /**
+     * 获取当前机构最新一条公告
+     * @param id  机构id
+     * @return
+     */
+    @GetMapping("/getOrganizationNotice")
+    public RestApiResponse<ArticleEntity> getOrganizationNotice(@RequestParam int id,
+                                                                @RequestParam int textTypeId) {
+        RestApiResponse<ArticleEntity> result = new RestApiResponse<ArticleEntity>();
+        try {
+            ArticleEntity articleEntity = articleService.getAnOrganizationNotice(id, textTypeId);
+            result.successResponse(Const.SUCCESS, articleEntity);
+        } catch (Exception e) {
+            logger.warn("获取最新公告异常", e);
+            result.failedApiResponse(Const.FAILED, "获取最新公告异常");
+        }
+        return result;
+    }
+
+    /**
+     *  获取当前机构的活动动态
+     *  @param id   机构id
+     * @return
+     */
+    @GetMapping("/getOrganizationActivity")
+    public RestApiResponse<List<ArticleEntity>> get(@RequestParam int id,@RequestParam int textTypeId,
+                                                    @RequestParam(defaultValue = "0", required = false) int index,
+                                                    @RequestParam(defaultValue = "4", required = false) int size) {
+        RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
+        try {
+            List<ArticleEntity> articleEntityList = articleService.getOrganizationActivity(id, textTypeId, index, size);
+            result.successResponse(Const.SUCCESS, articleEntityList);
+        } catch (Exception e) {
+            logger.warn("获取机构活动异常", e);
+            result.failedApiResponse(Const.FAILED, "获取机构活动异常");
+        }
+        return result;
+    }
+
+    /**
      * 获取所有智库专家
      */
     @GetMapping("/getNotShieldExpert")
@@ -304,7 +362,6 @@ public class FrontEndController {
      * @param keyword  查询值
      * @param textTypeId  文章类型
      * @param parentId  父级文章类型
-     * @param timeHorizon  时间范围 1(三天内),2(一周内),3(一月内),4(半年内),5(一年内)
      * @param sort  排序 0(降序),1(升序)
      * @return
      */
@@ -315,14 +372,13 @@ public class FrontEndController {
                                                           @RequestParam(required = false, defaultValue = "")String keyword,
                                                           @RequestParam(required = false, defaultValue = "0")int textTypeId,
                                                           @RequestParam(required = false, defaultValue = "0")int parentId,
-                                                          @RequestParam(required = false, defaultValue = "0")int timeHorizon,
                                                           @RequestParam(required = false, defaultValue = "0")int sort) {
         RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
         try {
             Map<String, String> map = new HashMap<String, String>();
             map.put("field", field);
             map.put("keyword", keyword);
-            List<ArticleEntity> list = articleService.findByCriteria(map, textTypeId, parentId, timeHorizon, sort, index, size);
+            List<ArticleEntity> list = articleService.findByCriteria(map, textTypeId, parentId, sort, index, size);
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("查询失败", e);

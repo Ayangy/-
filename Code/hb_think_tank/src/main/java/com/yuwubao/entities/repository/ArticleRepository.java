@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface ArticleRepository extends JpaRepository<ArticleEntity, Integer>, JpaSpecificationExecutor<ArticleEntity>{
     List<ArticleEntity> findByOrganizationId(int id);
+
+    List<ArticleEntity> findByTextTypeId(int id);
 }

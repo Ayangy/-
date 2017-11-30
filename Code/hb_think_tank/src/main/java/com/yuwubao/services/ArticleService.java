@@ -29,11 +29,17 @@ public interface ArticleService {
 
     List<ArticleEntity> findByOrganizationId(int id);
 
-    List<ArticleEntity> findByCriteria(Map<String, String> map, int textTypeId, int parentId, int timeHorizon,int sort, int index, int size);
+    List<ArticleEntity> findByCriteria(Map<String, String> map, int textTypeId, int parentId, int sort, int index, int size);
 
     List<ArticleEntity> getKind(int textTypeId, int index, int size);
 
     List<ArticleEntity> getRecommendArticle(int recommend, int index, int size);
 
     List<ArticleEntity> getNewestArticle(int index, int size);
+
+    ArticleEntity getAnOrganizationNotice(int id, int textTypeId);
+
+    List<ArticleEntity> getOrganizationActivity(int id, int textTypeId, int index, int size);
+
+    List<ArticleEntity> findByTextTypeId(int id);
 }

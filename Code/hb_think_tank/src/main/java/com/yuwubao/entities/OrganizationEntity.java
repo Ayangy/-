@@ -29,12 +29,7 @@ public class OrganizationEntity {
     /**
      * 单位领导
      */
-    private int lead;
-
-    /**
-     * 单位专家
-     */
-    private int expert;
+    private String lead;
 
     /**
      * 单位设置
@@ -75,20 +70,12 @@ public class OrganizationEntity {
         this.intro = intro;
     }
 
-    public int getLead() {
+    public String getLead() {
         return lead;
     }
 
-    public void setLead(int lead) {
+    public void setLead(String lead) {
         this.lead = lead;
-    }
-
-    public int getExpert() {
-        return expert;
-    }
-
-    public void setExpert(int expert) {
-        this.expert = expert;
     }
 
     public String getInstitutionSetting() {

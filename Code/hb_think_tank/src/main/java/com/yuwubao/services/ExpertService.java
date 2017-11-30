@@ -31,5 +31,5 @@ public interface ExpertService {
 
     List<ExpertEntity> queryAnExpert(int id);
 
-    List<ExpertEntity> findExpertByCondition(Map<String, String> map);
+    List<ExpertEntity> findExpertByCondition(Map<String, String> map, int type);
 }

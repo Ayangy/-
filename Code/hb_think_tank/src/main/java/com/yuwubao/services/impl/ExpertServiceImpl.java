@@ -113,7 +113,7 @@ public class ExpertServiceImpl implements ExpertService {
     }
 
     @Override
-    public List<ExpertEntity> findExpertByCondition(Map<String, String> map) {
+    public List<ExpertEntity> findExpertByCondition(Map<String, String> map, int type) {
         String field = map.get("field");
         String keyword = map.get("keyword");
         Specification<ExpertEntity> spec = new Specification<ExpertEntity>() {
@@ -126,6 +126,8 @@ public class ExpertServiceImpl implements ExpertService {
                         predict.getExpressions().add(criteriaBuilder.like(exp1, "%" + keyword + "%"));
                     }
                 }
+                Path<Integer> pathType = root.get("type");
+                predict.getExpressions().add(criteriaBuilder.equal(pathType, String.valueOf(type)));
                 Path<Integer> path = root.get("shield");
                 predict.getExpressions().add(criteriaBuilder.equal(path, String.valueOf(0)));
                 return predict;

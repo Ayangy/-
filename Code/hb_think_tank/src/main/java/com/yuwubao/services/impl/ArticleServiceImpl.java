@@ -156,7 +156,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleEntity> findByCriteria(Map<String, String> map, int textTypeId, int parentId, int timeHorizon, int sort, int index, int size) {
+    public List<ArticleEntity> findByCriteria(Map<String, String> map, int textTypeId, int parentId, int sort, int index, int size) {
         String field = map.get("field");
         String keyword = map.get("keyword");
         String sql = "SELECT * from article a, article_sort s WHERE a.textTypeId = s.id  AND a.shield = 0";
@@ -166,23 +166,6 @@ public class ArticleServiceImpl implements ArticleService {
         if (parentId != 0) {
             sql += " AND s.parentId = " + parentId;
         }
-        switch (timeHorizon) {
-            case 1:
-                sql += " AND a.addTime > DATE_SUB(now(),INTERVAL 3 DAY)";
-                break;
-            case 2:
-                sql += " AND a.addTime>DATE_SUB(CURDATE(), INTERVAL 1 WEEK)";
-                break;
-            case 3:
-                sql += " AND a.addTime>DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
-                break;
-            case 4:
-                sql += " AND a.addTime>DATE_SUB(CURDATE(), INTERVAL 6 MONTH)";
-                break;
-            case 5:
-                sql += " AND a.addTime>DATE_SUB(CURDATE(), INTERVAL 12 MONTH)";
-                break;
-        }
         if (StringUtils.isNotBlank(field)) {
             if (field.equals("content")) {
                 if (StringUtils.isNotBlank(keyword)) {
@@ -191,14 +174,10 @@ public class ArticleServiceImpl implements ArticleService {
             }
             if (field.equals("title")) {
                 if (StringUtils.isNotBlank(keyword)) {
-                    sql += " AND a.title LIKE '%" + keyword + "%'";
+                    sql += " or a.title LIKE '%" + keyword + "%'";
                 }
             }
-            if (!field.equals("content") && !field.equals("title")) {
-                if (StringUtils.isNotBlank(keyword)) {
-                    sql += " AND a.content NOT LIKE '%" + keyword + "%'";
-                }
-            }
+
         }
         if (sort == 0) {
             sql += " ORDER BY a.addTime DESC";
@@ -232,6 +211,31 @@ public class ArticleServiceImpl implements ArticleService {
         String sql = "SELECT * from article WHERE shield = 0 ORDER BY addTime DESC LIMIT ?,?;";
         RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
         List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, index, size);
+        return list;
+    }
+
+    @Override
+    public ArticleEntity getAnOrganizationNotice(int id, int textTypeId) {
+        String sql = "SELECT * from article WHERE organizationId = ? AND textTypeId = ? AND shield = 0 ORDER BY addTime DESC LIMIT 0,1";
+        RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, id, textTypeId);
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public List<ArticleEntity> getOrganizationActivity(int id, int textTypeId, int index, int size) {
+        String sql = "SELECT * from article WHERE organizationId = ? AND textTypeId = ? AND shield = 0 ORDER BY addTime DESC LIMIT ?,?";
+        RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, id, textTypeId, index, size);
+        return list;
+    }
+
+    @Override
+    public List<ArticleEntity> findByTextTypeId(int id) {
+        List<ArticleEntity> list = articleRepository.findByTextTypeId(id);
         return list;
     }
 

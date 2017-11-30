@@ -1,6 +1,8 @@
 package com.yuwubao.controllers;
 
+import com.yuwubao.entities.ArticleEntity;
 import com.yuwubao.entities.ArticleSortEntity;
+import com.yuwubao.services.ArticleService;
 import com.yuwubao.services.ArticleSortService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
@@ -30,6 +32,9 @@ public class ArticleSortController {
 
     @Autowired
     private ArticleSortService articleSortService;
+
+    @Autowired
+    private ArticleService articleService;
 
     /**
      * 查询文章分类
@@ -100,6 +105,11 @@ public class ArticleSortController {
                 result.failedApiResponse(Const.FAILED, "此分类下还有子级分类，请先删除子级类型");
                 return result;
             }
+            List<ArticleEntity> articleList = articleService.findByTextTypeId(id);
+            if (articleList.size() > 0) {
+                result.failedApiResponse(Const.FAILED, "此类文章未删净，删除失败");
+                return result;
+            }
             ArticleSortEntity articleSort = articleSortService.delete(id);
             if (articleSort == null) {
                 result.failedApiResponse(Const.FAILED, "删除失败,分类不存在");
@@ -147,6 +157,22 @@ public class ArticleSortController {
         } catch (Exception e) {
             logger.warn("获取列表异常", e);
             result.failedApiResponse(Const.FAILED, "获取列表异常");
+        }
+        return result;
+    }
+
+    /**
+     * 获取当前分类的子级类型
+     */
+    @GetMapping("/getArticleSort")
+    public RestApiResponse<List<ArticleSortEntity>> getSort(@RequestParam(required = false, defaultValue = "0") int parentId) {
+        RestApiResponse<List<ArticleSortEntity>> result = new RestApiResponse<List<ArticleSortEntity>>();
+        try {
+            List<ArticleSortEntity> list = articleSortService.getArticleSort(parentId);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("获取子级文章分类列表异常", e);
+            result.failedApiResponse(Const.FAILED, "获取子级文章分类列表异常");
         }
         return result;
     }
