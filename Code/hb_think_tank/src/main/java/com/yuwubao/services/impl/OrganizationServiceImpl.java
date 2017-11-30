@@ -145,4 +145,10 @@ public class OrganizationServiceImpl implements OrganizationService{
         };
         return organizationRepository.findAll(spec);
     }
+
+    @Override
+    public List<OrganizationEntity> findByShield(int shield) {
+        List<OrganizationEntity> list = organizationRepository.findByShield(shield);
+        return list;
+    }
 }

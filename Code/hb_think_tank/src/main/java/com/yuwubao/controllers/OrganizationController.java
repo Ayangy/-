@@ -80,6 +80,14 @@ public class OrganizationController {
                 result.failedApiResponse(Const.FAILED, "机构已存在");
                 return result;
             }
+
+            if (organizationEntity.getShield() == 0) {
+                List<OrganizationEntity> list = organizationService.findByShield(organizationEntity.getShield());
+                if (list.size() > 0) {
+                    result.failedApiResponse(Const.FAILED, "已记录本机构信息");
+                    return result;
+                }
+            }
             OrganizationEntity organization = organizationService.add(organizationEntity);
             if (organization == null) {
                 result.failedApiResponse(Const.FAILED, "添加机构失败");
