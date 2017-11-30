@@ -75,8 +75,8 @@ public class OrganizationController {
     public RestApiResponse<OrganizationEntity> add(@RequestBody OrganizationEntity organizationEntity) {
         RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
         try {
-            OrganizationEntity entity = organizationService.findByName(organizationEntity.getName());
-            if (entity != null) {
+            List<OrganizationEntity> entity = organizationService.findByName(organizationEntity.getName());
+            if (entity.size() > 0) {
                 result.failedApiResponse(Const.FAILED, "机构已存在");
                 return result;
             }
@@ -130,8 +130,8 @@ public class OrganizationController {
         try {
             OrganizationEntity organization = organizationService.findOne(organizationEntity.getId());
             if (!organization.getName().equals(organizationEntity.getName())) {
-                OrganizationEntity entity = organizationService.findByName(organizationEntity.getName());
-                if (entity != null) {
+                List<OrganizationEntity> entity = organizationService.findByName(organizationEntity.getName());
+                if (entity.size() > 0) {
                     result.failedApiResponse(Const.FAILED, "机构已存在");
                     return result;
                 }

@@ -111,13 +111,15 @@ public class OrganizationServiceImpl implements OrganizationService{
     }
 
     @Override
-    public OrganizationEntity findByName(String name) {
-        OrganizationEntity entity = organizationRepository.findByName(name);
-        return entity;
+    public List<OrganizationEntity> findByName(String name) {
+        String sql = "SELECT * FROM organization where `name` = ?";
+        RowMapper<OrganizationEntity> rowMapper = new BeanPropertyRowMapper<>(OrganizationEntity.class);
+        List<OrganizationEntity> list = jdbcTemplate.query(sql, rowMapper, name);
+        return list;
     }
 
     @Override
-    public List<OrganizationEntity> findByCondition(Map<String, String> map, int type) {
+    public List<OrganizationEntity> findByCondition(Map<String, String> map, int organizationType) {
         String field = map.get("field");
         String keyword = map.get("keyword");
         Specification<OrganizationEntity> spec = new Specification<OrganizationEntity>() {
@@ -130,8 +132,12 @@ public class OrganizationServiceImpl implements OrganizationService{
                         predict.getExpressions().add(criteriaBuilder.like(exp1, "%" + keyword + "%"));
                     }
                 }
+                if (organizationType != 0) {
+                    Path<Integer> path = root.get("organizationType");
+                    predict.getExpressions().add(criteriaBuilder.equal(path, String.valueOf(organizationType)));
+                }
                 Path<Integer> path = root.get("type");
-                predict.getExpressions().add(criteriaBuilder.equal(path, String.valueOf(type)));
+                predict.getExpressions().add(criteriaBuilder.equal(path, String.valueOf(1)));
                 Path<Integer> path1 = root.get("shield");
                 predict.getExpressions().add(criteriaBuilder.equal(path1, String.valueOf(0)));
                 return predict;

@@ -108,4 +108,6 @@ public class VideoServiceImpl implements VideoService {
         List<VideoEntity> list = jdbcTemplate.query(sql, rowMapper, shield, index, size);
         return list;
     }
+
+
 }

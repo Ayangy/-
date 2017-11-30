@@ -195,23 +195,23 @@ public class FrontEndController {
     }
 
     /**
-     * 模糊查询未屏蔽机构名
+     * 条件查询未屏蔽机构名
      * @param field 查询字段
      * @param keyword  查询值
-     * @param type  机构类型0(智库机构)，1(智库联盟)
+     * @param organizationType  1(大学),2(政府)
      * @return
      */
-    @GetMapping("/findOrganizationByName")
-    public RestApiResponse<Map<String, List<OrganizationEntity>>> findByName(@RequestParam(required = false, defaultValue = "")String field,
-                                                                @RequestParam(required = false, defaultValue = "")String keyword,
-                                                                @RequestParam(defaultValue = "0", required = false) int type) {
+    @GetMapping("/findOrganizationByCondition")
+    public RestApiResponse<Map<String, List<OrganizationEntity>>> findOrganizationByCondition(@RequestParam(required = false, defaultValue = "")String field,
+                                                                             @RequestParam(required = false, defaultValue = "")String keyword,
+                                                                             @RequestParam(defaultValue = "0", required = false) int organizationType) {
         RestApiResponse<Map<String, List<OrganizationEntity>>> result = new RestApiResponse<Map<String, List<OrganizationEntity>>>();
         Map<String, List<OrganizationEntity>> endResult = new HashMap<String, List<OrganizationEntity>>();
         try {
             Map<String, String> map = new HashMap();
             map.put("field", field);
             map.put("keyword", keyword);
-            List<OrganizationEntity> list = organizationService.findByCondition(map, type);
+            List<OrganizationEntity> list = organizationService.findByCondition(map, organizationType);
             List<String> letter = new ArrayList<String>();
             for (OrganizationEntity entity : list) {
                 String substring = entity.getName().substring(0, 1);
@@ -480,5 +480,6 @@ public class FrontEndController {
         }
         return result;
     }
+
 }
 

@@ -46,6 +46,16 @@ public class OrganizationEntity {
      */
     private int shield;
 
+    /**
+     * 地域名
+     */
+    private String territoryName;
+
+    /**
+     * 机构类型1（大学），2（政府）
+     */
+    private int organizationType;
+
     public int getId() {
         return id;
     }
@@ -100,5 +110,21 @@ public class OrganizationEntity {
 
     public void setShield(int shield) {
         this.shield = shield;
+    }
+
+    public String getTerritoryName() {
+        return territoryName;
+    }
+
+    public void setTerritoryName(String territoryName) {
+        this.territoryName = territoryName;
+    }
+
+    public int getOrganizationType() {
+        return organizationType;
+    }
+
+    public void setOrganizationType(int organizationType) {
+        this.organizationType = organizationType;
     }
 }
