@@ -331,6 +331,24 @@ public class FrontEndController {
         return result;
     }
 
+    @GetMapping("/getVideoDetails")
+    public RestApiResponse<VideoEntity> getVideoDetails(@RequestParam int id) {
+        RestApiResponse<VideoEntity> result = new RestApiResponse<VideoEntity>();
+        try {
+            VideoEntity entity = videoService.findOne(id);
+            if (entity == null) {
+                result.failedApiResponse(Const.FAILED, "音视频不存在");
+                return result;
+            }
+            result.successResponse(Const.SUCCESS, entity);
+        } catch (Exception e) {
+            logger.warn("查询视频详情异常", e);
+            result.failedApiResponse(Const.FAILED, "查询视频详情异常");
+        }
+        return result;
+
+    }
+
     /**
      * 分类查询未屏蔽文章
      * @param textTypeId  文章类型
