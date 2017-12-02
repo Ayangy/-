@@ -239,4 +239,12 @@ public class ArticleServiceImpl implements ArticleService {
         return list;
     }
 
+    @Override
+    public List<ArticleEntity> findByTextTypeIdAndShield(int textTypeId, int shield) {
+        String sql = "select * from article a, article_sort s where a.textTypeId = s.id and s.parentId = ? AND a.shield = ?";
+        RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, textTypeId, shield);
+        return list;
+    }
+
 }

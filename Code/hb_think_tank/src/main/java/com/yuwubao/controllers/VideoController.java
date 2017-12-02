@@ -111,8 +111,8 @@ public class VideoController {
                 result.failedApiResponse(Const.FAILED, "视频资讯不存在");
                 return result;
             }
-            videoService.delete(id);
             fileUploadController.deleteFile(entity.getVideoUrl());
+            videoService.delete(id);
             result.successResponse(Const.SUCCESS, entity, "删除成功");
         } catch (Exception e) {
             logger.warn("删除视频资讯异常:", e);
@@ -129,7 +129,7 @@ public class VideoController {
         RestApiResponse<VideoEntity> result = new RestApiResponse<VideoEntity>();
         try {
             OrganizationEntity organizationEntity = organizationService.findOne(videoEntity.getOrganizationId());
-            if (organizationEntity != null) {
+            if (organizationEntity == null) {
                 result.failedApiResponse(Const.FAILED, "指定的机构不存在");
                 return result;
             }
@@ -137,9 +137,6 @@ public class VideoController {
             if (entity == null) {
                 result.failedApiResponse(Const.FAILED, "该视频资讯不存在，修改失败");
                 return result;
-            }
-            if (!entity.getVideoUrl().equals(videoEntity.getVideoUrl())) {
-                fileUploadController.deleteFile(entity.getVideoUrl());
             }
             VideoEntity video = videoService.update(videoEntity);
             result.successResponse(Const.SUCCESS, video, "修改成功");

@@ -42,4 +42,6 @@ public interface ArticleService {
     List<ArticleEntity> getOrganizationActivity(int id, int textTypeId, int index, int size);
 
     List<ArticleEntity> findByTextTypeId(int id);
+
+    List<ArticleEntity> findByTextTypeIdAndShield(int textTypeId, int shield);
 }

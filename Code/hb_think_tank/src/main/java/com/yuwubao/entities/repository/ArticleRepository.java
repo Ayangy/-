@@ -13,4 +13,6 @@ public interface ArticleRepository extends JpaRepository<ArticleEntity, Integer>
     List<ArticleEntity> findByOrganizationId(int id);
 
     List<ArticleEntity> findByTextTypeId(int id);
+
+    List<ArticleEntity> findByTextTypeIdAndShield(int textTypeId, int shield);
 }

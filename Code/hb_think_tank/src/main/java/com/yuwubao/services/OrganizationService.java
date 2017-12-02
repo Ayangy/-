@@ -36,4 +36,6 @@ public interface OrganizationService {
     List<OrganizationEntity> findByShield(int shield);
 
     OrganizationEntity finByType(int i);
+
+    List<OrganizationEntity> findByShieldAndType(int shield, int type);
 }

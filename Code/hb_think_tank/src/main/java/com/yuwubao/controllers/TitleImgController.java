@@ -30,6 +30,9 @@ public class TitleImgController {
     @Autowired
     private TitleImgService titleImgService;
 
+    @Autowired
+    private FileUploadController fileUploadController;
+
     /**
      * 查询展示图片列表
      * @param index 第几页
@@ -94,6 +97,7 @@ public class TitleImgController {
                 result.failedApiResponse(Const.FAILED, "该图片不存在，删除失败");
                 return result;
             }
+            fileUploadController.deleteFile(titleImgEntity.getImgUrl());
             result.successResponse(Const.SUCCESS, titleImgEntity, "删除成功");
         } catch (Exception e) {
             logger.warn("删除展示图片异常:", e);
@@ -113,6 +117,9 @@ public class TitleImgController {
             if (entity == null) {
                 result.failedApiResponse(Const.FAILED, "修改失败，图片信息不存在");
                 return result;
+            }
+            if (!entity.getImgUrl().equals(titleImgEntity.getImgUrl())) {
+                fileUploadController.deleteFile(entity.getImgUrl());
             }
             TitleImgEntity imgEntity = titleImgService.update(titleImgEntity);
             result.successResponse(Const.SUCCESS, imgEntity, "修改成功");

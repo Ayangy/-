@@ -15,4 +15,6 @@ public interface OrganizationRepository extends JpaRepository<OrganizationEntity
     List<OrganizationEntity> findByShield(int shield);
 
     OrganizationEntity findByType(int i);
+
+    List<OrganizationEntity> findByShieldAndType(int shield, int type);
 }

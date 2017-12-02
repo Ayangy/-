@@ -156,4 +156,10 @@ public class OrganizationServiceImpl implements OrganizationService{
     public OrganizationEntity finByType(int i) {
         return organizationRepository.findByType(i);
     }
+
+    @Override
+    public List<OrganizationEntity> findByShieldAndType(int shield, int type) {
+        List<OrganizationEntity> list = organizationRepository.findByShieldAndType(shield, type);
+        return list;
+    }
 }

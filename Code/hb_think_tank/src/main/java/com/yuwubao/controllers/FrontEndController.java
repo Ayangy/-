@@ -520,5 +520,34 @@ public class FrontEndController {
         return result;
     }
 
+    /**
+     * 未屏蔽机构列表
+     */
+    @GetMapping("/getOrganizationList")
+    public RestApiResponse<List<OrganizationEntity>> getOrganizationList() {
+        RestApiResponse<List<OrganizationEntity>> result = new RestApiResponse<>();
+        try {
+            List<OrganizationEntity > list =  organizationService.findByShieldAndType(0,1);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("获取机构列表失败", e);
+            result.failedApiResponse(Const.FAILED, "获取机构列表失败");
+        }
+        return result;
+    }
+
+    @GetMapping("/getArticleList")
+    public RestApiResponse<List<ArticleEntity>> getAchievementList(@RequestParam int parentId) {
+        RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<>();
+        try {
+            List<ArticleEntity> entityList = articleService.findByTextTypeIdAndShield(parentId, 0);
+            result.successResponse(Const.SUCCESS, entityList);
+        } catch (Exception e) {
+            logger.warn("获取文章列表失败", e);
+            result.failedApiResponse(Const.FAILED, "获取文章列表失败");
+        }
+        return result;
+    }
+
 }
 
