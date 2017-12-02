@@ -268,12 +268,24 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleEntity> getDatabase() {
-        String sql = "";
+    public List<ArticleEntity> getDatabase(int index, int size, String keyword, String beginTime, String endTime) {
+        String sql = "SELECT * FROM article a, article_sort s WHERE a.textTypeId = s.id AND s.parentId = 25 ";
+        if (StringUtils.isNotBlank(beginTime)) {
+            sql += " AND a.addTime > " + beginTime;
+            if (StringUtils.isNotBlank(endTime)) {
+                sql += " AND a.addTime <" + endTime;
+            }
+        }
+        if (StringUtils.isNotBlank(keyword)) {
+            sql += " and ( title LIKE '%" + keyword + "%'" +
+                    "OR author LIKE '%" + keyword +"%'" +
+                    "OR content LIKE '%" + keyword + "%'" +
+                    ")";
+        }
+        sql += " limit ?, ?";
         RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
-        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, index, size);
         return list;
     }
-
 
 }

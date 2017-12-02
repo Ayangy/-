@@ -604,12 +604,28 @@ public class FrontEndController {
 
     /**
      * 数据库查询
+     * @param index  第几页
+     * @param size  每页几条
+     * @param keyword  查询值
+     * @param beginTime  开始时间
+     * @param endTime  结束时间
+     * @return
      */
     @GetMapping("/getDatabase")
-    public RestApiResponse<ArticleEntity> getDatabase() {
+    public RestApiResponse<List<ArticleEntity>> getDatabase(@RequestParam(defaultValue = "0", required = false)int index,
+                                                      @RequestParam(defaultValue = "10", required = false)int size,
+                                                      @RequestParam(required = false, defaultValue = "")String keyword,
+                                                      @RequestParam(required = false, defaultValue = "")String beginTime,
+                                                      @RequestParam(required = false, defaultValue = "")String endTime) {
         RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
-        List<ArticleEntity> list = articleService.getDatabase();
-        return null;
+        try {
+            List<ArticleEntity> list = articleService.getDatabase(index,size, keyword, beginTime, endTime);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("获取数据库列表异常", e);
+            result.failedApiResponse(Const.FAILED, "获取数据库列表异常");
+        }
+        return result;
     }
 
 }
