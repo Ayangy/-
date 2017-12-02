@@ -247,4 +247,13 @@ public class ArticleServiceImpl implements ArticleService {
         return list;
     }
 
+    @Override
+    public List<ArticleEntity> findOrganizationArticle(int textTypeId, int organizationId, int index, int size, int shield) {
+        String sql = "select * from article a, article_sort s where a.textTypeId = s.id and a.textTypeId = ? AND a.shield = ? AND a.organizationId = ? limit ?,?";
+        RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, textTypeId, shield, organizationId, index, size);
+        return list;
+    }
+
+
 }

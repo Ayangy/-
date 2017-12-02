@@ -37,6 +37,11 @@ public class OrganizationEntity {
     private String institutionSetting;
 
     /**
+     * 联系我们
+     */
+    private String contactUs;
+
+    /**
      *  机构分类0(智库机构)，1(智库联盟)
      */
     private int type;
@@ -126,5 +131,13 @@ public class OrganizationEntity {
 
     public void setOrganizationType(int organizationType) {
         this.organizationType = organizationType;
+    }
+
+    public String getContactUs() {
+        return contactUs;
+    }
+
+    public void setContactUs(String contactUs) {
+        this.contactUs = contactUs;
     }
 }

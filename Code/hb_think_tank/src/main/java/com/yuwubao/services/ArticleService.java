@@ -44,4 +44,6 @@ public interface ArticleService {
     List<ArticleEntity> findByTextTypeId(int id);
 
     List<ArticleEntity> findByTextTypeIdAndShield(int textTypeId, int shield);
+
+    List<ArticleEntity> findOrganizationArticle(int textTypeId, int organizationId, int index, int size, int i);
 }

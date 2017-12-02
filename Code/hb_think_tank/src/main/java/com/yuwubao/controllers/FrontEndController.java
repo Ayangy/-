@@ -536,6 +536,12 @@ public class FrontEndController {
         return result;
     }
 
+
+    /**
+     * 获取所有文章
+     * @param parentId
+     * @return
+     */
     @GetMapping("/getArticleList")
     public RestApiResponse<List<ArticleEntity>> getAchievementList(@RequestParam int parentId) {
         RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<>();
@@ -549,5 +555,27 @@ public class FrontEndController {
         return result;
     }
 
+    /**
+     * 获取指定机构文章
+     * @param textTypeId  文章类型id
+     * @param organizationId 机构id
+     * @param index  第几页
+     * @param size  每页几条
+     * @return
+     */
+    @GetMapping("/getInstitutionArticle")
+    public RestApiResponse<List<ArticleEntity>> getInstitutionArticle(@RequestParam int textTypeId, @RequestParam int organizationId,
+                                                                      @RequestParam(defaultValue = "0", required = false) int index,
+                                                                      @RequestParam(defaultValue = "5", required = false) int size) {
+        RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<>();
+        try {
+            List<ArticleEntity> entityList = articleService.findOrganizationArticle(textTypeId, organizationId, index, size, 0);
+            result.successResponse(Const.SUCCESS, entityList);
+        } catch (Exception e) {
+            logger.warn("获取文章列表失败", e);
+            result.failedApiResponse(Const.FAILED, "获取文章列表失败");
+        }
+        return result;
+    }
 }
 
