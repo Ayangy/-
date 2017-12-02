@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by yangyu on 2017/11/3.
  */
 @RestController
-    @RequestMapping("/videoNews")
+@RequestMapping("/videoNews")
 @CrossOrigin
 public class VideoController {
 

@@ -1,5 +1,7 @@
 package com.yuwubao.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 /**
@@ -7,6 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "territory")
+@JsonIgnoreProperties(value={"id"})
 public class TerritoryEntity {
 
     /**

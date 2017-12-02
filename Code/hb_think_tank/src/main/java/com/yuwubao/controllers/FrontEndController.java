@@ -169,7 +169,7 @@ public class FrontEndController {
      * @return
      */
     @GetMapping("/findOrganizationByLetter")
-    public RestApiResponse<Map<String, List<OrganizationEntity>>> findByLetter(@RequestParam(defaultValue = "0", required = false) int type,
+    public RestApiResponse<Map<String, List<OrganizationEntity>>> findByLetter(@RequestParam(defaultValue = "1", required = false) int type,
                                                                   @RequestParam(defaultValue = "", required = false) String letter) {
         RestApiResponse<Map<String, List<OrganizationEntity>>> result = new RestApiResponse<Map<String, List<OrganizationEntity>>>();
         Map<String, List<OrganizationEntity>> map = new HashMap<String, List<OrganizationEntity>>();
@@ -234,6 +234,27 @@ public class FrontEndController {
         } catch (Exception e) {
             logger.warn("机构名模糊查询异常", e);
             result.failedApiResponse(Const.FAILED, "机构名模糊查询异常");
+        }
+        return result;
+    }
+
+    /**
+     * 获取本机构
+     *
+     */
+    @GetMapping("/getThisInstitution")
+    public RestApiResponse<OrganizationEntity> getThisInstitution(){
+        RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
+        try {
+            OrganizationEntity organizationEntity = organizationService.finByType(0);
+            if (organizationEntity == null) {
+                result.failedApiResponse(Const.FAILED, "暂未添加本机构数据");
+                return result;
+            }
+            result.successResponse(Const.SUCCESS, organizationEntity);
+        } catch (Exception e) {
+            logger.warn("获取本机构数据异常", e);
+            result.failedApiResponse(Const.FAILED, "获取本机构数据异常");
         }
         return result;
     }

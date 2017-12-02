@@ -38,10 +38,11 @@ public class FileUploadController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String time = sdf.format(new Date());
         String path;
+        String separator = System.getProperties().getProperty("file.separator");
         if (type == 0) {
-            path = resourcesPath + "\\img\\" + time + "\\";
+            path = resourcesPath + separator + "img" + separator + time + separator;
         } else {
-            path = resourcesPath + "\\video\\" + time + "\\";
+            path = resourcesPath + separator + "video"+ separator + time + separator;
         }
         File f = new File(path);
         if (!f.exists()) {

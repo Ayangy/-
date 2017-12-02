@@ -10,6 +10,7 @@ import java.util.Map;
 /**
  * Created by yangyu on 2017/10/23.
  */
+
 public interface OrganizationService {
     Page<OrganizationEntity> findAll(Map<String, String> map, Pageable pageAble);
 
@@ -33,4 +34,6 @@ public interface OrganizationService {
     List<OrganizationEntity> findByCondition(Map<String, String> map, int organizationType);
 
     List<OrganizationEntity> findByShield(int shield);
+
+    OrganizationEntity finByType(int i);
 }
