@@ -397,28 +397,34 @@ public class FrontEndController {
      * 智库成果多条件查询
      * @param index  第几页
      * @param size  每页几条
-     * @param field  查询字段
+
      * @param keyword  查询值
-     * @param textTypeId  文章类型
-     * @param parentId  父级文章类型
+     * @param textTypeIds  文章类型
      * @param sort  排序 0(降序),1(升序)
      * @return
      */
     @GetMapping("/findResultByCriteria")
     public RestApiResponse<List<ArticleEntity>> findResultByCriteria(@RequestParam(defaultValue = "0", required = false)int index,
                                                           @RequestParam(defaultValue = "10", required = false)int size,
-                                                          @RequestParam(required = false, defaultValue = "")String field,
                                                           @RequestParam(required = false, defaultValue = "")String keyword,
-                                                          @RequestParam(required = false, defaultValue = "0")int textTypeId,
-                                                          @RequestParam(required = false, defaultValue = "0")int parentId,
+                                                          @RequestParam(required = false, defaultValue = "")String textTypeIds,
                                                           @RequestParam(required = false, defaultValue = "0")int sort) {
         RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
         try {
             Map<String, String> map = new HashMap<String, String>();
-            map.put("field", field);
             map.put("keyword", keyword);
-            List<ArticleEntity> list = articleService.findByCriteria(map, textTypeId, parentId, sort, index, size);
-            result.successResponse(Const.SUCCESS, list);
+            String[] sourceStrArray = textTypeIds.split(",");
+            List<ArticleEntity> resultList = new ArrayList<ArticleEntity>();
+            if (StringUtils.isNotBlank(textTypeIds)) {
+                for (String textType:sourceStrArray) {
+                    int textTypeId = Integer.parseInt(textType);
+                    List<ArticleEntity> list = articleService.findByCriteria(map, textTypeId, sort, index, size);
+                    for (ArticleEntity entity : list) {
+                        resultList.add(entity);
+                    }
+                }
+            }
+            result.successResponse(Const.SUCCESS, resultList);
         } catch (Exception e) {
             logger.warn("查询失败", e);
             result.failedApiResponse(Const.FAILED, "查询失败");
@@ -595,5 +601,16 @@ public class FrontEndController {
         }
         return result;
     }
+
+    /**
+     * 数据库查询
+     */
+    @GetMapping("/getDatabase")
+    public RestApiResponse<ArticleEntity> getDatabase() {
+        RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
+        List<ArticleEntity> list = articleService.getDatabase();
+        return null;
+    }
+
 }
 

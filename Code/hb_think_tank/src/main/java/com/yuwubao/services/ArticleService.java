@@ -29,7 +29,7 @@ public interface ArticleService {
 
     List<ArticleEntity> findByOrganizationId(int id);
 
-    List<ArticleEntity> findByCriteria(Map<String, String> map, int textTypeId, int parentId, int sort, int index, int size);
+    List<ArticleEntity> findByCriteria(Map<String, String> map, int textTypeId, int sort, int index, int size);
 
     List<ArticleEntity> getKind(int textTypeId, int index, int size);
 
@@ -46,4 +46,6 @@ public interface ArticleService {
     List<ArticleEntity> findByTextTypeIdAndShield(int textTypeId, int shield);
 
     List<ArticleEntity> findOrganizationArticle(int textTypeId, int organizationId, int index, int size, int i);
+
+    List<ArticleEntity> getDatabase();
 }

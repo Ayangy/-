@@ -156,33 +156,23 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleEntity> findByCriteria(Map<String, String> map, int textTypeId, int parentId, int sort, int index, int size) {
-        String field = map.get("field");
+    public List<ArticleEntity> findByCriteria(Map<String, String> map, int textTypeId, int sort, int index, int size) {
         String keyword = map.get("keyword");
-        String sql = "SELECT * from article a, article_sort s WHERE a.textTypeId = s.id  AND a.shield = 0";
+        String sql = "SELECT * from article WHERE shield = 0";
         if (textTypeId != 0) {
-            sql += " AND a.textTypeId = " + textTypeId;
+            sql += " AND textTypeId = " + textTypeId;
         }
-        if (parentId != 0) {
-            sql += " AND s.parentId = " + parentId;
+        if (StringUtils.isNotBlank(keyword)) {
+            sql += " and ( title LIKE '%" + keyword + "%'" +
+                    "OR author LIKE '%" + keyword +"%'" +
+                    "OR content LIKE '%" + keyword + "%'" +
+                    ")";
         }
-        if (StringUtils.isNotBlank(field)) {
-            if (field.equals("content")) {
-                if (StringUtils.isNotBlank(keyword)) {
-                    sql += " AND a.content LIKE '%" + keyword + "%'";
-                }
-            }
-            if (field.equals("title")) {
-                if (StringUtils.isNotBlank(keyword)) {
-                    sql += " or a.title LIKE '%" + keyword + "%'";
-                }
-            }
 
-        }
         if (sort == 0) {
-            sql += " ORDER BY a.addTime DESC";
+            sql += " ORDER BY addTime DESC";
         } else {
-            sql += " ORDER BY a.addTime";
+            sql += " ORDER BY addTime";
         }
         sql += " limit ?, ?";
         RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
@@ -274,6 +264,14 @@ public class ArticleServiceImpl implements ArticleService {
                 "a.recommend from article a, article_sort s where a.textTypeId = s.id and a.textTypeId = ? AND a.shield = ? AND a.organizationId = ? ORDER BY a.addTime Desc limit ?,?";
         RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
         List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, textTypeId, shield, organizationId, index, size);
+        return list;
+    }
+
+    @Override
+    public List<ArticleEntity> getDatabase() {
+        String sql = "";
+        RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper);
         return list;
     }
 
