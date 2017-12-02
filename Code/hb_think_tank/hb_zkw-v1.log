@@ -9207,3 +9207,4 @@ Caused by: java.sql.SQLException: No value specified for parameter 5
 2017-12-02 16:22:59.728  INFO 15388 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
 2017-12-02 16:22:59.729  INFO 15388 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
 2017-12-02 16:22:59.787  INFO 15388 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 58 ms
+2017-12-02 16:30:38.789  INFO 15388 --- [http-nio-8080-exec-1] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory

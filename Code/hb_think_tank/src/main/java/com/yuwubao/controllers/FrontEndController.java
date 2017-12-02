@@ -577,5 +577,23 @@ public class FrontEndController {
         }
         return result;
     }
+
+    /**
+     * 获取指定联盟详情
+     * @param organizationId  机构id
+     * @return
+     */
+    @GetMapping("/findInstitutionByid")
+    public RestApiResponse<OrganizationEntity> getInstitution(@RequestParam int organizationId) {
+        RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
+        try {
+            OrganizationEntity organizationEntity = organizationService.findOne(organizationId);
+            result.successResponse(Const.SUCCESS, organizationEntity);
+        } catch (Exception e) {
+            logger.warn("获取机构详情失败", e);
+            result.failedApiResponse(Const.FAILED, "获取机构详情失败");
+        }
+        return result;
+    }
 }
 
