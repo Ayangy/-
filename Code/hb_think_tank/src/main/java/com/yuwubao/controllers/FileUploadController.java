@@ -40,11 +40,11 @@ public class FileUploadController {
         String path = null;
         String sysName = System.getProperties().getProperty("os.name");
         String separator = System.getProperties().getProperty("file.separator");
-        if (sysName.contains("linux")) {
+        if (sysName.contains("Linux")) {
             if (type == 0) {
-                path = separator + "img" + separator + time + separator;
+                path = separator + "tmp" + separator + "img" + separator + time + separator;
             } else {
-                path = separator + "video" + separator + time + separator;
+                path = separator + "tmp" + separator + "video" + separator + time + separator;
             }
         } else {
             if (type == 0) {

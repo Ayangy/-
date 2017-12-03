@@ -79,7 +79,7 @@ public class VideoController {
         RestApiResponse<VideoEntity> result = new RestApiResponse<VideoEntity>();
         try {
             OrganizationEntity organizationEntity = organizationService.findOne(videoEntity.getOrganizationId());
-            if (organizationEntity != null) {
+            if (organizationEntity == null) {
                 result.failedApiResponse(Const.FAILED, "指定的机构不存在");
                 return result;
             }

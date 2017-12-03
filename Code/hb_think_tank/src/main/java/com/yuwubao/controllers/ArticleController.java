@@ -153,9 +153,6 @@ public class ArticleController {
         try {
             ArticleEntity oldEntity = articleService.findById(articleEntity.getId());
             articleEntity.setAddTime(oldEntity.getAddTime());
-            if (articleEntity.getImgUrl() != oldEntity.getImgUrl()) {
-                fileUploadController.deleteFile(oldEntity.getImgUrl());
-            }
             if (oldEntity.getOrganizationId() != articleEntity.getOrganizationId()) {
                 OrganizationEntity organizationEntity = organizationService.findOne(articleEntity.getOrganizationId());
                 if (organizationEntity == null) {
