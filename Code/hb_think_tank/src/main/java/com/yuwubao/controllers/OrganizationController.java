@@ -81,10 +81,10 @@ public class OrganizationController {
                 return result;
             }
 
-            if (organizationEntity.getShield() == 0) {
-                List<OrganizationEntity> list = organizationService.findByShield(organizationEntity.getShield());
-                if (list.size() > 0) {
-                    result.failedApiResponse(Const.FAILED, "已记录本机构信息");
+            if (organizationEntity.getType() == 0) {
+                OrganizationEntity entitie = organizationService.findByType(organizationEntity.getType());
+                if (entitie != null) {
+                    result.failedApiResponse(Const.FAILED, "已记录机构信息");
                     return result;
                 }
             }

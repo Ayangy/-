@@ -246,7 +246,7 @@ public class FrontEndController {
     public RestApiResponse<OrganizationEntity> getThisInstitution(){
         RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
         try {
-            OrganizationEntity organizationEntity = organizationService.finByType(0);
+            OrganizationEntity organizationEntity = organizationService.findByType(0);
             if (organizationEntity == null) {
                 result.failedApiResponse(Const.FAILED, "暂未添加本机构数据");
                 return result;

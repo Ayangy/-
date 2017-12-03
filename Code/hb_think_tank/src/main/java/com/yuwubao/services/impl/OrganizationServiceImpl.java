@@ -153,7 +153,7 @@ public class OrganizationServiceImpl implements OrganizationService{
     }
 
     @Override
-    public OrganizationEntity finByType(int i) {
+    public OrganizationEntity findByType(int i) {
         return organizationRepository.findByType(i);
     }
 
