@@ -9,6 +9,7 @@ import com.yuwubao.services.OrganizationService;
 import com.yuwubao.services.impl.ArticleSearchService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,13 +105,13 @@ public class ArticleController {
                 return result;
             }
             articleEntity.setAddTime(new Date());
-            /*if (articleEntity.getShield() == 0) {
-                articleSearchService.createDoc(articleEntity);
-            }*/
             ArticleEntity article = articleService.add(articleEntity);
             if (article == null) {
                 result.failedApiResponse(Const.FAILED, "添加失败");
                 return result;
+            }
+            if (articleEntity.getShield() == 0) {
+                articleSearchService.createDoc(article);
             }
             result.successResponse(Const.SUCCESS, article, "添加成功");
         } catch (Exception e) {
@@ -134,8 +135,10 @@ public class ArticleController {
                 result.failedApiResponse(Const.FAILED, "删除失败,文章不存在");
                 return result;
             }
-            //articleSearchService.delete(String.valueOf(id));
-            //fileUploadController.deleteFile(articleEntity.getImgUrl());
+            articleSearchService.delete(String.valueOf(id));
+            if (StringUtils.isNotBlank(articleEntity.getImgUrl())) {
+                fileUploadController.deleteFile(articleEntity.getImgUrl());
+            }
             result.successResponse(Const.SUCCESS, articleEntity, "删除成功");
         } catch (Exception e) {
             logger.warn("删除文章异常", e);
@@ -174,11 +177,11 @@ public class ArticleController {
                 return result;
             }
 
-            /*if (article.getShield() == 0) {
+            if (article.getShield() == 0) {
                 articleSearchService.createDoc(article);
             } else {
                 articleSearchService.delete(String.valueOf(article.getId()));
-            }*/
+            }
             result.successResponse(Const.SUCCESS, article, "修改成功");
         } catch (Exception e) {
             logger.warn("修改文章异常", e);

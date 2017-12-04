@@ -4,6 +4,7 @@ import com.yuwubao.entities.TitleImgEntity;
 import com.yuwubao.services.TitleImgService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +97,9 @@ public class TitleImgController {
             if (titleImgEntity == null) {
                 result.failedApiResponse(Const.FAILED, "该图片不存在，删除失败");
                 return result;
+            }
+            if (StringUtils.isNotBlank(titleImgEntity.getImgUrl())) {
+                fileUploadController.deleteFile(titleImgEntity.getImgUrl());
             }
             result.successResponse(Const.SUCCESS, titleImgEntity, "删除成功");
         } catch (Exception e) {

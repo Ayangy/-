@@ -6,6 +6,7 @@ import com.yuwubao.services.OrganizationService;
 import com.yuwubao.services.VideoService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,7 +112,9 @@ public class VideoController {
                 result.failedApiResponse(Const.FAILED, "视频资讯不存在");
                 return result;
             }
-            fileUploadController.deleteFile(entity.getVideoUrl());
+            if (StringUtils.isNotBlank(entity.getVideoUrl())) {
+                fileUploadController.deleteFile(entity.getVideoUrl());
+            }
             videoService.delete(id);
             result.successResponse(Const.SUCCESS, entity, "删除成功");
         } catch (Exception e) {

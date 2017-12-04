@@ -6,6 +6,7 @@ import com.yuwubao.services.ExpertService;
 import com.yuwubao.services.OrganizationService;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,6 +106,9 @@ public class ExpertController {
                 result.failedApiResponse(Const.FAILED, "专家不存在，删除失败");
                 return result;
             }
+            if (StringUtils.isNotBlank(expertEntity.getImg())) {
+                fileUploadController.deleteFile(expertEntity.getImg());
+            }
             result.successResponse(Const.SUCCESS, expertEntity, "删除成功");
             fileUploadController.deleteFile(expertEntity.getImg());
         } catch (Exception e) {
@@ -134,7 +138,11 @@ public class ExpertController {
             if (!organizationEntity.getName().equals(entity.getOrganizationName())) {
                 expertEntity.setOrganizationName(organizationEntity.getName());
             }
-            fileUploadController.deleteFile(entity.getImg());
+            if (StringUtils.isNotBlank(entity.getImg())) {
+                if (!entity.getImg().equals(expertEntity.getImg())) {
+                    fileUploadController.deleteFile(entity.getImg());
+                }
+            }
             ExpertEntity expert = expertService.update(expertEntity);
             result.successResponse(Const.SUCCESS, expert, "修改成功");
         } catch (Exception e) {
