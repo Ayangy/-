@@ -89,7 +89,13 @@ public class FileUploadController {
         RestApiResponse<Boolean> result = new RestApiResponse<Boolean>();
         try {
             String partFilePath = urlPath.substring(ThinkTankUtil.getCharacterPosition(urlPath));
-            String filePath= resourcesPath + partFilePath;
+            String sysName = System.getProperties().getProperty("os.name");
+            String filePath = null;
+            if (sysName.contains("Linux")) {
+                filePath = partFilePath;
+            } else {
+                filePath = resourcesPath + partFilePath;
+            }
             File deleteFile = new File(filePath);
             boolean state = deleteFile.delete();
             result.successResponse(Const.SUCCESS, state, "删除成功");
@@ -99,5 +105,4 @@ public class FileUploadController {
         }
         return result;
     }
-
 }
