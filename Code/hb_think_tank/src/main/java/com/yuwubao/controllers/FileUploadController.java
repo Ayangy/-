@@ -70,7 +70,8 @@ public class FileUploadController {
         try {
             file.transferTo(new File(path + filename));
             String address = ThinkTankUtil.getLocalHostLANAddress().getHostAddress();
-            String ip= "http://" + address + "/";
+            //String ip= "http://" + address + "/";
+            String ip= "http://47.104.8.66/";
             result.successResponse(Const.SUCCESS, ip + visit);
         } catch (Exception e) {
             logger.warn("文件上传失败", e);
