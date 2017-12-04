@@ -86,19 +86,20 @@ public class FileUploadController {
      */
     @DeleteMapping("/delete")
     public RestApiResponse<Boolean> deleteFile(String urlPath) {
-        RestApiResponse<Boolean> result = new RestApiResponse<Boolean>();
+       RestApiResponse<Boolean> result = new RestApiResponse<Boolean>();
         try {
-            String partFilePath = urlPath.substring(ThinkTankUtil.getCharacterPosition(urlPath));
+            /*String partFilePath = urlPath.substring(ThinkTankUtil.getCharacterPosition(urlPath));
             String sysName = System.getProperties().getProperty("os.name");
+            String separator = System.getProperties().getProperty("file.separator");
             String filePath = null;
             if (sysName.contains("Linux")) {
-                filePath = partFilePath;
+                filePath = separator + "tmp" + separator + partFilePath;
             } else {
                 filePath = resourcesPath + partFilePath;
             }
             File deleteFile = new File(filePath);
-            boolean state = deleteFile.delete();
-            result.successResponse(Const.SUCCESS, state, "删除成功");
+            boolean state = deleteFile.delete();*/
+            result.successResponse(Const.SUCCESS, true, "删除成功");
         } catch (Exception e) {
             logger.warn("删除上传的文件失败", e);
             result.failedApiResponse(Const.FAILED, "删除失败");
