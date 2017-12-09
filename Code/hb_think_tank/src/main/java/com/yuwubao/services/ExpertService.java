@@ -25,11 +25,11 @@ public interface ExpertService {
 
     List<ExpertEntity> getAll();
 
-    List<ExpertEntity> findExpertByLetter(String letter, int type);
+    List<ExpertEntity> findExpertByLetter(String letter);
 
     List<ExpertEntity> findByShield(int shield);
 
     List<ExpertEntity> queryAnExpert(int id);
 
-    List<ExpertEntity> findExpertByCondition(Map<String, String> map, int type);
+    List<ExpertEntity> findExpertByCondition(Map<String, String> map);
 }

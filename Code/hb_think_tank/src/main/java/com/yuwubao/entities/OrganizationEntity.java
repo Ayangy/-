@@ -57,7 +57,7 @@ public class OrganizationEntity {
     private String territoryName;
 
     /**
-     * 机构类型1（大学），2（政府）
+     * 机构类型0(大学),1(党校),2(政研室),3(科研机构)
      */
     private int organizationType;
 

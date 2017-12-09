@@ -87,13 +87,13 @@ public class FrontEndController {
                 String alphabet;
                 for (char i = 'A' ; i<= 'Z'; i++ ){
                     alphabet = String.valueOf(i);
-                    List<ExpertEntity> entityList = expertService.findExpertByLetter(alphabet, type);
+                    List<ExpertEntity> entityList = expertService.findExpertByLetter(alphabet);
                     map.put(alphabet,entityList);
                 }
                 result.successResponse(Const.SUCCESS, map);
                 return result;
             }
-            List<ExpertEntity> entities = expertService.findExpertByLetter(letter, type);
+            List<ExpertEntity> entities = expertService.findExpertByLetter(letter);
             map.put(letter, entities);
             result.successResponse(Const.SUCCESS, map);
         } catch (Exception e) {
@@ -133,15 +133,14 @@ public class FrontEndController {
      */
     @GetMapping("/findExpertByCondition")
     public RestApiResponse<Map<String, List<ExpertEntity>>> findExpertByCondition(@RequestParam(required = false, defaultValue = "")String field,
-                                                                                  @RequestParam(required = false, defaultValue = "")String keyword,
-                                                                                  @RequestParam(required = false, defaultValue = "0")int countryType){
+                                                                                  @RequestParam(required = false, defaultValue = "")String keyword){
         RestApiResponse<Map<String, List<ExpertEntity>>> result = new RestApiResponse<Map<String, List<ExpertEntity>>>();
         Map<String, List<ExpertEntity>> endResult = new HashMap<String, List<ExpertEntity>>();
         try {
             Map<String, String> map = new HashMap();
             map.put("field", field);
             map.put("keyword", keyword);
-            List<ExpertEntity> list = expertService.findExpertByCondition(map, countryType);
+            List<ExpertEntity> list = expertService.findExpertByCondition(map);
             List<String> letter = new ArrayList<String>();
             for (ExpertEntity entity : list) {
                 String substring = entity.getName().substring(0, 1);
