@@ -26,4 +26,6 @@ public interface ArticleSortService {
     ArticleSortEntity findById(int id);
 
     List<ArticleSortEntity> getJuniorAll();
+
+    List<ArticleSortEntity> findByParentId(int parentId);
 }
