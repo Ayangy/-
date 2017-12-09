@@ -44,6 +44,9 @@ public class FrontEndController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BlogrollService blogrollService;
+
     /**
      * 获取未屏蔽的最新文章
      * @param textTypeId  文章类型
@@ -626,6 +629,25 @@ public class FrontEndController {
             result.failedApiResponse(Const.FAILED, "获取数据库列表异常");
         }
         return result;
+    }
+
+    /**
+     * 获取合作单位列表
+     * @param type  0(共建机构),1(友情链接),2(合作媒体),3(特别成员单位)
+     * @return
+     */
+    @GetMapping("/getBlogroll")
+    public RestApiResponse<List<BlogrollEntity>> getBlogroll(@RequestParam int type) {
+        RestApiResponse<List<BlogrollEntity>> result = new RestApiResponse<List<BlogrollEntity>>();
+        try {
+            List<BlogrollEntity> list = blogrollService.findByType(type);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("获取合作单位列表异常", e);
+            result.failedApiResponse(Const.FAILED, "获取合作单位列表异常");
+        }
+        return result;
+
     }
 
 }

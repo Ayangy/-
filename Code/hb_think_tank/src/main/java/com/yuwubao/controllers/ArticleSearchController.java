@@ -114,7 +114,6 @@ public class ArticleSearchController {
                     }
                     articleEntity.setContent(content);
                 }
-                articleEntity.setId(Integer.parseInt(hit.getId()));
                 list.add(articleEntity);
             }
             result.successResponse(Const.SUCCESS, list, "获取列表成功");
@@ -161,17 +160,17 @@ public class ArticleSearchController {
                             .field("title")
                             .startObject()
                             .field("analyzer","ik_max_word")
-                            .field("type", "string")
+                            .field("type", "text")
                             .endObject()
                             .field("author")
                             .startObject()
                             .field("analyzer","ik_smart")
-                            .field("type", "string")
+                            .field("type", "text")
                             .endObject()
                             .field("content")
                             .startObject()
                             .field("analyzer","ik_max_word")
-                            .field("type", "string")
+                            .field("type", "text")
                             .endObject()
                             .endObject()
                             .endObject();
