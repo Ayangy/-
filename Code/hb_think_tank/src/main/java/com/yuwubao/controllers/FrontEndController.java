@@ -659,17 +659,16 @@ public class FrontEndController {
      * @return
      */
     @GetMapping("/findByString")
-    public RestApiResponse<List<ArticleEntity>> findByString(@RequestParam(defaultValue = "0", required = false)int index,
+    public RestApiResponse<List<VideoEntity>> findByString(@RequestParam(defaultValue = "0", required = false)int index,
                                                            @RequestParam(defaultValue = "10", required = false)int size,
-                                                           @RequestParam(defaultValue = "", required = false)String query,
-                                                           @RequestParam int textTypeId) {
-        RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
+                                                           @RequestParam(defaultValue = "", required = false)String query) {
+        RestApiResponse<List<VideoEntity>> result = new RestApiResponse<List<VideoEntity>>();
         try {
-            List<ArticleEntity> list = articleService.findByString(query, textTypeId, index, size);
+            List<VideoEntity> list = videoService.findByString(query, index, size);
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
-            logger.warn("获取合作单位列表异常", e);
-            result.failedApiResponse(Const.FAILED, "获取合作单位列表异常");
+            logger.warn("条件查询音视频异常", e);
+            result.failedApiResponse(Const.FAILED, "条件查询音视频异常");
         }
         return result;
 

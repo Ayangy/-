@@ -23,4 +23,5 @@ public interface VideoService {
 
     List<VideoEntity> getNewsVideo(int index, int size, int shield);
 
+    List<VideoEntity> findByString(String query, int index, int size);
 }

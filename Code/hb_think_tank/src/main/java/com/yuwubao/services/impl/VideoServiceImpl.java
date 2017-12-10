@@ -109,5 +109,19 @@ public class VideoServiceImpl implements VideoService {
         return list;
     }
 
+    @Override
+    public List<VideoEntity> findByString(String query, int index, int size) {
+        String sql = "select * from video_news WHERE shield = 0 ";
+        if (StringUtils.isNotBlank(query)) {
+            sql += " and ( title LIKE '%" + query + "%'" +
+                    "OR content LIKE '%" + query + "%'" +
+                    ")";
+        }
+        sql += " limit ?, ?";
+        RowMapper<VideoEntity> rowMapper = new BeanPropertyRowMapper<>(VideoEntity.class);
+        List<VideoEntity> list = jdbcTemplate.query(sql, rowMapper, index, size);
+        return list;
+    }
+
 
 }

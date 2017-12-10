@@ -290,7 +290,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleEntity> findByString(String query,int textTypeId, int index, int size) {
-        String sql = "SELECT * FROM article  WHERE  textTypeId = ? ";
+        String sql = "SELECT * FROM article  WHERE  textTypeId = ? AND shield = 0";
         if (StringUtils.isNotBlank(query)) {
             sql += " and ( title LIKE '%" + query + "%'" +
                     "OR author LIKE '%" + query +"%'" +
