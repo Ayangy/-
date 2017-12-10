@@ -27,6 +27,12 @@
 		<transport.version>5.4.1</transport.version>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
+		</dependency>
 		<!-- elasticsearch 5.x 依赖 -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>

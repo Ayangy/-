@@ -3,6 +3,7 @@ package com.yuwubao.controllers;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
 import com.yuwubao.util.ThinkTankUtil;
+import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,17 +39,20 @@ public class FileUploadController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String time = sdf.format(new Date());
         String path = null;
+        String original = null;
         String sysName = System.getProperties().getProperty("os.name");
         String separator = System.getProperties().getProperty("file.separator");
         if (sysName.contains("Linux")) {
             if (type == 0) {
                 path = separator + "tmp" + separator + "img" + separator + time + separator;
+                original = separator + "tmp" + separator + "original" + separator + time + separator;
             } else {
                 path = separator + "tmp" + separator + "video" + separator + time + separator;
             }
         } else {
             if (type == 0) {
                 path = resourcesPath + separator + "img" + separator + time + separator;
+                original = resourcesPath + separator + "original" + separator + time + separator;
             } else {
                 path = resourcesPath + separator + "video" + separator + time + separator;
             }
@@ -56,6 +60,10 @@ public class FileUploadController {
         File f = new File(path);
         if (!f.exists()) {
             f.mkdirs();
+        }
+        File originalFile = new File(original);
+        if (!originalFile.exists()) {
+            originalFile.mkdirs();
         }
         String filename = file.getOriginalFilename();
         String suffix = filename.substring(filename.lastIndexOf('.'));
@@ -68,7 +76,8 @@ public class FileUploadController {
              visit = "video/" + time + "/" + filename;
         }
         try {
-            file.transferTo(new File(path + filename));
+            file.transferTo(new File(originalFile+separator + filename));
+            Thumbnails.of(originalFile+separator+filename).size(350, 194).keepAspectRatio(false).toFile(path+separator+filename);
             String address = ThinkTankUtil.getLocalHostLANAddress().getHostAddress();
             //String ip= "http://" + address + "/";
             String ip= "http://47.104.8.66/";
