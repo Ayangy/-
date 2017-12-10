@@ -61,9 +61,12 @@ public class FileUploadController {
         if (!f.exists()) {
             f.mkdirs();
         }
-        File originalFile = new File(original);
-        if (!originalFile.exists()) {
-            originalFile.mkdirs();
+        File originalFile = null;
+        if (original != null) {
+            originalFile = new File(original);
+            if (!originalFile.exists()) {
+                originalFile.mkdirs();
+            }
         }
         String filename = file.getOriginalFilename();
         String suffix = filename.substring(filename.lastIndexOf('.'));
@@ -76,8 +79,12 @@ public class FileUploadController {
              visit = "video/" + time + "/" + filename;
         }
         try {
-            file.transferTo(new File(originalFile+separator + filename));
-            Thumbnails.of(originalFile+separator+filename).size(350, 194).keepAspectRatio(false).toFile(path+separator+filename);
+            if (originalFile != null) {
+                file.transferTo(new File(originalFile + separator + filename));
+                Thumbnails.of(originalFile + separator + filename).size(350, 194).keepAspectRatio(false).toFile(path + separator + filename);
+            } else {
+                file.transferTo(new File(path  + filename));
+            }
             String address = ThinkTankUtil.getLocalHostLANAddress().getHostAddress();
             //String ip= "http://" + address + "/";
             String ip= "http://47.104.8.66/";
