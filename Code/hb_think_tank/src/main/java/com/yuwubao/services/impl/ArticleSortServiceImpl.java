@@ -110,9 +110,5 @@ public class ArticleSortServiceImpl implements ArticleSortService {
         return list;
     }
 
-    @Override
-    public List<ArticleSortEntity> findByParentId(int parentId) {
-        List<ArticleSortEntity> list = articleSortRepository.findByParentId(parentId);
-        return list;
-    }
+
 }

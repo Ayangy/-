@@ -47,9 +47,6 @@ public class FrontEndController {
     @Autowired
     private BlogrollService blogrollService;
 
-    @Autowired
-    private ArticleSortService articleSortService;
-
     /**
      * 获取未屏蔽的最新文章
      * @param textTypeId  文章类型
@@ -650,28 +647,6 @@ public class FrontEndController {
         }
         return result;
 
-    }
-
-    /**
-     * 获取二级菜单
-     * @param parentId  父菜单Id
-     * @return
-     */
-    @GetMapping("/getSubmenu")
-    public RestApiResponse<List<ArticleSortEntity>> getSubmenu(@RequestParam int parentId) {
-        RestApiResponse<List<ArticleSortEntity>> result = new RestApiResponse<List<ArticleSortEntity>>();
-        try {
-            List<ArticleSortEntity> list = articleSortService.findByParentId(parentId);
-            if (list.size() == 0) {
-                result.failedApiResponse(Const.FAILED, "此分类不存在");
-                return result;
-            }
-            result.successResponse(Const.SUCCESS, list);
-        } catch (Exception e) {
-            logger.warn("获取子菜单异常", e);
-            result.failedApiResponse(Const.FAILED, "获取子菜单异常");
-        }
-        return result;
     }
 
 }
