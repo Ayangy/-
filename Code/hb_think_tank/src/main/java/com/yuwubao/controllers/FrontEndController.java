@@ -126,18 +126,20 @@ public class FrontEndController {
      * 条件查询专家
      * @param field  查询字段
      * @param keyword  查询值
+     * @param fieldType 0党建、1社会、2生态、3政治、4经济、5文化、6热点专题、7国际关系
      * @return
      */
     @GetMapping("/findExpertByCondition")
     public RestApiResponse<Map<String, List<ExpertEntity>>> findExpertByCondition(@RequestParam(required = false, defaultValue = "")String field,
-                                                                                  @RequestParam(required = false, defaultValue = "")String keyword){
+                                                                                  @RequestParam(required = false, defaultValue = "")String keyword,
+                                                                                  @RequestParam(required = false, defaultValue = "")int fieldType){
         RestApiResponse<Map<String, List<ExpertEntity>>> result = new RestApiResponse<Map<String, List<ExpertEntity>>>();
         Map<String, List<ExpertEntity>> endResult = new HashMap<String, List<ExpertEntity>>();
         try {
             Map<String, String> map = new HashMap();
             map.put("field", field);
             map.put("keyword", keyword);
-            List<ExpertEntity> list = expertService.findExpertByCondition(map);
+            List<ExpertEntity> list = expertService.findExpertByCondition(map, fieldType);
             List<String> letter = new ArrayList<String>();
             for (ExpertEntity entity : list) {
                 String substring = entity.getName().substring(0, 1);
@@ -640,6 +642,30 @@ public class FrontEndController {
         RestApiResponse<List<BlogrollEntity>> result = new RestApiResponse<List<BlogrollEntity>>();
         try {
             List<BlogrollEntity> list = blogrollService.findByType(type);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("获取合作单位列表异常", e);
+            result.failedApiResponse(Const.FAILED, "获取合作单位列表异常");
+        }
+        return result;
+
+    }
+
+    /**
+     * 条件查询音视频
+     * @param index
+     * @param size
+     * @param query
+     * @return
+     */
+    @GetMapping("/findByString")
+    public RestApiResponse<List<ArticleEntity>> findByString(@RequestParam(defaultValue = "0", required = false)int index,
+                                                           @RequestParam(defaultValue = "10", required = false)int size,
+                                                           @RequestParam(defaultValue = "", required = false)String query,
+                                                           @RequestParam int textTypeId) {
+        RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
+        try {
+            List<ArticleEntity> list = articleService.findByString(query, textTypeId, index, size);
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("获取合作单位列表异常", e);

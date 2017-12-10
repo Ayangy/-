@@ -73,6 +73,12 @@ public class ArticleEntity implements Serializable {
      */
     private int recommend;
 
+    /**
+     *
+     * 资源类型0(文本),1(音视频)
+     */
+    private int resourceType;
+
     public int getId() {
         return id;
     }
@@ -167,5 +173,13 @@ public class ArticleEntity implements Serializable {
 
     public void setRecommend(int recommend) {
         this.recommend = recommend;
+    }
+
+    public int getResourceType() {
+        return resourceType;
+    }
+
+    public void setResourceType(int resourceType) {
+        this.resourceType = resourceType;
     }
 }

@@ -48,4 +48,6 @@ public interface ArticleService {
     List<ArticleEntity> findOrganizationArticle(int textTypeId, int organizationId, int index, int size, int i);
 
     List<ArticleEntity> getDatabase(int index, int size, String keyword, String beginTime, String endTime);
+
+    List<ArticleEntity> findByString(String query, int textTypeId, int index, int size);
 }

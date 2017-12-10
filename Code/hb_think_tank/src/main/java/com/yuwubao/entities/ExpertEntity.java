@@ -52,6 +52,11 @@ public class ExpertEntity {
     private String research;
 
     /**
+     * 研究领域类型0党建、1 社会、2生态、3政治、4经济、5文化、6热点专题、7国际关系
+     */
+    private int fieldType;
+
+    /**
      * 教育背景
      */
     private String educational;
@@ -163,6 +168,14 @@ public class ExpertEntity {
 
     public void setResearch(String research) {
         this.research = research;
+    }
+
+    public int getFieldType() {
+        return fieldType;
+    }
+
+    public void setFieldType(int fieldType) {
+        this.fieldType = fieldType;
     }
 
     public String getEducational() {
