@@ -76,7 +76,7 @@ public class FileUploadController {
         if (type == 0) {
             visit = "img/" + time + "/" + filename;
         } else {
-             visit = "video/" + time + "/" + filename;
+            visit = "video/" + time + "/" + filename;
         }
         try {
             if (originalFile != null) {

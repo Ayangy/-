@@ -156,23 +156,34 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleEntity> findByCriteria(Map<String, String> map, int textTypeId, int sort, int index, int size) {
+    public List<ArticleEntity> findByCriteria(Map<String, String> map, int parentId, int sort, int index, int size) {
         String keyword = map.get("keyword");
-        String sql = "SELECT * from article WHERE shield = 0";
-        if (textTypeId != 0) {
-            sql += " AND textTypeId = " + textTypeId;
+        String sql = "SELECT a.id," +
+                "a.title," +
+                "a.author," +
+                "a.createdDate," +
+                "a.content," +
+                "a.imgUrl," +
+                "a.imgState," +
+                "a.textTypeId," +
+                "a.organizationId," +
+                "a.addTime," +
+                "a.shield," +
+                "a.recommend from article a, article_sort s WHERE a.textTypeId = s.id AND a.shield = 0";
+        if (parentId != 0) {
+            sql += " AND s.parentId = " + parentId;
         }
         if (StringUtils.isNotBlank(keyword)) {
-            sql += " and ( title LIKE '%" + keyword + "%'" +
-                    "OR author LIKE '%" + keyword +"%'" +
-                    "OR content LIKE '%" + keyword + "%'" +
+            sql += " and ( a.title LIKE '%" + keyword + "%'" +
+                    "OR a.author LIKE '%" + keyword +"%'" +
+                    "OR a.content LIKE '%" + keyword + "%'" +
                     ")";
         }
 
         if (sort == 0) {
-            sql += " ORDER BY addTime DESC";
+            sql += " ORDER BY a.addTime DESC";
         } else {
-            sql += " ORDER BY addTime";
+            sql += " ORDER BY a.addTime";
         }
         sql += " limit ?, ?";
         RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
@@ -269,7 +280,18 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleEntity> getDatabase(int index, int size, String keyword, String beginTime, String endTime) {
-        String sql = "SELECT * FROM article a, article_sort s WHERE a.textTypeId = s.id AND s.parentId = 25 ";
+        String sql = "SELECT a.id," +
+                "a.title," +
+                "a.author," +
+                "a.createdDate," +
+                "a.content," +
+                "a.imgUrl," +
+                "a.imgState," +
+                "a.textTypeId," +
+                "a.organizationId," +
+                "a.addTime," +
+                "a.shield," +
+                "a.recommend FROM article a, article_sort s WHERE a.textTypeId = s.id AND s.parentId = 25 ";
         if (StringUtils.isNotBlank(beginTime)) {
             sql += " AND a.addTime > " + beginTime;
             if (StringUtils.isNotBlank(endTime)) {
