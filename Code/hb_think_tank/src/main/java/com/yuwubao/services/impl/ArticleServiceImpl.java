@@ -201,7 +201,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleEntity> getRecommendArticle(int recommend, int index, int size) {
-        String sql = "SELECT * from article WHERE recommend = ? AND shield = 0 LIMIT ?,?;";
+        String sql = "SELECT * from article WHERE recommend = ? AND shield = 0 ORDER BY addTime DESC LIMIT ?,?;";
         RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
         List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, recommend, index, size);
         return list;
