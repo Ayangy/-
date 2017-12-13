@@ -147,9 +147,12 @@ public class OrganizationController {
                     }
                 }
             }
-            if (organizationEntity.getType() == 0 || organization.getType() == 0){
-                result.failedApiResponse(Const.FAILED, "不能修改机构");
-                return result;
+            if (organizationEntity.getType() != organization.getType() && organization.getType() != 0){
+                OrganizationEntity byType = organizationService.findByType(organizationEntity.getType());
+                if (byType != null) {
+                    result.failedApiResponse(Const.FAILED, "不能修改机构");
+                    return result;
+                }
             }
             if (organization == null) {
                 result.failedApiResponse(Const.FAILED, "修改失败，机构不存在");
