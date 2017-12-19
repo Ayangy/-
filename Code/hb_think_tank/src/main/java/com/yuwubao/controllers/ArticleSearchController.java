@@ -114,7 +114,13 @@ public class ArticleSearchController {
                     }
                     articleEntity.setContent(content);
                 }
-                list.add(articleEntity);
+                Integer id = Integer.valueOf(hit.getId());
+                ArticleEntity entity = articleService.findById(id);
+                if (entity != null) {
+                    articleEntity.setImgUrl(entity.getImgUrl());
+                    articleEntity.setId(id);
+                    list.add(articleEntity);
+                }
             }
             result.successResponse(Const.SUCCESS, list, "获取列表成功");
         } catch (Exception e) {
