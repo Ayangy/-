@@ -324,8 +324,8 @@ public class FrontEndController {
 
     /**
      * 获取最新的未屏蔽视频新闻
-     * @param index  第几页
-     * @param size 每页几条
+     //* @param index  第几页
+     //* @param size 每页几条
      * @return
      */
     /*@GetMapping("/findVideoNews")
@@ -655,10 +655,13 @@ public class FrontEndController {
      * @return
      */
     @PostMapping("/checkEmail")
-    public RestApiResponse<Boolean> checkEmail(@RequestParam String email) {
+    public RestApiResponse<Boolean> checkEmail(@RequestParam(defaultValue = "", required = false) String email) {
         RestApiResponse<Boolean> result = new RestApiResponse<Boolean>();
         try {
-
+            if (!StringUtils.isNotBlank(email)) {
+                result.failedApiResponse(Const.FAILED, "邮箱不能为空");
+                return result;
+            }
             boolean emailState = CheckEmailValidityUtil.isEmailValid(email);
             result.successResponse(Const.SUCCESS, emailState);
         } catch (Exception e) {
