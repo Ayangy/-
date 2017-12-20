@@ -470,42 +470,6 @@ public class FrontEndController {
     }
 
     /**
-     * 注册用户
-     */
-    @PostMapping("/registeredUser")
-    public RestApiResponse<UserEntity> registeredUser(@RequestBody UserEntity userEntity,
-                                           @RequestParam(required = false, defaultValue = "1")int type) {
-        RestApiResponse<UserEntity> result = new RestApiResponse<UserEntity>();
-        try {
-            if (!StringUtils.isNotBlank(userEntity.getUsername())) {
-                result.failedApiResponse(Const.FAILED, "未设置用户名");
-                return result;
-            }
-            if (!StringUtils.isNotBlank(userEntity.getPassword())) {
-                result.failedApiResponse(Const.FAILED, "未设置密码");
-                return result;
-            }
-            UserEntity entity = userService.findByUsernameAndType(userEntity.getUsername(), type);
-            if (entity != null) {
-                result.failedApiResponse(Const.FAILED, "用户名已存在");
-                return result;
-            }
-            userEntity.setCreateTime(new Date());
-            userEntity.setType(type);
-            UserEntity user = userService.add(userEntity);
-            if (user == null) {
-                result.failedApiResponse(Const.FAILED, "添加失败");
-                return result;
-            }
-            result.successResponse(Const.SUCCESS, user, "注册成功");
-        } catch (Exception e) {
-            logger.warn("注册用户异常:", e);
-            result.failedApiResponse(Const.FAILED, "注册用户异常");
-        }
-        return result;
-    }
-
-    /**
      * 未屏蔽机构列表
      */
     @GetMapping("/getOrganizationList")
