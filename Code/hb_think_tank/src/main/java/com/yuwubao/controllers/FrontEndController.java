@@ -2,19 +2,22 @@ package com.yuwubao.controllers;
 
 import com.yuwubao.entities.*;
 import com.yuwubao.services.*;
-import com.yuwubao.util.Const;
-import com.yuwubao.util.RestApiResponse;
-import com.yuwubao.util.ThinkTankUtil;
+import com.yuwubao.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.OutputStream;
 import java.util.*;
 
 /**
- * 前端首页数据
+ * 前端接口
  * Created by yangyu on 2017/11/6.
  */
 @RestController
@@ -75,8 +78,7 @@ public class FrontEndController {
      * @return
      */
     @GetMapping("/findExpertByLetter")
-    public RestApiResponse<Map<String, List<ExpertEntity>>> findExpertByLetter(@RequestParam(defaultValue = "", required = false) String letter,
-                                                                               @RequestParam(defaultValue = "0", required = false) int type) {
+    public RestApiResponse<Map<String, List<ExpertEntity>>> findExpertByLetter(@RequestParam(defaultValue = "", required = false) String letter) {
         RestApiResponse<Map<String, List<ExpertEntity>>> result = new RestApiResponse<Map<String, List<ExpertEntity>>>();
         Map<String, List<ExpertEntity>> map = new HashMap<String, List<ExpertEntity>>();
         try {
@@ -202,20 +204,22 @@ public class FrontEndController {
      * 条件查询未屏蔽机构名
      * @param field 查询字段
      * @param keyword  查询值
-     * @param organizationType  1(大学),2(政府)
+     * @param organizationType  1(大学),2(党校),3(政研室),4(科研机构)
+     * @param type  0(智库机构),1(智库联盟)
      * @return
      */
     @GetMapping("/findOrganizationByCondition")
     public RestApiResponse<Map<String, List<OrganizationEntity>>> findOrganizationByCondition(@RequestParam(required = false, defaultValue = "")String field,
-                                                                             @RequestParam(required = false, defaultValue = "")String keyword,
-                                                                             @RequestParam(defaultValue = "0", required = false) int organizationType) {
+                                                                                              @RequestParam(required = false, defaultValue = "")String keyword,
+                                                                                              @RequestParam(defaultValue = "0", required = false) int organizationType,
+                                                                                              @RequestParam(defaultValue = "0", required = false) int type) {
         RestApiResponse<Map<String, List<OrganizationEntity>>> result = new RestApiResponse<Map<String, List<OrganizationEntity>>>();
         Map<String, List<OrganizationEntity>> endResult = new HashMap<String, List<OrganizationEntity>>();
         try {
             Map<String, String> map = new HashMap();
             map.put("field", field);
             map.put("keyword", keyword);
-            List<OrganizationEntity> list = organizationService.findByCondition(map, organizationType);
+            List<OrganizationEntity> list = organizationService.findByCondition(map, organizationType, type);
             List<String> letter = new ArrayList<String>();
             for (OrganizationEntity entity : list) {
                 String substring = entity.getName().substring(0, 1);
@@ -246,7 +250,7 @@ public class FrontEndController {
      * 获取本机构
      *
      */
-    @GetMapping("/getThisInstitution")
+    /*@GetMapping("/getThisInstitution")
     public RestApiResponse<OrganizationEntity> getThisInstitution(){
         RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
         try {
@@ -261,25 +265,7 @@ public class FrontEndController {
             result.failedApiResponse(Const.FAILED, "获取本机构数据异常");
         }
         return result;
-    }
-
-    /**
-     * 获取机构介绍
-     * @param id
-     * @return
-     */
-    @GetMapping("/organizationDetails")
-    public RestApiResponse<OrganizationEntity> findOrganizationByid(@RequestParam int id) {
-        RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
-        try {
-            OrganizationEntity organizationEntity = organizationService.findOne(id);
-            result.successResponse(Const.SUCCESS, organizationEntity);
-        } catch (Exception e) {
-            logger.warn("查询机构异常", e);
-            result.failedApiResponse(Const.FAILED, "查询机构异常");
-        }
-        return result;
-    }
+    }*/
 
     /**
      * 获取当前机构最新一条公告
@@ -342,7 +328,7 @@ public class FrontEndController {
      * @param size 每页几条
      * @return
      */
-    @GetMapping("/findVideoNews")
+    /*@GetMapping("/findVideoNews")
     public RestApiResponse<List<VideoEntity>> getVideoNews(@RequestParam(defaultValue = "0", required = false) int index,
                                                            @RequestParam(defaultValue = "1", required = false) int size) {
         RestApiResponse<List<VideoEntity>> result = new RestApiResponse<List<VideoEntity>>();
@@ -354,7 +340,7 @@ public class FrontEndController {
             result.failedApiResponse(Const.FAILED, "视频新闻获取异常");
         }
         return result;
-    }
+    }*/
 
     @GetMapping("/getVideoDetails")
     public RestApiResponse<VideoEntity> getVideoDetails(@RequestParam int id) {
@@ -523,10 +509,10 @@ public class FrontEndController {
      * 未屏蔽机构列表
      */
     @GetMapping("/getOrganizationList")
-    public RestApiResponse<List<OrganizationEntity>> getOrganizationList() {
+    public RestApiResponse<List<OrganizationEntity>> getOrganizationList(@RequestParam(required = false, defaultValue = "1")int type) {
         RestApiResponse<List<OrganizationEntity>> result = new RestApiResponse<>();
         try {
-            List<OrganizationEntity > list =  organizationService.findByShieldAndType(0,1);
+            List<OrganizationEntity > list =  organizationService.findByShieldAndType(0,type);
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("获取机构列表失败", e);
@@ -663,5 +649,50 @@ public class FrontEndController {
 
     }
 
+    /**
+     *  验证邮箱是否有效
+     * @param email  邮箱地址
+     * @return
+     */
+    @PostMapping("/checkEmail")
+    public RestApiResponse<Boolean> checkEmail(@RequestParam String email) {
+        RestApiResponse<Boolean> result = new RestApiResponse<Boolean>();
+        try {
+
+            boolean emailState = CheckEmailValidityUtil.isEmailValid(email);
+            result.successResponse(Const.SUCCESS, emailState);
+        } catch (Exception e) {
+            logger.warn("检查邮箱异常", e);
+            result.failedApiResponse(Const.FAILED, "检查邮箱异常");
+        }
+        return result;
+    }
+
+    /**
+     * 获取验证码
+     * @param response
+     * @param session
+     * @throws Exception
+     */
+    @RequestMapping("/valicode")
+    public void valicode(HttpServletResponse response, HttpSession session){
+        try {
+            //利用图片工具生成图片
+            //第一个参数是生成的验证码，第二个参数是生成的图片
+            Object[] objs = VerifyCodeUtil.createImage();
+            //将验证码存入Session
+            session.setAttribute("imageCode",objs[0]);
+
+            //将图片输出给浏览器
+            BufferedImage image = (BufferedImage) objs[1];
+            response.setContentType("image/png");
+            OutputStream os = response.getOutputStream();
+            ImageIO.write(image, "png", os);
+        } catch (Exception e) {
+            logger.warn("获取验证码异常", e);
+        }
+    }
+
 }
+
 

@@ -117,7 +117,7 @@ public class VideoServiceImpl implements VideoService {
                     "OR content LIKE '%" + query + "%'" +
                     ")";
         }
-        sql += " limit ?, ?";
+        sql += "order by createTime desc limit ?, ?";
         RowMapper<VideoEntity> rowMapper = new BeanPropertyRowMapper<>(VideoEntity.class);
         List<VideoEntity> list = jdbcTemplate.query(sql, rowMapper, index, size);
         return list;

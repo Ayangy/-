@@ -31,7 +31,7 @@ public interface OrganizationService {
 
     List<OrganizationEntity> findByName(String name);
 
-    List<OrganizationEntity> findByCondition(Map<String, String> map, int organizationType);
+    List<OrganizationEntity> findByCondition(Map<String, String> map, int organizationType, int type);
 
     List<OrganizationEntity> findByShield(int shield);
 

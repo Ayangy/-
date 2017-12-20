@@ -100,11 +100,6 @@ public class ArticleSortController {
     public RestApiResponse<ArticleSortEntity> delete(@RequestParam int id) {
         RestApiResponse<ArticleSortEntity> result = new RestApiResponse<ArticleSortEntity>();
         try {
-            List<ArticleSortEntity> sort = articleSortService.getArticleSort(id);
-            if (sort.size() > 0) {
-                result.failedApiResponse(Const.FAILED, "此分类下还有子级分类，请先删除子级类型");
-                return result;
-            }
             List<ArticleEntity> articleList = articleService.findByTextTypeId(id);
             if (articleList.size() > 0) {
                 result.failedApiResponse(Const.FAILED, "此类文章未删净，删除失败");

@@ -3,7 +3,6 @@ package com.yuwubao.controllers;
 import com.yuwubao.util.Const;
 import com.yuwubao.util.RestApiResponse;
 import com.yuwubao.util.ThinkTankUtil;
-import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +27,9 @@ public class FileUploadController {
     @Value("${resourcesPath}")
     private String resourcesPath;
 
+    @Value("${visitIp}")
+    private String visitIp;
+
     /**
      * 将上传的图片保存到本地
      * @param file  上传的文件
@@ -39,20 +41,20 @@ public class FileUploadController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String time = sdf.format(new Date());
         String path = null;
-        String original = null;
+        //String original = null;
         String sysName = System.getProperties().getProperty("os.name");
         String separator = System.getProperties().getProperty("file.separator");
         if (sysName.contains("Linux")) {
             if (type == 0) {
                 path = separator + "tmp" + separator + "img" + separator + time + separator;
-                original = separator + "tmp" + separator + "original" + separator + time + separator;
+                //original = separator + "tmp" + separator + "original" + separator + time + separator;
             } else {
                 path = separator + "tmp" + separator + "video" + separator + time + separator;
             }
         } else {
             if (type == 0) {
                 path = resourcesPath + separator + "img" + separator + time + separator;
-                original = resourcesPath + separator + "original" + separator + time + separator;
+                //original = resourcesPath + separator + "original" + separator + time + separator;
             } else {
                 path = resourcesPath + separator + "video" + separator + time + separator;
             }
@@ -61,13 +63,13 @@ public class FileUploadController {
         if (!f.exists()) {
             f.mkdirs();
         }
-        File originalFile = null;
+        /*File originalFile = null;
         if (original != null) {
             originalFile = new File(original);
             if (!originalFile.exists()) {
                 originalFile.mkdirs();
             }
-        }
+        }*/
         String filename = file.getOriginalFilename();
         String suffix = filename.substring(filename.lastIndexOf('.'));
         String uuid = UUID.randomUUID().toString().replace("-", "");
@@ -79,15 +81,15 @@ public class FileUploadController {
             visit = "video/" + time + "/" + filename;
         }
         try {
-            if (originalFile != null) {
+            /*if (originalFile != null) {
                 file.transferTo(new File(originalFile + separator + filename));
                 Thumbnails.of(originalFile + separator + filename).size(350, 194).keepAspectRatio(false).toFile(path + separator + filename);
             } else {
                 file.transferTo(new File(path  + filename));
-            }
+            }*/
+            file.transferTo(new File(path  + filename));
             String address = ThinkTankUtil.getLocalHostLANAddress().getHostAddress();
-            //String ip= "http://" + address + "/";
-            String ip= "http://47.104.8.66/";
+            String ip= "http://" + visitIp + "/";
             result.successResponse(Const.SUCCESS, ip + visit);
         } catch (Exception e) {
             logger.warn("文件上传失败", e);

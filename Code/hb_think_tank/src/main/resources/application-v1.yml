@@ -17,7 +17,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hb_think_tank?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://localhost:3306/hbzk?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
     username: root
     password: root
 #    url: jdbc:mysql://47.104.8.66:3306/think_tank?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull

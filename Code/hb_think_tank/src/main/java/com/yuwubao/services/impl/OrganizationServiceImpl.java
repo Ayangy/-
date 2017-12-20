@@ -119,7 +119,7 @@ public class OrganizationServiceImpl implements OrganizationService{
     }
 
     @Override
-    public List<OrganizationEntity> findByCondition(Map<String, String> map, int organizationType) {
+    public List<OrganizationEntity> findByCondition(Map<String, String> map, int organizationType, int type) {
         String field = map.get("field");
         String keyword = map.get("keyword");
         Specification<OrganizationEntity> spec = new Specification<OrganizationEntity>() {
@@ -137,7 +137,7 @@ public class OrganizationServiceImpl implements OrganizationService{
                     predict.getExpressions().add(criteriaBuilder.equal(path, String.valueOf(organizationType)));
                 }
                 Path<Integer> path = root.get("type");
-                predict.getExpressions().add(criteriaBuilder.equal(path, String.valueOf(1)));
+                predict.getExpressions().add(criteriaBuilder.equal(path, String.valueOf(type)));
                 Path<Integer> path1 = root.get("shield");
                 predict.getExpressions().add(criteriaBuilder.equal(path1, String.valueOf(0)));
                 return predict;
