@@ -7,6 +7,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import sun.misc.BASE64Encoder;
 
@@ -715,6 +718,22 @@ public class FrontEndController {
         } catch (Exception e) {
             logger.warn("添加评论异常", e);
             result.failedApiResponse(Const.FAILED, "添加评论异常");
+        }
+        return result;
+    }
+
+    @GetMapping("/getCommentList")
+    public RestApiResponse<Page<CommentEntity>> getCommentList(@RequestParam(defaultValue = "1", required = false) int index,
+                                                               @RequestParam(defaultValue = "10", required = false) int size,
+                                                               @RequestParam int articleId) {
+        RestApiResponse<Page<CommentEntity>> result = new RestApiResponse<Page<CommentEntity>>();
+        try {
+            Pageable pageAble = new PageRequest(index-1, size);
+            Page<CommentEntity> list = commentService.findAll(pageAble, articleId);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("获取评论列表异常", e);
+            result.failedApiResponse(Const.FAILED, "获取评论列表异常");
         }
         return result;
     }
