@@ -8,12 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
-import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.*;
 
 /**
@@ -49,6 +48,12 @@ public class FrontEndController {
 
     @Autowired
     private BlogrollService blogrollService;
+
+    @Autowired
+    private CommentService commentService;
+
+    @Autowired
+    private ClientUserService clientUserService;
 
     /**
      * 获取未屏蔽的最新文章
@@ -637,29 +642,82 @@ public class FrontEndController {
 
     /**
      * 获取验证码
-     * @param response
-     * @param session
      * @throws Exception
      */
-    @RequestMapping("/valicode")
-    public void valicode(HttpServletResponse response, HttpSession session){
+    @PostMapping("/getCaptcha")
+    public RestApiResponse<Map<String, Object>> getCaptcha(){
+        RestApiResponse<Map<String, Object>> result = new RestApiResponse<Map<String, Object>>();
         try {
             //利用图片工具生成图片
             //第一个参数是生成的验证码，第二个参数是生成的图片
             Object[] objs = VerifyCodeUtil.createImage();
-            //将验证码存入Session
-            session.setAttribute("imageCode",objs[0]);
+            String captcha = (String)objs[0];
 
-            //将图片输出给浏览器
+            // 图片验证码
+            ByteArrayOutputStream outputStream = null;
             BufferedImage image = (BufferedImage) objs[1];
-            response.setContentType("image/png");
-            OutputStream os = response.getOutputStream();
-            ImageIO.write(image, "png", os);
+
+            outputStream = new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", outputStream);
+
+            // 对字节数组Base64编码
+            BASE64Encoder encoder = new BASE64Encoder();
+
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("img", "data:image/png;base64," + encoder.encode(outputStream.toByteArray()));
+            map.put("captcha", captcha);
+            result.successResponse(Const.SUCCESS, map);
         } catch (Exception e) {
             logger.warn("获取验证码异常", e);
+            result.failedApiResponse(Const.FAILED, "获取验证码异常");
         }
+        return result;
     }
 
+    /**
+     * 发表评论
+     * @param clientUserId  前端用户id
+     * @param articleId  文章id
+     * @param content  评论内容
+     * @return
+     */
+    @PostMapping("/makeComments")
+    public RestApiResponse<CommentEntity> makeComments(@RequestParam int clientUserId,
+                                                       @RequestParam int articleId,
+                                                       @RequestParam String content) {
+        RestApiResponse<CommentEntity> result = new RestApiResponse<CommentEntity>();
+        try {
+            if (!StringUtils.isNotBlank(content)) {
+                result.failedApiResponse(Const.FAILED, "评论不能为空");
+                return result;
+            }
+            ClientUserEntity clientUserEntity = clientUserService.findOne(clientUserId);
+            if (clientUserEntity == null) {
+                result.failedApiResponse(Const.FAILED, "用户不存在,评论失败");
+                return result;
+            }
+            ArticleEntity articleEntity = articleService.findById(articleId);
+            if (articleEntity == null) {
+                result.failedApiResponse(Const.FAILED, "文章不存在,评论失败");
+                return result;
+            }
+            CommentEntity comment = new CommentEntity();
+            comment.setClientUserId(clientUserId);
+            comment.setArticleId(articleId);
+            comment.setContent(content);
+            comment.setAddTime(new Date());
+            CommentEntity commentEntity = commentService.add(comment);
+            if (commentEntity == null) {
+                result.failedApiResponse(Const.FAILED, "发表评论失败");
+                return result;
+            }
+            result.successResponse(Const.SUCCESS, commentEntity);
+        } catch (Exception e) {
+            logger.warn("添加评论异常", e);
+            result.failedApiResponse(Const.FAILED, "添加评论异常");
+        }
+        return result;
+    }
 }
 
 

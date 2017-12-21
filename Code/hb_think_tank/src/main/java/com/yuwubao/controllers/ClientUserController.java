@@ -3,6 +3,7 @@ package com.yuwubao.controllers;
 import com.yuwubao.entities.ClientUserEntity;
 import com.yuwubao.services.ClientUserService;
 import com.yuwubao.util.Const;
+import com.yuwubao.util.MD5;
 import com.yuwubao.util.RestApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,6 +57,7 @@ public class ClientUserController {
             }
             String uuid = UUID.randomUUID().toString().replace("-", "");
             clientUserEntity.setActivationCode(uuid);
+            clientUserEntity.setPwd(MD5.md5(clientUserEntity.getPwd()));
             ClientUserEntity entity = clientUserService.add(clientUserEntity);
             if (entity != null) {
                 //创建参数配置, 用于连接邮件服务器的参数配置
@@ -129,6 +131,10 @@ public class ClientUserController {
         try {
             ClientUserEntity entity = clientUserService.findOne(id);
             if (entity != null) {
+                if(entity.getStatus() == 1){
+                    result.failedApiResponse(Const.FAILED, "账号已激活");
+                    return result;
+                }
                 if(entity.getActivationCode().equals(ActivationCode)){
                     entity.setStatus(1);
                     clientUserService.add(entity);
@@ -143,6 +149,5 @@ public class ClientUserController {
         }
         return result;
     }
-
 
 }

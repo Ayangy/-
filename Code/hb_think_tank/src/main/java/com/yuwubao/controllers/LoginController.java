@@ -6,6 +6,7 @@ import com.yuwubao.entities.vo.UserVo;
 import com.yuwubao.services.ClientUserService;
 import com.yuwubao.services.UserService;
 import com.yuwubao.util.Const;
+import com.yuwubao.util.MD5;
 import com.yuwubao.util.RestApiResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -67,11 +68,11 @@ public class LoginController {
      * @return
      */
     @PostMapping("/login")
-    public RestApiResponse<Boolean> login(@RequestBody UserVo userVo) {
-        RestApiResponse<Boolean> result = new RestApiResponse<Boolean>();
+    public RestApiResponse<ClientUserEntity> login(@RequestBody UserVo userVo) {
+        RestApiResponse<ClientUserEntity> result = new RestApiResponse<ClientUserEntity>();
         try {
             String username = userVo.getUsername();
-            String pwd = userVo.getPassword();
+            String pwd = MD5.md5(userVo.getPassword());
             ClientUserEntity clientUserEntity;
             if (userVo.getUsername().matches("[\\w\\.\\-]+@([\\w\\-]+\\.)+[\\w\\-]+")) {
                 clientUserEntity = clientUserService.findByEmailAndPwd(username, pwd);
@@ -86,7 +87,7 @@ public class LoginController {
                 result.failedApiResponse(Const.FAILED, "账号未激活");
                 return result;
             }
-            result.successResponse(Const.SUCCESS, true, "登录成功");
+            result.successResponse(Const.SUCCESS, clientUserEntity);
         } catch (Exception e) {
             logger.warn("登录异常", e);
             result.failedApiResponse(Const.FAILED, "登录异常");

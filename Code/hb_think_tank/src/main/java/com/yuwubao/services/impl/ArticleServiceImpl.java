@@ -143,7 +143,7 @@ public class ArticleServiceImpl implements ArticleService {
         if (parentId != 0) {
             sql += " AND s.parentId = " + String.valueOf(parentId);
         }
-        sql += " order by a.createdDate desc LIMIT ?, ?";
+        sql += " order by a.addTime desc LIMIT ?, ?";
         RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
         List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper, shield, index, size);
         return list;
