@@ -7,15 +7,20 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -30,6 +35,12 @@ public class FrontEndController {
     private final static Logger logger = LoggerFactory.getLogger(FrontEndController.class);
 
     private final static int shield = 0;//未屏蔽数据
+
+    @Value("${resourcesPath}")
+    private String resourcesPath;
+
+    @Value("${visitIp}")
+    private String visitIp;
 
     @Autowired
     private ArticleService articleService;
@@ -722,18 +733,78 @@ public class FrontEndController {
         return result;
     }
 
+    /**
+     * 获取评论列表
+     * @param index  第几页
+     * @param size  每页几条
+     * @param articleId  文章id
+     * @return
+     */
     @GetMapping("/getCommentList")
     public RestApiResponse<Page<CommentEntity>> getCommentList(@RequestParam(defaultValue = "1", required = false) int index,
                                                                @RequestParam(defaultValue = "10", required = false) int size,
                                                                @RequestParam int articleId) {
         RestApiResponse<Page<CommentEntity>> result = new RestApiResponse<Page<CommentEntity>>();
         try {
-            Pageable pageAble = new PageRequest(index-1, size);
+            Sort sort = new Sort(Sort.Direction.DESC, "addTime");
+            Pageable pageAble = new PageRequest(index-1, size, sort);
             Page<CommentEntity> list = commentService.findAll(pageAble, articleId);
             result.successResponse(Const.SUCCESS, list);
         } catch (Exception e) {
             logger.warn("获取评论列表异常", e);
             result.failedApiResponse(Const.FAILED, "获取评论列表异常");
+        }
+        return result;
+    }
+
+    /**
+     * 提交调查问卷
+     * @param file  上传的文件
+     * @return
+     */
+    @PostMapping("/upload")
+    public RestApiResponse<String> saveFile(@RequestParam int type,  MultipartFile file) {
+        RestApiResponse<String> result = new RestApiResponse<String>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String time = sdf.format(new Date());
+        String path = null;
+        String sysName = System.getProperties().getProperty("os.name");
+        String separator = System.getProperties().getProperty("file.separator");
+        if (sysName.contains("Linux")) {
+            if (type == 0) {
+                path = separator + "tmp" + separator + "img" + separator + time + separator;
+            } else {
+                path = separator + "tmp" + separator + "video" + separator + time + separator;
+            }
+        } else {
+            if (type == 0) {
+                path = resourcesPath + separator + "img" + separator + time + separator;
+            } else {
+                path = resourcesPath + separator + "video" + separator + time + separator;
+            }
+        }
+        File f = new File(path);
+        if (!f.exists()) {
+            f.mkdirs();
+        }
+        String filename = file.getOriginalFilename();
+        String suffix = filename.substring(filename.lastIndexOf('.'));
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        filename = uuid + suffix;
+        String visit;
+        if (type == 0) {
+            visit = "img/" + time + "/" + filename;
+        } else {
+            visit = "video/" + time + "/" + filename;
+        }
+        try {
+            file.transferTo(new File(path  + filename));
+            String address = ThinkTankUtil.getLocalHostLANAddress().getHostAddress();
+            String ip= "http://" + visitIp + "/";
+            result.successResponse(Const.SUCCESS, ip + visit);
+        } catch (Exception e) {
+            logger.warn("文件上传失败", e);
+            result.failedApiResponse(Const.FAILED, "文件上传失败");
         }
         return result;
     }

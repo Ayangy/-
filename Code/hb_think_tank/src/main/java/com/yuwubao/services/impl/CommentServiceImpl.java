@@ -37,7 +37,7 @@ public class CommentServiceImpl implements CommentService {
             public Predicate toPredicate(Root<CommentEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder){
                 Predicate predict = criteriaBuilder.conjunction();
                 if (articleId != 0) {
-                    Path<Integer> type = root.get("id");
+                    Path<Integer> type = root.get("articleId");
                     predict.getExpressions().add(criteriaBuilder.equal(type, articleId));
                 }
                 return predict;
