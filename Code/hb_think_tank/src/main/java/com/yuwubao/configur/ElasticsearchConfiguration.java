@@ -64,7 +64,7 @@ public class ElasticsearchConfiguration implements FactoryBean<TransportClient>,
 
     protected void buildClient()  {
         try {
-            PreBuiltTransportClient  preBuiltTransportClient = new PreBuiltTransportClient(settings());
+            PreBuiltTransportClient  preBuiltTransportClient = new PreBuiltTransportClient(Settings.EMPTY);
             if (!"".equals(clusterNodes)){
                 for (String nodes:clusterNodes.split(",")) {
                     String InetSocket [] = nodes.split(":");

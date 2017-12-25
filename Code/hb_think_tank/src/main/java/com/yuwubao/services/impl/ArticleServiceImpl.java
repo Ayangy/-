@@ -293,9 +293,9 @@ public class ArticleServiceImpl implements ArticleService {
                 "a.shield," +
                 "a.recommend FROM article a, article_sort s WHERE a.textTypeId = s.id AND s.parentId = 25 ";
         if (StringUtils.isNotBlank(beginTime)) {
-            sql += " AND a.addTime > " + beginTime;
+            sql += " AND a.addTime > '" + beginTime +"'";
             if (StringUtils.isNotBlank(endTime)) {
-                sql += " AND a.addTime <" + endTime;
+                sql += " AND a.addTime < '" + endTime + "'";
             }
         }
         if (StringUtils.isNotBlank(keyword)) {

@@ -13,14 +13,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -757,57 +754,7 @@ public class FrontEndController {
         return result;
     }
 
-    /**
-     * 提交调查问卷
-     * @param file  上传的文件
-     * @return
-     */
-    @PostMapping("/upload")
-    public RestApiResponse<String> saveFile(@RequestParam int type,  MultipartFile file) {
-        RestApiResponse<String> result = new RestApiResponse<String>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String time = sdf.format(new Date());
-        String path = null;
-        String sysName = System.getProperties().getProperty("os.name");
-        String separator = System.getProperties().getProperty("file.separator");
-        if (sysName.contains("Linux")) {
-            if (type == 0) {
-                path = separator + "tmp" + separator + "img" + separator + time + separator;
-            } else {
-                path = separator + "tmp" + separator + "video" + separator + time + separator;
-            }
-        } else {
-            if (type == 0) {
-                path = resourcesPath + separator + "img" + separator + time + separator;
-            } else {
-                path = resourcesPath + separator + "video" + separator + time + separator;
-            }
-        }
-        File f = new File(path);
-        if (!f.exists()) {
-            f.mkdirs();
-        }
-        String filename = file.getOriginalFilename();
-        String suffix = filename.substring(filename.lastIndexOf('.'));
-        String uuid = UUID.randomUUID().toString().replace("-", "");
-        filename = uuid + suffix;
-        String visit;
-        if (type == 0) {
-            visit = "img/" + time + "/" + filename;
-        } else {
-            visit = "video/" + time + "/" + filename;
-        }
-        try {
-            file.transferTo(new File(path  + filename));
-            String address = ThinkTankUtil.getLocalHostLANAddress().getHostAddress();
-            String ip= "http://" + visitIp + "/";
-            result.successResponse(Const.SUCCESS, ip + visit);
-        } catch (Exception e) {
-            logger.warn("文件上传失败", e);
-            result.failedApiResponse(Const.FAILED, "文件上传失败");
-        }
-        return result;
-    }
+
 }
 
 
