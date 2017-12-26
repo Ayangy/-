@@ -66,6 +66,9 @@ public class FrontEndController {
     @Autowired
     private ClientUserService clientUserService;
 
+    @Autowired
+    private QuestionnaireService questionnaireService;
+
     /**
      * 获取未屏蔽的最新文章
      * @param textTypeId  文章类型
@@ -693,11 +696,15 @@ public class FrontEndController {
      * @return
      */
     @PostMapping("/makeComments")
-    public RestApiResponse<CommentEntity> makeComments(@RequestParam int clientUserId,
+    public RestApiResponse<CommentEntity> makeComments(@RequestParam(required = false, defaultValue = "0") int clientUserId,
                                                        @RequestParam int articleId,
-                                                       @RequestParam String content) {
+                                                       @RequestParam(required = false, defaultValue = "") String content) {
         RestApiResponse<CommentEntity> result = new RestApiResponse<CommentEntity>();
         try {
+            if (clientUserId == 0) {
+                result.failedApiResponse(Const.FAILED, "您未登录，发布评论失败");
+                return result;
+            }
             if (!StringUtils.isNotBlank(content)) {
                 result.failedApiResponse(Const.FAILED, "评论不能为空");
                 return result;
@@ -717,6 +724,8 @@ public class FrontEndController {
             comment.setArticleId(articleId);
             comment.setContent(content);
             comment.setAddTime(new Date());
+            comment.setClientUserName(clientUserEntity.getName());
+            comment.setArticleTitle(articleEntity.getTitle());
             CommentEntity commentEntity = commentService.add(comment);
             if (commentEntity == null) {
                 result.failedApiResponse(Const.FAILED, "发表评论失败");
@@ -731,7 +740,7 @@ public class FrontEndController {
     }
 
     /**
-     * 获取评论列表
+     * 获取当前文章的评论列表
      * @param index  第几页
      * @param size  每页几条
      * @param articleId  文章id
@@ -754,6 +763,57 @@ public class FrontEndController {
         return result;
     }
 
+    /**
+     * 提交调查问卷
+     * @param clientUserId  前端用户id
+     * @param articleId  文章id
+     * @param questionnaireResultUrl  问卷Url
+     * @return
+     */
+    @PostMapping("/submitQuestionnaire")
+    public RestApiResponse<QuestionnaireEntity> submitQuestionnaire(@RequestParam(required = false, defaultValue = "0") int clientUserId,
+                                                                    @RequestParam int articleId,
+                                                                    @RequestParam(required = false, defaultValue = "") String questionnaireResultUrl) {
+        RestApiResponse<QuestionnaireEntity> result = new RestApiResponse<QuestionnaireEntity>();
+        try {
+            if (clientUserId == 0) {
+                result.failedApiResponse(Const.FAILED, "您未登录,请登录再提交");
+                return result;
+            }
+            ClientUserEntity clientUserEntity = clientUserService.findOne(clientUserId);
+            if (clientUserEntity == null) {
+                result.failedApiResponse(Const.FAILED, "用户不存在,提交失败");
+                return result;
+            }
+            QuestionnaireEntity questionnaire = questionnaireService.findByClientUserId(clientUserId);
+            if (questionnaire != null) {
+                result.failedApiResponse(Const.FAILED, "您已提交问卷");
+                return result;
+            }
+            ArticleEntity articleEntity = articleService.findById(articleId);
+            if (articleEntity == null) {
+                result.failedApiResponse(Const.FAILED, "此调研话题不存在,提交失败");
+                return result;
+            }
+            if (!StringUtils.isNotBlank(questionnaireResultUrl)) {
+                result.failedApiResponse(Const.FAILED, "提交失败");
+                return result;
+            }
+            QuestionnaireEntity questionnaireEntity = new QuestionnaireEntity();
+            questionnaireEntity.setClientUserId(clientUserId);
+            questionnaireEntity.setClientUserName(clientUserEntity.getName());
+            questionnaireEntity.setArticleId(articleId);
+            questionnaireEntity.setArticleTitle(articleEntity.getTitle());
+            questionnaireEntity.setQuestionnaireResultUrl(questionnaireResultUrl);
+            questionnaireEntity.setSubmitTime(new Date());
+            QuestionnaireEntity entity = questionnaireService.save(questionnaireEntity);
+            result.successResponse(Const.SUCCESS, entity);
+        } catch (Exception e) {
+            logger.warn("提交异常", e);
+            result.failedApiResponse(Const.FAILED, "提交异常");
+        }
+        return result;
+    }
 
 }
 

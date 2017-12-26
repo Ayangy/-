@@ -45,18 +45,46 @@ public class FileUploadController {
         String sysName = System.getProperties().getProperty("os.name");
         String separator = System.getProperties().getProperty("file.separator");
         if (sysName.contains("Linux")) {
-            if (type == 0) {
+            /*if (type == 0) {
                 path = separator + "tmp" + separator + "img" + separator + time + separator;
                 //original = separator + "tmp" + separator + "original" + separator + time + separator;
-            } else {
+            } else if (type == 1){
                 path = separator + "tmp" + separator + "video" + separator + time + separator;
+            }*/
+            switch(type) {
+                case 0:
+                    path = separator + "tmp" + separator + "img" + separator + time + separator;
+                    break;
+                case 1:
+                    path = separator + "tmp" + separator + "video" + separator + time + separator;
+                    break;
+                case 2:
+                    path = separator + "tmp" + separator + "accessory" + separator + time + separator;
+                    break;
+                default:
+                    path = separator + "tmp" + separator + "accessoryResult" + separator + time + separator;
+                    break;
             }
         } else {
-            if (type == 0) {
+            /*if (type == 0) {
                 path = resourcesPath + separator + "img" + separator + time + separator;
                 //original = resourcesPath + separator + "original" + separator + time + separator;
-            } else {
+            } else if (type == 1){
                 path = resourcesPath + separator + "video" + separator + time + separator;
+            }*/
+            switch(type) {
+                case 0:
+                    path = resourcesPath + separator + "img" + separator + time + separator;
+                    break;
+                case 1:
+                    path = resourcesPath + separator + "video" + separator + time + separator;
+                    break;
+                case 2:
+                    path = resourcesPath + separator + "accessory" + separator + time + separator;
+                    break;
+                default:
+                    path = resourcesPath + separator + "accessoryResult" + separator + time + separator;
+                    break;
             }
         }
         File f = new File(path);
@@ -75,11 +103,26 @@ public class FileUploadController {
         String uuid = UUID.randomUUID().toString().replace("-", "");
         filename = uuid + suffix;
         String visit;
-        if (type == 0) {
+        /*if (type == 0) {
             visit = "img/" + time + "/" + filename;
-        } else {
+        } else if (type == 1){
             visit = "video/" + time + "/" + filename;
+        }*/
+        switch (type) {
+            case 0:
+                visit = "img/" + time + "/" + filename;
+                break;
+            case 1:
+                visit = "video/" + time + "/" + filename;
+                break;
+            case 2:
+                visit = "accessory/" + time + "/" + filename;
+                break;
+            default:
+                visit = "accessoryResult/" + time + "/" + filename;
+                break;
         }
+
         try {
             /*if (originalFile != null) {
                 file.transferTo(new File(originalFile + separator + filename));

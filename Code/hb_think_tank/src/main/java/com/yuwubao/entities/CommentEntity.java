@@ -23,9 +23,19 @@ public class CommentEntity {
     private int clientUserId;
 
     /**
+     * 前端用户名
+     */
+    private String clientUserName;
+
+    /**
      * 文章id
      */
     private int articleId;
+
+    /**
+     * 文章标题
+     */
+    private String articleTitle;
 
     /**
      * 评论内容
@@ -53,12 +63,28 @@ public class CommentEntity {
         this.clientUserId = clientUserId;
     }
 
+    public String getClientUserName() {
+        return clientUserName;
+    }
+
+    public void setClientUserName(String clientUserName) {
+        this.clientUserName = clientUserName;
+    }
+
     public int getArticleId() {
         return articleId;
     }
 
     public void setArticleId(int articleId) {
         this.articleId = articleId;
+    }
+
+    public String getArticleTitle() {
+        return articleTitle;
+    }
+
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
     }
 
     public String getContent() {

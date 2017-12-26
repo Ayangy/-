@@ -73,6 +73,11 @@ public class ArticleEntity implements Serializable {
      */
     private int recommend;
 
+    /**
+     * 附件
+     */
+    private String accessory;
+
     public int getId() {
         return id;
     }
@@ -167,5 +172,13 @@ public class ArticleEntity implements Serializable {
 
     public void setRecommend(int recommend) {
         this.recommend = recommend;
+    }
+
+    public String getAccessory() {
+        return accessory;
+    }
+
+    public void setAccessory(String accessory) {
+        this.accessory = accessory;
     }
 }
