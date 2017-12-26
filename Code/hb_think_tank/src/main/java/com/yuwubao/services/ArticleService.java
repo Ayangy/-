@@ -50,4 +50,6 @@ public interface ArticleService {
     List<ArticleEntity> getDatabase(int index, int size, String keyword, String beginTime, String endTime);
 
     List<ArticleEntity> findByString(String query, int textTypeId, int index, int size);
+
+    List<ArticleEntity> findLiteratureList(int index, int size, int literatureType);
 }

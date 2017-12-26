@@ -27,8 +27,8 @@ public class FileUploadController {
     @Value("${resourcesPath}")
     private String resourcesPath;
 
-    @Value("${visitIp}")
-    private String visitIp;
+    @Value("${serverIp}")
+    private String serverIp;
 
     /**
      * 将上传的图片保存到本地
@@ -132,7 +132,7 @@ public class FileUploadController {
             }*/
             file.transferTo(new File(path  + filename));
             String address = ThinkTankUtil.getLocalHostLANAddress().getHostAddress();
-            String ip= "http://" + visitIp + "/";
+            String ip= "http://" + serverIp + "/";
             result.successResponse(Const.SUCCESS, ip + visit);
         } catch (Exception e) {
             logger.warn("文件上传失败", e);

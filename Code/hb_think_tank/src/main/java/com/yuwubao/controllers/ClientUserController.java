@@ -40,6 +40,9 @@ public class ClientUserController {
     @Value("${myEmailPwd}")
     private String myEmailPwd ;
 
+    @Value("${serverIp}")
+    private String serverIp;
+
     @Autowired
     private ClientUserService clientUserService;
 
@@ -92,7 +95,7 @@ public class ClientUserController {
                 //邮件正文
                 message.setContent("您好：\n" +
                         "感谢您注册湖北智库网，点击或复制到浏览器打开下方链接，激活您的账号"+
-                        "<a href='http://localhost:8080/clientUser/activateUser?id=" + clientUserEntity.getId() + "&ActivationCode=" +clientUserEntity.getActivationCode()+" _act='check_domail'>http://localhost:8080/clientUser/activateUser?id="+ clientUserEntity.getId() +"&ActivationCode=" +clientUserEntity.getActivationCode()+ "</a>",
+                        "<a href='http://" + serverIp + ":8080/clientUser/activateUser?id=" + clientUserEntity.getId() + "&ActivationCode=" +clientUserEntity.getActivationCode()+" _act='check_domail'>http://" + serverIp + ":8080/clientUser/activateUser?id="+ clientUserEntity.getId() +"&ActivationCode=" +clientUserEntity.getActivationCode()+ "</a>",
                         "text/html;charset=UTF-8");
 
                 //设置发件时间

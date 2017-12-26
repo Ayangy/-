@@ -325,4 +325,12 @@ public class ArticleServiceImpl implements ArticleService {
         return list;
     }
 
+    @Override
+    public List<ArticleEntity> findLiteratureList(int index, int size, int literatureType) {
+        String sql = "SELECT * FROM article  WHERE  literatureType = ? AND shield = 0 limit ?,?";
+        RowMapper<ArticleEntity> rowMapper = new BeanPropertyRowMapper<>(ArticleEntity.class);
+        List<ArticleEntity> list = jdbcTemplate.query(sql, rowMapper,literatureType, index, size);
+        return list;
+    }
+
 }

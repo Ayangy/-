@@ -36,8 +36,8 @@ public class FrontEndController {
     @Value("${resourcesPath}")
     private String resourcesPath;
 
-    @Value("${visitIp}")
-    private String visitIp;
+    @Value("${serverIp}")
+    private String serverIp;
 
     @Autowired
     private ArticleService articleService;
@@ -269,7 +269,7 @@ public class FrontEndController {
      * 获取本机构
      *
      */
-    /*@GetMapping("/getThisInstitution")
+    @GetMapping("/getThisInstitution")
     public RestApiResponse<OrganizationEntity> getThisInstitution(){
         RestApiResponse<OrganizationEntity> result = new RestApiResponse<OrganizationEntity>();
         try {
@@ -284,7 +284,7 @@ public class FrontEndController {
             result.failedApiResponse(Const.FAILED, "获取本机构数据异常");
         }
         return result;
-    }*/
+    }
 
     /**
      * 获取当前机构最新一条公告
@@ -343,11 +343,11 @@ public class FrontEndController {
 
     /**
      * 获取最新的未屏蔽视频新闻
-     //* @param index  第几页
-     //* @param size 每页几条
+     * @param index  第几页
+     * @param size 每页几条
      * @return
      */
-    /*@GetMapping("/findVideoNews")
+    @GetMapping("/findVideoNews")
     public RestApiResponse<List<VideoEntity>> getVideoNews(@RequestParam(defaultValue = "0", required = false) int index,
                                                            @RequestParam(defaultValue = "1", required = false) int size) {
         RestApiResponse<List<VideoEntity>> result = new RestApiResponse<List<VideoEntity>>();
@@ -359,7 +359,7 @@ public class FrontEndController {
             result.failedApiResponse(Const.FAILED, "视频新闻获取异常");
         }
         return result;
-    }*/
+    }
 
     @GetMapping("/getVideoDetails")
     public RestApiResponse<VideoEntity> getVideoDetails(@RequestParam int id) {
@@ -815,6 +815,27 @@ public class FrontEndController {
         return result;
     }
 
+    /**
+     * 条件查询文献库
+     * @param index  第几页
+     * @param size  每页几条
+     * @param literatureType  文献类型
+     * @return
+     */
+    @GetMapping("/findLiteratureList")
+    public RestApiResponse<List<ArticleEntity>> getLiteratureList(@RequestParam(required = false, defaultValue = "0")int index,
+                                                                  @RequestParam(required = false, defaultValue = "10")int size,
+                                                                  @RequestParam(required = false, defaultValue = "0") int literatureType) {
+        RestApiResponse<List<ArticleEntity>> result = new RestApiResponse<List<ArticleEntity>>();
+        try {
+            List<ArticleEntity> list = articleService.findLiteratureList(index,size, literatureType);
+            result.successResponse(Const.SUCCESS,list);
+        } catch (Exception e) {
+            logger.warn("获取文献列表异常", e);
+            result.failedApiResponse(Const.FAILED, "获取文献列表异常");
+        }
+        return result;
+    }
 }
 
 
