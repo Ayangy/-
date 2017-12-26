@@ -836,6 +836,26 @@ public class FrontEndController {
         }
         return result;
     }
+
+    /**
+     * 按类型获取智库机构
+     * @param organizationType 机构分型
+     * @param type  机构类型
+     * @return
+     */
+    @GetMapping("/findByOrganizationType")
+    public RestApiResponse<List<OrganizationEntity>> findByOrganizationType(@RequestParam int organizationType,
+                                                                            @RequestParam(required = false,defaultValue = "0")int type) {
+        RestApiResponse<List<OrganizationEntity>> result = new RestApiResponse<List<OrganizationEntity>>();
+        try {
+            List<OrganizationEntity> list = organizationService.findByOrganizationType(type, organizationType);
+            result.successResponse(Const.SUCCESS, list);
+        } catch (Exception e) {
+            logger.warn("获取机构列异常", e);
+            result.failedApiResponse(Const.FAILED,"获取机构列异常");
+        }
+        return result;
+    }
 }
 
 

@@ -38,4 +38,6 @@ public interface OrganizationService {
     OrganizationEntity findByType(int i);
 
     List<OrganizationEntity> findByShieldAndType(int shield, int type);
+
+    List<OrganizationEntity> findByOrganizationType(int type, int organizationType);
 }

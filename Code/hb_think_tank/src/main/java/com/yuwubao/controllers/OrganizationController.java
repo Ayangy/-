@@ -80,14 +80,13 @@ public class OrganizationController {
                 result.failedApiResponse(Const.FAILED, "机构已存在");
                 return result;
             }
-
-            if (organizationEntity.getType() == 0) {
+           /* if (organizationEntity.getType() == 0) {
                 OrganizationEntity entitie = organizationService.findByType(organizationEntity.getType());
                 if (entitie != null) {
                     result.failedApiResponse(Const.FAILED, "已记录机构信息");
                     return result;
                 }
-            }
+            }*/
             OrganizationEntity organization = organizationService.add(organizationEntity);
             if (organization == null) {
                 result.failedApiResponse(Const.FAILED, "添加机构失败");
@@ -151,13 +150,13 @@ public class OrganizationController {
                     }
                 }
             }
-           if (organizationEntity.getType() != organization.getType() && organization.getType() != 0){
+           /*if (organizationEntity.getType() != organization.getType() && organization.getType() != 0){
                 OrganizationEntity byType = organizationService.findByType(organizationEntity.getType());
                 if (byType != null) {
                     result.failedApiResponse(Const.FAILED, "不能修改机构");
                     return result;
                 }
-            }
+            }*/
             OrganizationEntity entity = organizationService.update(organizationEntity);
             result.successResponse(Const.SUCCESS, entity, "修改机构成功");
         } catch (Exception e) {

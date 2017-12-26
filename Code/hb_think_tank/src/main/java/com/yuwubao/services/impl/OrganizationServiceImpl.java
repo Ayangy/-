@@ -162,4 +162,12 @@ public class OrganizationServiceImpl implements OrganizationService{
         List<OrganizationEntity> list = organizationRepository.findByShieldAndType(shield, type);
         return list;
     }
+
+    @Override
+    public List<OrganizationEntity> findByOrganizationType(int type, int organizationType) {
+        String sql = "select * from organization where type = ? AND organizationType = ? AND shield = 0";
+        RowMapper<OrganizationEntity> rowMapper = new BeanPropertyRowMapper<>(OrganizationEntity.class);
+        List<OrganizationEntity> list = jdbcTemplate.query(sql, rowMapper, type, organizationType);
+        return list;
+    }
 }
