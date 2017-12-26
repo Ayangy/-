@@ -3121,3 +3121,609 @@ Caused by: org.springframework.core.convert.ConversionFailedException: Failed to
 Caused by: java.lang.IllegalArgumentException: A null value cannot be assigned to a primitive type
 	... 74 common frames omitted
 
+2017-12-26 22:30:56.106  WARN 22376 --- [http-nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: ""
+2017-12-26 22:30:56.109  WARN 22376 --- [http-nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved exception caused by Handler execution: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: ""
+2017-12-26 22:31:22.673  INFO 22376 --- [http-nio-8080-exec-8] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1499934488,1500256931,1500516759; Idea-d796403=0fd01506-f2a4-4f58-a46c-85b97b9d213c] that contained an invalid cookie. That cookie will be ignored.Note: further occurrences of this error will be logged at DEBUG level.
+2017-12-26 22:49:46.951  INFO 12840 --- [restartedMain] com.yuwubao.HbThinkTankApplication       : Starting HbThinkTankApplication on PC201602271711 with PID 12840 (started by Administrator in C:\Users\Administrator\Desktop\湖北智库网项目\Code\hb_think_tank)
+2017-12-26 22:49:46.953  INFO 12840 --- [restartedMain] com.yuwubao.HbThinkTankApplication       : The following profiles are active: v1
+2017-12-26 22:49:47.086  INFO 12840 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@63a99357: startup date [Tue Dec 26 22:49:47 CST 2017]; root of context hierarchy
+2017-12-26 22:49:50.186  INFO 12840 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Tomcat; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Tomcat.class]]
+2017-12-26 22:49:52.387  INFO 12840 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8080 (http)
+2017-12-26 22:49:52.407  INFO 12840 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2017-12-26 22:49:52.411  INFO 12840 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.20
+2017-12-26 22:49:52.963  INFO 12840 --- [localhost-startStop-1] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2017-12-26 22:49:52.971  INFO 12840 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-12-26 22:49:52.971  INFO 12840 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 5891 ms
+2017-12-26 22:49:53.268  INFO 12840 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-12-26 22:49:53.275  INFO 12840 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-12-26 22:49:53.276  INFO 12840 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-12-26 22:49:53.276  INFO 12840 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-12-26 22:49:53.276  INFO 12840 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-12-26 22:49:54.436  INFO 12840 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-12-26 22:49:54.457  INFO 12840 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-12-26 22:49:54.600  INFO 12840 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-12-26 22:49:54.603  INFO 12840 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-12-26 22:49:54.605  INFO 12840 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-12-26 22:49:54.734  INFO 12840 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-12-26 22:49:55.024  INFO 12840 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-12-26 22:49:56.111  INFO 12840 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-12-26 22:50:00.952  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@63a99357: startup date [Tue Dec 26 22:49:47 CST 2017]; root of context hierarchy
+2017-12-26 22:50:01.089  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/article/add],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ArticleEntity> com.yuwubao.controllers.ArticleController.add(com.yuwubao.entities.ArticleEntity)
+2017-12-26 22:50:01.091  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/article/update],methods=[PUT]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ArticleEntity> com.yuwubao.controllers.ArticleController.update(com.yuwubao.entities.ArticleEntity)
+2017-12-26 22:50:01.092  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/article/delete],methods=[DELETE]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ArticleEntity> com.yuwubao.controllers.ArticleController.delete(int)
+2017-12-26 22:50:01.093  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/article/articleDetails],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ArticleEntity> com.yuwubao.controllers.ArticleController.findArticleById(int)
+2017-12-26 22:50:01.094  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/article/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<org.springframework.data.domain.Page<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.ArticleController.findAll(int,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,int)
+2017-12-26 22:50:01.098  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/query/zk/article],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.ArticleSearchController.query(java.lang.String,int,int)
+2017-12-26 22:50:01.098  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/es/addMapping],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<java.lang.Boolean> com.yuwubao.controllers.ArticleSearchController.addMapping(java.lang.String,java.lang.String)
+2017-12-26 22:50:01.099  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/es/deleteIndex],methods=[DELETE]}" onto public com.yuwubao.util.RestApiResponse<java.lang.Boolean> com.yuwubao.controllers.ArticleSearchController.deleteIndex(java.lang.String)
+2017-12-26 22:50:01.100  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/es/addIndex],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<java.lang.Boolean> com.yuwubao.controllers.ArticleSearchController.createIndex(java.lang.String)
+2017-12-26 22:50:01.104  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/articleSort/add],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ArticleSortEntity> com.yuwubao.controllers.ArticleSortController.add(com.yuwubao.entities.ArticleSortEntity)
+2017-12-26 22:50:01.105  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/articleSort/update],methods=[PUT]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ArticleSortEntity> com.yuwubao.controllers.ArticleSortController.update(com.yuwubao.entities.ArticleSortEntity)
+2017-12-26 22:50:01.106  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/articleSort/delete],methods=[DELETE]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ArticleSortEntity> com.yuwubao.controllers.ArticleSortController.delete(int)
+2017-12-26 22:50:01.106  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/articleSort/getAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleSortEntity>> com.yuwubao.controllers.ArticleSortController.getAll()
+2017-12-26 22:50:01.107  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/articleSort/getJuniorAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleSortEntity>> com.yuwubao.controllers.ArticleSortController.getJuniorAll()
+2017-12-26 22:50:01.107  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/articleSort/getArticleSonSort],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleSortEntity>> com.yuwubao.controllers.ArticleSortController.getSonSort(int)
+2017-12-26 22:50:01.107  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/articleSort/getArticleSort],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleSortEntity>> com.yuwubao.controllers.ArticleSortController.getSort(int)
+2017-12-26 22:50:01.414  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/articleSort/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<org.springframework.data.domain.Page<com.yuwubao.entities.ArticleSortEntity>> com.yuwubao.controllers.ArticleSortController.findAll(int,int,java.lang.String,java.lang.String,int)
+2017-12-26 22:50:01.417  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/blogroll/add],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.BlogrollEntity> com.yuwubao.controllers.BlogrollController.add(com.yuwubao.entities.BlogrollEntity)
+2017-12-26 22:50:01.418  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/blogroll/update],methods=[PUT]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.BlogrollEntity> com.yuwubao.controllers.BlogrollController.update(com.yuwubao.entities.BlogrollEntity)
+2017-12-26 22:50:01.420  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/blogroll/delete],methods=[DELETE]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.BlogrollEntity> com.yuwubao.controllers.BlogrollController.delete(int)
+2017-12-26 22:50:01.421  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/blogroll/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<org.springframework.data.domain.Page<com.yuwubao.entities.BlogrollEntity>> com.yuwubao.controllers.BlogrollController.findAll(int,int,java.lang.String,java.lang.String)
+2017-12-26 22:50:01.425  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/clientUser/activateUser]}" onto public com.yuwubao.util.RestApiResponse<java.lang.Boolean> com.yuwubao.controllers.ClientUserController.activateUser(int,java.lang.String)
+2017-12-26 22:50:01.428  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/clientUser/registeredUser],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<java.lang.Boolean> com.yuwubao.controllers.ClientUserController.registeredUser(com.yuwubao.entities.ClientUserEntity)
+2017-12-26 22:50:01.430  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/comment/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<org.springframework.data.domain.Page<com.yuwubao.entities.CommentEntity>> com.yuwubao.controllers.CommentController.findAll(int,int,java.lang.String,java.lang.String)
+2017-12-26 22:50:01.433  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/data/backup],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<java.lang.Boolean> com.yuwubao.controllers.DataController.backup()
+2017-12-26 22:50:01.434  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/data/recover],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<java.lang.Boolean> com.yuwubao.controllers.DataController.recover()
+2017-12-26 22:50:01.437  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/expert/add],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ExpertEntity> com.yuwubao.controllers.ExpertController.add(com.yuwubao.entities.ExpertEntity)
+2017-12-26 22:50:01.437  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/expert/update],methods=[PUT]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ExpertEntity> com.yuwubao.controllers.ExpertController.update(com.yuwubao.entities.ExpertEntity)
+2017-12-26 22:50:01.438  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/expert/delete],methods=[DELETE]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ExpertEntity> com.yuwubao.controllers.ExpertController.delete(int)
+2017-12-26 22:50:01.440  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/expert/expertDetails],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ExpertEntity> com.yuwubao.controllers.ExpertController.findExpertById(int)
+2017-12-26 22:50:01.441  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/expert/getExpertAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ExpertEntity>> com.yuwubao.controllers.ExpertController.findExpertAll()
+2017-12-26 22:50:01.441  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/expert/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<org.springframework.data.domain.Page<com.yuwubao.entities.ExpertEntity>> com.yuwubao.controllers.ExpertController.findAll(int,int,java.lang.String,java.lang.String)
+2017-12-26 22:50:01.442  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/resource/delete],methods=[DELETE]}" onto public com.yuwubao.util.RestApiResponse<java.lang.Boolean> com.yuwubao.controllers.FileUploadController.deleteFile(java.lang.String)
+2017-12-26 22:50:01.443  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/resource/upload],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<java.lang.String> com.yuwubao.controllers.FileUploadController.saveFile(int,org.springframework.web.multipart.MultipartFile)
+2017-12-26 22:50:01.456  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getOrganizationActivity],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.FrontEndController.get(int,int,int,int)
+2017-12-26 22:50:01.457  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getKind],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.FrontEndController.getKind(int,int,int)
+2017-12-26 22:50:01.458  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/articleSort],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.FrontEndController.articleSort(int,int,int,int)
+2017-12-26 22:50:01.458  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/article],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.FrontEndController.getHomeArticle(int,int,int)
+2017-12-26 22:50:01.458  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/queryAnExpert],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ExpertEntity>> com.yuwubao.controllers.FrontEndController.queryAnExpert(int)
+2017-12-26 22:50:01.459  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/findVideoNews],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.VideoEntity>> com.yuwubao.controllers.FrontEndController.getVideoNews(int,int)
+2017-12-26 22:50:01.460  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/findOrganizationByLetter],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.Map<java.lang.String, java.util.List<com.yuwubao.entities.OrganizationEntity>>> com.yuwubao.controllers.FrontEndController.findByLetter(int,java.lang.String)
+2017-12-26 22:50:01.460  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getVideoDetails],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.VideoEntity> com.yuwubao.controllers.FrontEndController.getVideoDetails(int)
+2017-12-26 22:50:01.461  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getNotShieldExpert],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ExpertEntity>> com.yuwubao.controllers.FrontEndController.findExpertAll()
+2017-12-26 22:50:01.461  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getCaptcha],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<java.util.Map<java.lang.String, java.lang.Object>> com.yuwubao.controllers.FrontEndController.getCaptcha()
+2017-12-26 22:50:01.461  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/makeComments],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.CommentEntity> com.yuwubao.controllers.FrontEndController.makeComments(int,int,java.lang.String)
+2017-12-26 22:50:01.462  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getDatabase],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.FrontEndController.getDatabase(int,int,java.lang.String,java.lang.String,java.lang.String)
+2017-12-26 22:50:01.462  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/findByString],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.VideoEntity>> com.yuwubao.controllers.FrontEndController.findByString(int,int,java.lang.String)
+2017-12-26 22:50:01.462  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getCommentList],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<org.springframework.data.domain.Page<com.yuwubao.entities.CommentEntity>> com.yuwubao.controllers.FrontEndController.getCommentList(int,int,int)
+2017-12-26 22:50:01.463  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getBlogroll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.BlogrollEntity>> com.yuwubao.controllers.FrontEndController.getBlogroll(int)
+2017-12-26 22:50:01.463  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getNewestArticle],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.FrontEndController.getNewestArticle(int,int)
+2017-12-26 22:50:01.463  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/checkEmail],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<java.lang.Boolean> com.yuwubao.controllers.FrontEndController.checkEmail(java.lang.String)
+2017-12-26 22:50:01.464  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/findInstitutionByid],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.OrganizationEntity> com.yuwubao.controllers.FrontEndController.getInstitution(int)
+2017-12-26 22:50:01.464  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/findExpertByLetter],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.Map<java.lang.String, java.util.List<com.yuwubao.entities.ExpertEntity>>> com.yuwubao.controllers.FrontEndController.findExpertByLetter(java.lang.String)
+2017-12-26 22:50:01.465  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/submitQuestionnaire],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.QuestionnaireEntity> com.yuwubao.controllers.FrontEndController.submitQuestionnaire(int,int,java.lang.String)
+2017-12-26 22:50:01.465  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getArticleList],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.FrontEndController.getAchievementList(int)
+2017-12-26 22:50:01.465  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/findExpertByCondition],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.Map<java.lang.String, java.util.List<com.yuwubao.entities.ExpertEntity>>> com.yuwubao.controllers.FrontEndController.findExpertByCondition(java.lang.String,java.lang.String,int)
+2017-12-26 22:50:01.466  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/findLiteratureList],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.FrontEndController.getLiteratureList(int,int,int)
+2017-12-26 22:50:01.466  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getRecommendArticle],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.FrontEndController.getRecommendArticle(int,int,int)
+2017-12-26 22:50:01.467  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/findResultByCriteria],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.FrontEndController.findResultByCriteria(int,int,java.lang.String,int,int)
+2017-12-26 22:50:01.467  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getOrganizationList],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.OrganizationEntity>> com.yuwubao.controllers.FrontEndController.getOrganizationList(int)
+2017-12-26 22:50:01.467  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getThisInstitution],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.OrganizationEntity> com.yuwubao.controllers.FrontEndController.getThisInstitution()
+2017-12-26 22:50:01.468  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getInstitutionArticle],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.ArticleEntity>> com.yuwubao.controllers.FrontEndController.getInstitutionArticle(int,int,int,int)
+2017-12-26 22:50:01.471  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/getOrganizationNotice],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ArticleEntity> com.yuwubao.controllers.FrontEndController.getOrganizationNotice(int,int)
+2017-12-26 22:50:01.473  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/frontEnd/findOrganizationByCondition],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.Map<java.lang.String, java.util.List<com.yuwubao.entities.OrganizationEntity>>> com.yuwubao.controllers.FrontEndController.findOrganizationByCondition(java.lang.String,java.lang.String,int,int)
+2017-12-26 22:50:01.477  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/login],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.UserEntity> com.yuwubao.controllers.LoginController.sysLogin(com.yuwubao.entities.UserEntity,int)
+2017-12-26 22:50:01.477  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/login],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.ClientUserEntity> com.yuwubao.controllers.LoginController.login(com.yuwubao.entities.vo.UserVo)
+2017-12-26 22:50:01.479  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/menu/editRoleRight],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<java.lang.Boolean> com.yuwubao.controllers.MenuController.editRoleRight(int,java.util.List<java.lang.Integer>)
+2017-12-26 22:50:01.479  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/menu/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.services.contracts.Menu>> com.yuwubao.controllers.MenuController.findAll()
+2017-12-26 22:50:01.482  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/organization/add],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.OrganizationEntity> com.yuwubao.controllers.OrganizationController.add(com.yuwubao.entities.OrganizationEntity)
+2017-12-26 22:50:01.483  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/organization/update],methods=[PUT]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.OrganizationEntity> com.yuwubao.controllers.OrganizationController.update(com.yuwubao.entities.OrganizationEntity)
+2017-12-26 22:50:01.483  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/organization/delete],methods=[DELETE]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.OrganizationEntity> com.yuwubao.controllers.OrganizationController.delete(int)
+2017-12-26 22:50:01.484  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/organization/getAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.OrganizationEntity>> com.yuwubao.controllers.OrganizationController.getAll()
+2017-12-26 22:50:01.486  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/organization/getOrganization],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.OrganizationEntity> com.yuwubao.controllers.OrganizationController.getOrganizationEntity(int)
+2017-12-26 22:50:01.487  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/organization/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<org.springframework.data.domain.Page<com.yuwubao.entities.OrganizationEntity>> com.yuwubao.controllers.OrganizationController.findAll(int,int,java.lang.String,java.lang.String)
+2017-12-26 22:50:01.488  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/questionnaire/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<org.springframework.data.domain.Page<com.yuwubao.entities.QuestionnaireEntity>> com.yuwubao.controllers.QuestionnaireController.findAll(int,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+2017-12-26 22:50:01.490  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/role/add],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.RoleEntity> com.yuwubao.controllers.RoleController.add(com.yuwubao.entities.RoleEntity)
+2017-12-26 22:50:01.490  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/role/update],methods=[PUT]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.RoleEntity> com.yuwubao.controllers.RoleController.update(com.yuwubao.entities.RoleEntity)
+2017-12-26 22:50:01.490  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/role/delete],methods=[DELETE]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.RoleEntity> com.yuwubao.controllers.RoleController.delete(int)
+2017-12-26 22:50:01.491  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/role/getAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.RoleEntity>> com.yuwubao.controllers.RoleController.getAll()
+2017-12-26 22:50:01.491  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/role/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<org.springframework.data.domain.Page<com.yuwubao.entities.RoleEntity>> com.yuwubao.controllers.RoleController.findAll(int,int,java.lang.String,java.lang.String)
+2017-12-26 22:50:01.492  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/territory/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.TerritoryEntity>> com.yuwubao.controllers.TerritoryController.findAll()
+2017-12-26 22:50:01.493  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/titleImg/add],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.TitleImgEntity> com.yuwubao.controllers.TitleImgController.add(com.yuwubao.entities.TitleImgEntity)
+2017-12-26 22:50:01.493  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/titleImg/update],methods=[PUT]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.TitleImgEntity> com.yuwubao.controllers.TitleImgController.update(com.yuwubao.entities.TitleImgEntity)
+2017-12-26 22:50:01.494  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/titleImg/delete],methods=[DELETE]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.TitleImgEntity> com.yuwubao.controllers.TitleImgController.delete(int)
+2017-12-26 22:50:01.494  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/titleImg/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<org.springframework.data.domain.Page<com.yuwubao.entities.TitleImgEntity>> com.yuwubao.controllers.TitleImgController.findAll(int,int,java.lang.String,java.lang.String,java.lang.Integer)
+2017-12-26 22:50:01.494  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/titleImg/findByState],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<java.util.List<com.yuwubao.entities.TitleImgEntity>> com.yuwubao.controllers.TitleImgController.findByState()
+2017-12-26 22:50:01.496  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/add],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.UserEntity> com.yuwubao.controllers.UserController.add(com.yuwubao.entities.UserEntity,int)
+2017-12-26 22:50:01.497  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/update],methods=[PUT]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.UserEntity> com.yuwubao.controllers.UserController.update(com.yuwubao.entities.UserEntity)
+2017-12-26 22:50:01.497  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/delete],methods=[DELETE]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.UserEntity> com.yuwubao.controllers.UserController.delete(int)
+2017-12-26 22:50:01.498  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<org.springframework.data.domain.Page<com.yuwubao.entities.UserEntity>> com.yuwubao.controllers.UserController.findAll(int,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+2017-12-26 22:50:01.498  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/updateAuthedUserRole],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.UserRoleEntity> com.yuwubao.controllers.UserController.editUserRole(int,int)
+2017-12-26 22:50:01.499  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/videoNews/add],methods=[POST]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.VideoEntity> com.yuwubao.controllers.VideoController.add(com.yuwubao.entities.VideoEntity)
+2017-12-26 22:50:01.500  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/videoNews/update],methods=[PUT]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.VideoEntity> com.yuwubao.controllers.VideoController.update(com.yuwubao.entities.VideoEntity)
+2017-12-26 22:50:01.500  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/videoNews/delete],methods=[DELETE]}" onto public com.yuwubao.util.RestApiResponse<com.yuwubao.entities.VideoEntity> com.yuwubao.controllers.VideoController.delete(int)
+2017-12-26 22:50:01.501  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/videoNews/findAll],methods=[GET]}" onto public com.yuwubao.util.RestApiResponse<org.springframework.data.domain.Page<com.yuwubao.entities.VideoEntity>> com.yuwubao.controllers.VideoController.findAll(int,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+2017-12-26 22:50:01.506  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-12-26 22:50:01.507  INFO 12840 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-12-26 22:50:01.559  INFO 12840 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-12-26 22:50:01.559  INFO 12840 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-12-26 22:50:01.634  INFO 12840 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-12-26 22:50:02.104  INFO 12840 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-12-26 22:50:02.304  INFO 12840 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-12-26 22:50:02.412  INFO 12840 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2017-12-26 22:50:02.421  INFO 12840 --- [restartedMain] com.yuwubao.HbThinkTankApplication       : Started HbThinkTankApplication in 16.773 seconds (JVM running for 18.218)
+2017-12-26 22:52:33.826  INFO 12840 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-12-26 22:52:33.826  INFO 12840 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2017-12-26 22:52:33.873  INFO 12840 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 47 ms
+2017-12-26 22:52:33.986  INFO 12840 --- [http-nio-8080-exec-2] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2017-12-26 23:17:24.011  WARN 12840 --- [http-nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved exception caused by Handler execution: org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/x-www-form-urlencoded;charset=UTF-8' not supported
+2017-12-26 23:20:18.524  WARN 12840 --- [http-nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved exception caused by Handler execution: org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/x-www-form-urlencoded;charset=UTF-8' not supported
+2017-12-26 23:23:20.886  WARN 12840 --- [http-nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved exception caused by Handler execution: org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/x-www-form-urlencoded;charset=UTF-8' not supported
+2017-12-26 23:26:05.200  WARN 12840 --- [http-nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved exception caused by Handler execution: org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/x-www-form-urlencoded;charset=UTF-8' not supported
+2017-12-26 23:27:27.429  WARN 12840 --- [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved exception caused by Handler execution: org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/x-www-form-urlencoded;charset=UTF-8' not supported
+2017-12-26 23:33:32.072  WARN 12840 --- [http-nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: ""
+2017-12-26 23:33:32.073  WARN 12840 --- [http-nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved exception caused by Handler execution: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: ""
+2017-12-26 23:33:38.277  WARN 12840 --- [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1054, SQLState: 42S22
+2017-12-26 23:33:38.278 ERROR 12840 --- [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Unknown column 'articleent0_.accessory' in 'field list'
+2017-12-26 23:33:38.295  INFO 12840 --- [http-nio-8080-exec-1] o.h.e.internal.DefaultLoadEventListener  : HHH000327: Error performing load command : org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+2017-12-26 23:33:38.358  WARN 12840 --- [http-nio-8080-exec-1] c.yuwubao.controllers.ArticleController  : 文章获取异常
+
+org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:261) ~[spring-orm-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:244) ~[spring-orm-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:488) ~[spring-orm-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:59) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:213) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:147) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:133) ~[spring-data-jpa-1.11.0.RELEASE.jar:na]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92) ~[spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.data.repository.core.support.SurroundingTransactionDetectorMethodInterceptor.invoke(SurroundingTransactionDetectorMethodInterceptor.java:57) ~[spring-data-commons-1.13.7.RELEASE.jar:na]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:213) ~[spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at com.sun.proxy.$Proxy99.findOne(Unknown Source) ~[na:na]
+	at com.yuwubao.services.impl.ArticleServiceImpl.findById(ArticleServiceImpl.java:131) ~[classes/:na]
+	at com.yuwubao.controllers.ArticleController.findArticleById(ArticleController.java:203) ~[classes/:na]
+	at com.yuwubao.controllers.ArticleController$$FastClassBySpringCGLIB$$5a28cf76.invoke(<generated>) [classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204) [spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:738) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99) [spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:282) [spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96) [spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at com.yuwubao.controllers.ArticleController$$EnhancerBySpringCGLIB$$64bfbf22.findArticleById(<generated>) [classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:133) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:97) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) [tomcat-embed-websocket-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:108) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:478) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:80) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:799) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1457) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_111]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_111]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_111]
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:63) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:109) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:95) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:79) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.loader.plan.exec.internal.AbstractLoadPlanBasedLoader.getResultSet(AbstractLoadPlanBasedLoader.java:434) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.loader.plan.exec.internal.AbstractLoadPlanBasedLoader.executeQueryStatement(AbstractLoadPlanBasedLoader.java:186) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.loader.plan.exec.internal.AbstractLoadPlanBasedLoader.executeLoad(AbstractLoadPlanBasedLoader.java:121) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.loader.plan.exec.internal.AbstractLoadPlanBasedLoader.executeLoad(AbstractLoadPlanBasedLoader.java:86) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader.load(AbstractLoadPlanBasedEntityLoader.java:167) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.load(AbstractEntityPersister.java:4019) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.event.internal.DefaultLoadEventListener.loadFromDatasource(DefaultLoadEventListener.java:508) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.event.internal.DefaultLoadEventListener.doLoad(DefaultLoadEventListener.java:478) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.event.internal.DefaultLoadEventListener.load(DefaultLoadEventListener.java:219) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.event.internal.DefaultLoadEventListener.proxyOrLoad(DefaultLoadEventListener.java:278) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.event.internal.DefaultLoadEventListener.doOnLoad(DefaultLoadEventListener.java:121) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.event.internal.DefaultLoadEventListener.onLoad(DefaultLoadEventListener.java:89) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.internal.SessionImpl.fireLoad(SessionImpl.java:1129) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.internal.SessionImpl.access$2600(SessionImpl.java:164) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.internal.SessionImpl$IdentifierLoadAccessImpl.load(SessionImpl.java:2696) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:975) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.find(AbstractEntityManagerImpl.java:1075) ~[hibernate-entitymanager-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.find(AbstractEntityManagerImpl.java:1039) ~[hibernate-entitymanager-5.0.12.Final.jar:5.0.12.Final]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:347) ~[spring-orm-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at com.sun.proxy.$Proxy97.find(Unknown Source) ~[na:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:298) ~[spring-orm-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at com.sun.proxy.$Proxy97.find(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findOne(SimpleJpaRepository.java:241) ~[spring-data-jpa-1.11.0.RELEASE.jar:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.executeMethodOn(RepositoryFactorySupport.java:504) ~[spring-data-commons-1.13.7.RELEASE.jar:na]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.doInvoke(RepositoryFactorySupport.java:489) ~[spring-data-commons-1.13.7.RELEASE.jar:na]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.invoke(RepositoryFactorySupport.java:461) ~[spring-data-commons-1.13.7.RELEASE.jar:na]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:56) ~[spring-data-commons-1.13.7.RELEASE.jar:na]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99) [spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:282) [spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96) [spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:136) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	... 75 common frames omitted
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'articleent0_.accessory' in 'field list'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_111]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_111]
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.Util.getInstance(Util.java:408) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:943) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3973) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3909) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2527) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2680) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2487) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.PreparedStatement.executeQuery(PreparedStatement.java:1966) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at sun.reflect.GeneratedMethodAccessor148.invoke(Unknown Source) ~[na:na]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.apache.tomcat.jdbc.pool.StatementFacade$StatementProxy.invoke(StatementFacade.java:114) ~[tomcat-jdbc-8.5.20.jar:na]
+	at com.sun.proxy.$Proxy125.executeQuery(Unknown Source) ~[na:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:70) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	... 121 common frames omitted
+
+2017-12-26 23:33:38.371 ERROR 12840 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Transaction marked as rollbackOnly] with root cause
+
+javax.persistence.RollbackException: Transaction marked as rollbackOnly
+	at org.hibernate.jpa.internal.TransactionImpl.commit(TransactionImpl.java:58) ~[hibernate-entitymanager-5.0.12.Final.jar:5.0.12.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:517) ~[spring-orm-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:761) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:730) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:504) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:292) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673) ~[spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at com.yuwubao.controllers.ArticleController$$EnhancerBySpringCGLIB$$64bfbf22.findArticleById(<generated>) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:133) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:97) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:108) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:478) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:80) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:799) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1457) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_111]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_111]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_111]
+
+2017-12-26 23:34:23.231  WARN 12840 --- [http-nio-8080-exec-9] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1054, SQLState: 42S22
+2017-12-26 23:34:23.232 ERROR 12840 --- [http-nio-8080-exec-9] o.h.engine.jdbc.spi.SqlExceptionHelper   : Unknown column 'articleent0_.accessory' in 'field list'
+2017-12-26 23:34:23.233  INFO 12840 --- [http-nio-8080-exec-9] o.h.e.internal.DefaultLoadEventListener  : HHH000327: Error performing load command : org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+2017-12-26 23:34:23.254  WARN 12840 --- [http-nio-8080-exec-9] c.yuwubao.controllers.ArticleController  : 文章获取异常
+
+org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:261) ~[spring-orm-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:244) ~[spring-orm-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:488) ~[spring-orm-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:59) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:213) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:147) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:133) ~[spring-data-jpa-1.11.0.RELEASE.jar:na]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92) ~[spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.data.repository.core.support.SurroundingTransactionDetectorMethodInterceptor.invoke(SurroundingTransactionDetectorMethodInterceptor.java:57) ~[spring-data-commons-1.13.7.RELEASE.jar:na]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:213) ~[spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at com.sun.proxy.$Proxy99.findOne(Unknown Source) ~[na:na]
+	at com.yuwubao.services.impl.ArticleServiceImpl.findById(ArticleServiceImpl.java:131) ~[classes/:na]
+	at com.yuwubao.controllers.ArticleController.findArticleById(ArticleController.java:203) ~[classes/:na]
+	at com.yuwubao.controllers.ArticleController$$FastClassBySpringCGLIB$$5a28cf76.invoke(<generated>) [classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204) [spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:738) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99) [spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:282) [spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96) [spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at com.yuwubao.controllers.ArticleController$$EnhancerBySpringCGLIB$$64bfbf22.findArticleById(<generated>) [classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:133) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:97) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846) [spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) [tomcat-embed-websocket-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:108) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:478) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:80) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:799) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1457) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_111]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_111]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_111]
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:63) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:109) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:95) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:79) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.loader.plan.exec.internal.AbstractLoadPlanBasedLoader.getResultSet(AbstractLoadPlanBasedLoader.java:434) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.loader.plan.exec.internal.AbstractLoadPlanBasedLoader.executeQueryStatement(AbstractLoadPlanBasedLoader.java:186) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.loader.plan.exec.internal.AbstractLoadPlanBasedLoader.executeLoad(AbstractLoadPlanBasedLoader.java:121) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.loader.plan.exec.internal.AbstractLoadPlanBasedLoader.executeLoad(AbstractLoadPlanBasedLoader.java:86) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader.load(AbstractLoadPlanBasedEntityLoader.java:167) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.load(AbstractEntityPersister.java:4019) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.event.internal.DefaultLoadEventListener.loadFromDatasource(DefaultLoadEventListener.java:508) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.event.internal.DefaultLoadEventListener.doLoad(DefaultLoadEventListener.java:478) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.event.internal.DefaultLoadEventListener.load(DefaultLoadEventListener.java:219) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.event.internal.DefaultLoadEventListener.proxyOrLoad(DefaultLoadEventListener.java:278) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.event.internal.DefaultLoadEventListener.doOnLoad(DefaultLoadEventListener.java:121) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.event.internal.DefaultLoadEventListener.onLoad(DefaultLoadEventListener.java:89) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.internal.SessionImpl.fireLoad(SessionImpl.java:1129) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.internal.SessionImpl.access$2600(SessionImpl.java:164) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.internal.SessionImpl$IdentifierLoadAccessImpl.load(SessionImpl.java:2696) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:975) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.find(AbstractEntityManagerImpl.java:1075) ~[hibernate-entitymanager-5.0.12.Final.jar:5.0.12.Final]
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.find(AbstractEntityManagerImpl.java:1039) ~[hibernate-entitymanager-5.0.12.Final.jar:5.0.12.Final]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:347) ~[spring-orm-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at com.sun.proxy.$Proxy97.find(Unknown Source) ~[na:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:298) ~[spring-orm-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at com.sun.proxy.$Proxy97.find(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findOne(SimpleJpaRepository.java:241) ~[spring-data-jpa-1.11.0.RELEASE.jar:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.executeMethodOn(RepositoryFactorySupport.java:504) ~[spring-data-commons-1.13.7.RELEASE.jar:na]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.doInvoke(RepositoryFactorySupport.java:489) ~[spring-data-commons-1.13.7.RELEASE.jar:na]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.invoke(RepositoryFactorySupport.java:461) ~[spring-data-commons-1.13.7.RELEASE.jar:na]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:56) ~[spring-data-commons-1.13.7.RELEASE.jar:na]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99) [spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:282) [spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96) [spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:136) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	... 75 common frames omitted
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'articleent0_.accessory' in 'field list'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_111]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_111]
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.Util.getInstance(Util.java:408) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:943) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3973) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3909) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2527) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2680) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2487) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at com.mysql.jdbc.PreparedStatement.executeQuery(PreparedStatement.java:1966) ~[mysql-connector-java-5.1.44.jar:5.1.44]
+	at sun.reflect.GeneratedMethodAccessor148.invoke(Unknown Source) ~[na:na]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.apache.tomcat.jdbc.pool.StatementFacade$StatementProxy.invoke(StatementFacade.java:114) ~[tomcat-jdbc-8.5.20.jar:na]
+	at com.sun.proxy.$Proxy125.executeQuery(Unknown Source) ~[na:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:70) ~[hibernate-core-5.0.12.Final.jar:5.0.12.Final]
+	... 121 common frames omitted
+
+2017-12-26 23:34:23.271 ERROR 12840 --- [http-nio-8080-exec-9] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Transaction marked as rollbackOnly] with root cause
+
+javax.persistence.RollbackException: Transaction marked as rollbackOnly
+	at org.hibernate.jpa.internal.TransactionImpl.commit(TransactionImpl.java:58) ~[hibernate-entitymanager-5.0.12.Final.jar:5.0.12.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:517) ~[spring-orm-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:761) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:730) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:504) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:292) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96) ~[spring-tx-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673) ~[spring-aop-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at com.yuwubao.controllers.ArticleController$$EnhancerBySpringCGLIB$$64bfbf22.findArticleById(<generated>) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:133) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:97) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846) ~[spring-webmvc-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:108) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.11.RELEASE.jar:4.3.11.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) ~[tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:478) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:80) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:799) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1457) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_111]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_111]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.20.jar:8.5.20]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_111]
+
